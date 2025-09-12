@@ -1,3 +1,10 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'IAMDIFFERENT - Home',
+  description: 'Creative Developer & Innovator',
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
