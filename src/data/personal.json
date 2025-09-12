@@ -1,0 +1,34 @@
+{
+  "name": "IAMDIFFERENT",
+  "title": "Creative Developer & Innovator",
+  "bio": "I'm different. I think differently, create differently, and approach problems with a unique perspective. This is my space to showcase what makes me unique.",
+  "tagline": "Where creativity meets innovation",
+  "contact": {
+    "email": "hello@iamdifferent.com",
+    "linkedin": "https://linkedin.com/in/iamdifferent",
+    "github": "https://github.com/iamdifferent",
+    "twitter": "https://twitter.com/iamdifferent"
+  },
+  "skills": [
+    "React Development",
+    "Next.js",
+    "TypeScript",
+    "Creative Problem Solving",
+    "UI/UX Design",
+    "Innovation"
+  ],
+  "highlights": [
+    {
+      "title": "Unique Perspective",
+      "description": "I approach every project with fresh eyes and innovative thinking"
+    },
+    {
+      "title": "Creative Solutions",
+      "description": "Finding elegant solutions to complex problems is my passion"
+    },
+    {
+      "title": "Continuous Learning",
+      "description": "Always exploring new technologies and methodologies"
+    }
+  ]
+}
