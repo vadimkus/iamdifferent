@@ -1,0 +1,27 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue sky background -->
+  <rect width="32" height="32" fill="#87CEEB"/>
+  
+  <!-- Sand dune shape -->
+  <path d="M2 20C2 20 6 16 10 18C14 20 18 16 22 18C26 20 30 16 30 20V30H2V20Z" fill="#D2B48C"/>
+  
+  <!-- Sand texture lines -->
+  <path d="M4 22C6 20 8 22 10 20" stroke="#C19A6B" stroke-width="0.5" fill="none"/>
+  <path d="M12 20C14 18 16 20 18 18" stroke="#C19A6B" stroke-width="0.5" fill="none"/>
+  <path d="M20 18C22 16 24 18 26 16" stroke="#C19A6B" stroke-width="0.5" fill="none"/>
+  
+  <!-- Additional sand texture -->
+  <path d="M6 24C8 22 10 24 12 22" stroke="#C19A6B" stroke-width="0.3" fill="none"/>
+  <path d="M14 22C16 20 18 22 20 20" stroke="#C19A6B" stroke-width="0.3" fill="none"/>
+  <path d="M22 20C24 18 26 20 28 18" stroke="#C19A6B" stroke-width="0.3" fill="none"/>
+  
+  <!-- Sky gradient overlay -->
+  <rect width="32" height="20" fill="url(#skyGradient)" opacity="0.4"/>
+  
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#87CEEB;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+</svg>
