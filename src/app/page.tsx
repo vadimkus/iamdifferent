@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white relative overflow-hidden">
       <video 
-        className="absolute inset-0 w-full h-full object-cover scale-50 -mt-48"
+        className="absolute inset-0 w-full h-full object-cover scale-50 -mt-52"
         autoPlay 
         muted 
         loop 
@@ -21,12 +21,16 @@ export default function Home() {
       
       {/* Button text overlay */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-8">
-        <a 
-          href="/how-to-live-differently"
-          className="text-black text-lg font-semibold hover:text-gray-600 transition-colors duration-200 cursor-pointer"
-        >
-          How to Live Differently
-        </a>
+        <span className="text-black text-lg font-normal">
+          Как жить по-другому?
+        </span>
+      </div>
+      
+      {/* Text under video */}
+      <div className="absolute bottom-60 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-4xl px-8">
+        <p className="text-center text-lg md:text-xl text-black leading-relaxed font-light">
+          Это жизнь — создана для удовольствия и наслаждения! Каждый день — это шанс кайфовать по полной, ведь у вас всего одна жизнь. Погрузитесь в моменты счастья, будь то работа или хобби. Кайфуйте по полной!
+        </p>
       </div>
     </main>
   )
