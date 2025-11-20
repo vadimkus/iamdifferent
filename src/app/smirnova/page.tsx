@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 export default function Smirnova() {
   const [vladivostokColor, setVladivostokColor] = useState('text-gray-500')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,12 +67,65 @@ export default function Smirnova() {
             </nav>
 
             {/* Mobile Menu Button */}
-            <button className="lg:hidden text-gray-700">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button 
+              className="lg:hidden text-gray-700"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden border-t border-gray-200 py-4">
+              <nav className="flex flex-col space-y-4">
+                <a 
+                  href="/smirnova" 
+                  className="text-emerald-600 font-light px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Главная
+                </a>
+                <a 
+                  href="/smirnova#about" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  О нас
+                </a>
+                <a 
+                  href="/faq" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Частые вопросы
+                </a>
+                <a 
+                  href="/videos" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Бесплатные видео
+                </a>
+                <a 
+                  href="/smirnova#contact" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Контакты
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
