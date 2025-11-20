@@ -15,6 +15,18 @@ export default function Smirnova() {
 
     return () => clearInterval(interval)
   }, [])
+
+  // Handle smooth scroll to contact section when navigating with hash
+  useEffect(() => {
+    if (window.location.hash === '#contact') {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [])
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
@@ -65,18 +77,18 @@ export default function Smirnova() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 py-20 md:py-32">
-          <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-gray-800 mb-6 leading-tight">
+        <section className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 py-12 sm:py-16 md:py-20 lg:py-32">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-gray-800 mb-4 sm:mb-5 md:mb-6 leading-tight">
               Йога — это искусство пробуждения.
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 font-light mb-4 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 font-light mb-3 sm:mb-4 leading-relaxed max-w-3xl mx-auto">
               Вернуться к настоящему себе. Это может быть так просто. Йога предлагает нам способ увидеть мир, который работает на вас, а не против вас.
             </p>
-            <p className="text-lg md:text-xl text-gray-700 font-light mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 font-light mb-6 sm:mb-7 md:mb-8 leading-relaxed max-w-3xl mx-auto">
               Йога напоминает мне, что всё взаимосвязано, поэтому мы должны жить, действовать и дышать осознанно. Процесс — это и есть награда.
             </p>
-            <p className="text-xl md:text-2xl text-emerald-700 font-light italic">
+            <p className="text-lg sm:text-xl md:text-2xl text-emerald-700 font-light italic">
               Наслаждайтесь!
             </p>
           </div>
