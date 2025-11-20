@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'IAMDIFFERENT - Home',
-  description: 'Creative Developer & Innovator',
+  title: 'iamdifferent.ru',
+  description: 'iamdifferent.ru',
 }
 
 export default function Home() {

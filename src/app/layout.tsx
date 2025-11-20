@@ -15,7 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'IAMDIFFERENT - Creative Developer & Innovator',
+  title: 'iamdifferent.ru',
   description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development. Where creativity meets innovation.',
   keywords: ['developer', 'creative', 'innovation', 'react', 'nextjs', 'typescript', 'ui/ux'],
   authors: [{ name: 'IAMDIFFERENT' }],
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://iamdifferent.com',
-    title: 'IAMDIFFERENT - Creative Developer & Innovator',
+    title: 'iamdifferent.ru',
     description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development.',
     siteName: 'IAMDIFFERENT',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IAMDIFFERENT - Creative Developer & Innovator',
+    title: 'iamdifferent.ru',
     description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development.',
     creator: '@iamdifferent',
   },
