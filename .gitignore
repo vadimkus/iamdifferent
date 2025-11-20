@@ -80,3 +80,7 @@ jspm_packages/
 .vercel
 
 /generated/prisma
+
+# Scripts (excluded from build)
+scripts/*.ts
+!scripts/*.js
