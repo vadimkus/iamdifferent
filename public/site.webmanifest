@@ -1,0 +1,17 @@
+{
+  "name": "Нина Смирнова - Йога Тренер",
+  "short_name": "Нина Смирнова",
+  "description": "Профессиональный фитнес и йога тренер во Владивостоке",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+

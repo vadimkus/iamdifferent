@@ -15,29 +15,61 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'iamdifferent.ru',
-  description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development. Where creativity meets innovation.',
-  keywords: ['developer', 'creative', 'innovation', 'react', 'nextjs', 'typescript', 'ui/ux'],
-  authors: [{ name: 'IAMDIFFERENT' }],
-  creator: 'IAMDIFFERENT',
+  metadataBase: new URL('https://iamdifferent.ru'),
+  title: {
+    default: 'Нина Смирнова - Фитнес и Йога Тренер | Владивосток',
+    template: '%s | Нина Смирнова - Йога Тренер',
+  },
+  description: 'Нина Смирнова - профессиональный фитнес и йога тренер во Владивостоке. Индивидуальные занятия, групповые практики, онлайн-курсы. Запишитесь на занятие прямо сейчас!',
+  keywords: [
+    'йога тренер',
+    'фитнес тренер',
+    'йога Владивосток',
+    'йога занятия',
+    'йога для начинающих',
+    'виньяса йога',
+    'онлайн йога',
+    'индивидуальные занятия йогой',
+    'Нина Смирнова',
+    'yoga instructor',
+    'fitness trainer',
+    'Vladivostok yoga',
+  ],
+  authors: [{ name: 'Нина Смирнова', url: 'https://iamdifferent.ru/smirnova' }],
+  creator: 'Нина Смирнова',
+  publisher: 'Нина Смирнова',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: 'https://iamdifferent.com',
-    title: 'iamdifferent.ru',
-    description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development.',
-    siteName: 'IAMDIFFERENT',
+    locale: 'ru_RU',
+    url: 'https://iamdifferent.ru',
+    siteName: 'Нина Смирнова - Йога Тренер',
+    title: 'Нина Смирнова - Фитнес и Йога Тренер | Владивосток',
+    description: 'Профессиональный фитнес и йога тренер во Владивостоке. Индивидуальные занятия, групповые практики, онлайн-курсы.',
+    images: [
+      {
+        url: '/smirnova/logo/logo3.png',
+        width: 1200,
+        height: 630,
+        alt: 'Нина Смирнова - Йога Тренер',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'iamdifferent.ru',
-    description: 'A unique personal website showcasing creativity, innovation, and cutting-edge development.',
-    creator: '@iamdifferent',
+    title: 'Нина Смирнова - Фитнес и Йога Тренер',
+    description: 'Профессиональный фитнес и йога тренер во Владивостоке. Запишитесь на занятие!',
+    images: ['/smirnova/logo/logo3.png'],
   },
   robots: {
     index: true,
@@ -50,6 +82,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: 'https://iamdifferent.ru',
+  },
 }
 
 export default function RootLayout({
@@ -58,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="ru" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className={`${inter.className} antialiased`}>
         {children}
       </body>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import StructuredData from '@/components/StructuredData'
 
 export default function Smirnova() {
   const [vladivostokColor, setVladivostokColor] = useState('text-gray-500')
@@ -29,18 +30,24 @@ export default function Smirnova() {
     }
   }, [])
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <>
+      <StructuredData />
+      <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo/Brand */}
             <div className="flex items-center gap-3">
-              <img 
-                src="/smirnova/logo/logo3.png" 
-                alt="Нина Смирнова" 
-                className="w-10 h-10 md:w-12 md:h-12 object-contain"
-              />
+              <a href="/smirnova" aria-label="Главная страница">
+                <img 
+                  src="/smirnova/logo/logo3.png" 
+                  alt="Логотип Нины Смирновой - Фитнес и Йога Тренер" 
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  width="48"
+                  height="48"
+                />
+              </a>
               <div>
                 <h1 className="text-lg md:text-xl font-light text-gray-800">Нина Смирнова</h1>
                 <p className={`text-xs font-light transition-colors duration-300 ${vladivostokColor}`}>Фитнес и Йога Тренер</p>
@@ -389,5 +396,6 @@ export default function Smirnova() {
         </div>
       </footer>
     </div>
+    </>
   )
 }

@@ -1,0 +1,14 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://iamdifferent.ru/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1
+

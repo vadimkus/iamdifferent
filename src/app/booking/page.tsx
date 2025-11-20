@@ -206,11 +206,13 @@ export default function BookingPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex items-center gap-3">
-              <a href="/smirnova">
+              <a href="/smirnova" aria-label="Главная страница">
                 <img 
                   src="/smirnova/logo/logo3.png" 
-                  alt="Нина Смирнова" 
+                  alt="Логотип Нины Смирновой - Фитнес и Йога Тренер" 
                   className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  width="48"
+                  height="48"
                 />
               </a>
               <div>
