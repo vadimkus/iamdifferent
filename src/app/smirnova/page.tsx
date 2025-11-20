@@ -10,7 +10,7 @@ export default function Smirnova() {
             {/* Logo/Brand */}
             <div className="flex items-center gap-3">
               <img 
-                src="/smirnova/logo/logo.png" 
+                src="/smirnova/logo/Logo.png" 
                 alt="Нина Смирнова" 
                 className="w-10 h-10 md:w-12 md:h-12 object-contain"
               />
