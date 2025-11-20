@@ -80,7 +80,7 @@ export default function FAQ() {
               </a>
               <div>
                 <h1 className="text-lg md:text-xl font-light text-gray-800">Нина Смирнова</h1>
-                <p className={`text-xs font-light transition-colors duration-300 ${vladivostokColor}`}>Владивосток</p>
+                <p className={`text-xs font-light transition-colors duration-300 ${vladivostokColor}`}>Фитнес и Йога Тренер</p>
               </div>
             </div>
             <nav className="hidden lg:flex items-center gap-8">
