@@ -332,7 +332,7 @@ export default function Smirnova() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-white font-light mb-4">О нас</h3>
               <ul className="space-y-2 text-sm">
@@ -365,6 +365,16 @@ export default function Smirnova() {
                 <li>
                   <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
                     Telegram
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-light mb-4">Запись</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="/booking" className="hover:text-emerald-400 transition-colors">
+                    Записаться на занятие
                   </a>
                 </li>
               </ul>

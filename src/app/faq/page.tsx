@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 export default function FAQ() {
   const [vladivostokColor, setVladivostokColor] = useState('text-gray-500')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -102,23 +103,83 @@ export default function FAQ() {
             </nav>
 
             {/* Mobile Menu Button */}
-            <button className="lg:hidden text-gray-700">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button 
+              className="lg:hidden text-gray-700"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden border-t border-gray-200 py-4">
+              <nav className="flex flex-col space-y-4">
+                <a 
+                  href="/smirnova" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Главная
+                </a>
+                <a 
+                  href="/smirnova#about" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  О нас
+                </a>
+                <a 
+                  href="/faq" 
+                  className="text-emerald-600 font-light px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Частые вопросы
+                </a>
+                <a 
+                  href="/videos" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Бесплатные видео
+                </a>
+                <a 
+                  href="/booking" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Запись
+                </a>
+                <a 
+                  href="/smirnova#contact" 
+                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Контакты
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
       <main className="flex-1">
         {/* FAQ Section */}
-        <section className="bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-4 md:px-8">
-            <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-4 text-center">
+        <section className="bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 py-12 sm:py-16 md:py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-800 mb-3 sm:mb-4 text-center">
               Частые вопросы
             </h1>
-            <p className="text-lg text-gray-700 font-light text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-700 font-light text-center mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
               Здесь вы найдёте ответы на наиболее часто задаваемые вопросы о занятиях йогой
             </p>
 
@@ -130,7 +191,7 @@ export default function FAQ() {
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-emerald-50 transition-colors"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-emerald-50 transition-colors"
                   >
                     <span className="text-lg font-light text-gray-800 pr-4">
                       {faq.question}
@@ -152,8 +213,8 @@ export default function FAQ() {
                     </svg>
                   </button>
                   {openIndex === index && (
-                    <div className="px-6 py-4 bg-emerald-50 border-t border-emerald-100">
-                      <p className="text-gray-700 font-light leading-relaxed">
+                    <div className="px-4 sm:px-6 py-3 sm:py-4 bg-emerald-50 border-t border-emerald-100">
+                      <p className="text-sm sm:text-base text-gray-700 font-light leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -180,7 +241,7 @@ export default function FAQ() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-white font-light mb-4">О нас</h3>
               <ul className="space-y-2 text-sm">
@@ -213,6 +274,16 @@ export default function FAQ() {
                 <li>
                   <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
                     Telegram
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-light mb-4">Запись</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="/booking" className="hover:text-emerald-400 transition-colors">
+                    Записаться на занятие
                   </a>
                 </li>
               </ul>

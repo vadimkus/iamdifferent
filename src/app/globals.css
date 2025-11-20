@@ -105,3 +105,43 @@ html {
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900;
 }
+
+/* Mobile-friendly calendar styles */
+@media (max-width: 640px) {
+  .rbc-calendar {
+    font-size: 12px;
+  }
+  
+  .rbc-header {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  
+  .rbc-date-cell {
+    padding: 4px;
+  }
+  
+  .rbc-today {
+    background-color: #f0fdf4;
+  }
+  
+  .rbc-event {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+  
+  .rbc-toolbar {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .rbc-toolbar button {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .rbc-toolbar-label {
+    font-size: 14px;
+    margin: 8px 0;
+  }
+}
