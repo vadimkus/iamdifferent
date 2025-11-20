@@ -16,28 +16,25 @@ export default function Smirnova() {
               />
               <div>
                 <h1 className="text-lg md:text-xl font-light text-gray-800">Нина Смирнова</h1>
+                <p className="text-xs text-gray-500 font-light">Владивосток</p>
               </div>
             </div>
 
             {/* Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
-              <div className="relative group">
-                <button className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
-                  О нас
-                </button>
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
-                  <a href="#about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">О Нине</a>
-                  <a href="#faq" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Частые вопросы</a>
-                  <a href="#contact" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Контакты</a>
-                </div>
-              </div>
-              <a href="#courses" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
-                Курсы
+              <a href="/smirnova" className="text-emerald-600 font-light">
+                Главная
               </a>
-              <a href="#videos" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/smirnova#about" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+                О нас
+              </a>
+              <a href="/faq" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+                Частые вопросы
+              </a>
+              <a href="/videos" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
                 Бесплатные видео
               </a>
-              <a href="#contact" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/smirnova#contact" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
                 Контакты
               </a>
             </nav>
@@ -192,7 +189,7 @@ export default function Smirnova() {
             <h2 className="text-3xl md:text-4xl font-light text-gray-800 mb-12 text-center">
               Свяжитесь со мной
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               {/* Instagram Card */}
               <a
                 href="https://www.instagram.com/nina.smirnovaa/"
@@ -228,6 +225,25 @@ export default function Smirnova() {
                 <p className="text-teal-700 font-light break-all">Healthy.smirnova@gmail.com</p>
                 <p className="text-gray-600 font-light text-sm mt-2">Отправить сообщение</p>
               </a>
+
+              {/* Telegram Card */}
+              <a
+                href="https://t.me/nina_smirnova"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-blue-100"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-light text-gray-800">Telegram</h3>
+                </div>
+                <p className="text-blue-700 font-light">@nina_smirnova</p>
+                <p className="text-gray-600 font-light text-sm mt-2">Написать в Telegram</p>
+              </a>
             </div>
           </div>
         </section>
@@ -236,12 +252,12 @@ export default function Smirnova() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <h3 className="text-white font-light mb-4">О нас</h3>
               <ul className="space-y-2 text-sm">
                 <li><a href="#about" className="hover:text-emerald-400 transition-colors">О Нине</a></li>
-                <li><a href="#faq" className="hover:text-emerald-400 transition-colors">Частые вопросы</a></li>
+                <li><a href="/faq" className="hover:text-emerald-400 transition-colors">Частые вопросы</a></li>
                 <li><a href="#contact" className="hover:text-emerald-400 transition-colors">Контакты</a></li>
               </ul>
             </div>
@@ -249,7 +265,7 @@ export default function Smirnova() {
               <h3 className="text-white font-light mb-4">Курсы</h3>
               <ul className="space-y-2 text-sm">
                 <li><a href="#courses" className="hover:text-emerald-400 transition-colors">Все курсы</a></li>
-                <li><a href="#videos" className="hover:text-emerald-400 transition-colors">Бесплатные видео</a></li>
+                <li><a href="/videos" className="hover:text-emerald-400 transition-colors">Бесплатные видео</a></li>
                 <li><a href="#courses" className="hover:text-emerald-400 transition-colors">Мастер-классы</a></li>
               </ul>
             </div>
@@ -266,21 +282,21 @@ export default function Smirnova() {
                     Email
                   </a>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-white font-light mb-4">Правовая информация</h3>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Условия использования</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Политика конфиденциальности</a></li>
-                <li><a href="#contact" className="hover:text-emerald-400 transition-colors">Поддержка</a></li>
+                <li>
+                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                    Telegram
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-gray-800 pt-8">
             <p className="text-sm text-gray-400 text-center">
-              © {new Date().getFullYear()} Нина Смирнова. Все права защищены.
+              © {new Date().getFullYear()} Нина Смирнова.
+            </p>
+            <p className="text-sm text-gray-400 text-center mt-1">
+              Все права защищены.
             </p>
           </div>
         </div>
