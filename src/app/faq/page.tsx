@@ -1,8 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function FAQ() {
+  const [vladivostokColor, setVladivostokColor] = useState('text-gray-500')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVladivostokColor('text-black')
+      setTimeout(() => {
+        setVladivostokColor('text-gray-500')
+      }, 1000) // Change back after 1 second
+    }, 9000) // Every 9 seconds
+
+    return () => clearInterval(interval)
+  }, [])
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const faqs = [
@@ -68,7 +80,7 @@ export default function FAQ() {
               </a>
               <div>
                 <h1 className="text-lg md:text-xl font-light text-gray-800">Нина Смирнова</h1>
-                <p className="text-xs text-gray-500 font-light">Владивосток</p>
+                <p className={`text-xs font-light transition-colors duration-300 ${vladivostokColor}`}>Владивосток</p>
               </div>
             </div>
             <nav className="hidden lg:flex items-center gap-8">
@@ -209,10 +221,7 @@ export default function FAQ() {
 
           <div className="border-t border-gray-800 pt-8">
             <p className="text-sm text-gray-400 text-center">
-              © {new Date().getFullYear()} Нина Смирнова.
-            </p>
-            <p className="text-sm text-gray-400 text-center mt-1">
-              Все права защищены.
+              © {new Date().getFullYear()} Нина Смирнова. Все права защищены.
             </p>
           </div>
         </div>
