@@ -307,7 +307,7 @@ export default function Videos() {
               <h3 className="text-white font-light mb-4">Запись</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="/booking" className="hover:text-emerald-400 transition-colors">
+                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
                     Записаться на занятие
                   </a>
                 </li>

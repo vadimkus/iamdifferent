@@ -155,7 +155,9 @@ export default function FAQ() {
                   Бесплатные видео
                 </a>
                 <a 
-                  href="/booking" 
+                  href="https://t.me/nina_smirnova" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -284,7 +286,7 @@ export default function FAQ() {
               <h3 className="text-white font-light mb-4">Запись</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="/booking" className="hover:text-emerald-400 transition-colors">
+                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
                     Записаться на занятие
                   </a>
                 </li>
