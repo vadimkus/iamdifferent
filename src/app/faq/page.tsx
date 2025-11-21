@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react'
 
 export default function FAQ() {
-  const [vladivostokColor, setVladivostokColor] = useState('text-gray-500')
+  const [vladivostokColor, setVladivostokColor] = useState('text-gray-400')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
       setVladivostokColor('text-black')
       setTimeout(() => {
-        setVladivostokColor('text-gray-500')
+        setVladivostokColor('text-gray-400')
       }, 1000) // Change back after 1 second
     }, 9000) // Every 9 seconds
 
@@ -68,7 +68,7 @@ export default function FAQ() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-300">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex items-center gap-3">
@@ -82,31 +82,31 @@ export default function FAQ() {
                 />
               </a>
               <div>
-                <h1 className="text-lg md:text-xl font-light text-gray-800">Нина Смирнова</h1>
+                <h1 className="text-lg md:text-xl font-light text-black">Нина Смирнова</h1>
                 <p className={`text-xs font-light transition-colors duration-300 ${vladivostokColor}`}>Фитнес и Йога Тренер</p>
               </div>
             </div>
             <nav className="hidden lg:flex items-center gap-8">
-              <a href="/smirnova" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/smirnova" className="text-gray-600 hover:text-black font-light transition-colors">
                 Главная
               </a>
-              <a href="/smirnova#about" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/smirnova#about" className="text-gray-600 hover:text-black font-light transition-colors">
                 О нас
               </a>
-              <a href="/faq" className="text-emerald-600 font-light">
+              <a href="/faq" className="text-black font-light">
                 Частые вопросы
               </a>
-              <a href="/videos" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/videos" className="text-gray-600 hover:text-black font-light transition-colors">
                 Бесплатные видео
               </a>
-              <a href="/smirnova#contact" className="text-gray-700 hover:text-emerald-600 font-light transition-colors">
+              <a href="/smirnova#contact" className="text-gray-600 hover:text-black font-light transition-colors">
                 Контакты
               </a>
             </nav>
 
             {/* Mobile Menu Button */}
             <button 
-              className="lg:hidden text-gray-700"
+              className="lg:hidden text-black"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -124,32 +124,32 @@ export default function FAQ() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="lg:hidden border-t border-gray-200 py-4">
+            <div className="lg:hidden border-t border-gray-300 py-4">
               <nav className="flex flex-col space-y-4">
                 <a 
                   href="/smirnova" 
-                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-black font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Главная
                 </a>
                 <a 
                   href="/smirnova#about" 
-                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-black font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   О нас
                 </a>
                 <a 
                   href="/faq" 
-                  className="text-emerald-600 font-light px-2 py-1"
+                  className="text-black font-light px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Частые вопросы
                 </a>
                 <a 
                   href="/videos" 
-                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-black font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Бесплатные видео
@@ -158,14 +158,14 @@ export default function FAQ() {
                   href="https://t.me/nina_smirnova" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-black font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Запись
                 </a>
                 <a 
                   href="/smirnova#contact" 
-                  className="text-gray-700 hover:text-emerald-600 font-light transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-black font-light transition-colors px-2 py-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Контакты
@@ -178,12 +178,12 @@ export default function FAQ() {
 
       <main className="flex-1">
         {/* FAQ Section */}
-        <section className="bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 py-12 sm:py-16 md:py-24">
+        <section className="bg-white py-12 sm:py-16 md:py-24 border-b border-gray-300">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-800 mb-3 sm:mb-4 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-black mb-3 sm:mb-4 text-center">
               Частые вопросы
             </h1>
-            <p className="text-base sm:text-lg text-gray-700 font-light text-center mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
+            <p className="text-base sm:text-lg text-gray-600 font-light text-center mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
               Здесь вы найдёте ответы на наиболее часто задаваемые вопросы о занятиях йогой
             </p>
 
@@ -191,17 +191,17 @@ export default function FAQ() {
               {faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+                  className="bg-white border border-gray-300 overflow-hidden"
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-emerald-50 transition-colors"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-colors"
                   >
-                    <span className="text-lg font-light text-gray-800 pr-4">
+                    <span className="text-lg font-light text-black pr-4">
                       {faq.question}
                     </span>
                     <svg
-                      className={`w-5 h-5 text-emerald-600 flex-shrink-0 transition-transform ${
+                      className={`w-5 h-5 text-black flex-shrink-0 transition-transform ${
                         openIndex === index ? 'rotate-180' : ''
                       }`}
                       fill="none"
@@ -217,8 +217,8 @@ export default function FAQ() {
                     </svg>
                   </button>
                   {openIndex === index && (
-                    <div className="px-4 sm:px-6 py-3 sm:py-4 bg-emerald-50 border-t border-emerald-100">
-                      <p className="text-sm sm:text-base text-gray-700 font-light leading-relaxed">
+                    <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 border-t border-gray-300">
+                      <p className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -233,7 +233,7 @@ export default function FAQ() {
               </p>
               <a
                 href="/smirnova#contact"
-                className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-light"
+                className="inline-block px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors font-light border border-black"
               >
                 Свяжитесь со мной
               </a>
@@ -243,40 +243,40 @@ export default function FAQ() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12 md:py-16">
+      <footer className="bg-black text-gray-400 py-12 md:py-16 border-t border-gray-300">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-white font-light mb-4">О нас</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/smirnova#about" className="hover:text-emerald-400 transition-colors">О Нине</a></li>
-                <li><a href="/faq" className="hover:text-emerald-400 transition-colors">Частые вопросы</a></li>
-                <li><a href="/smirnova#contact" className="hover:text-emerald-400 transition-colors">Контакты</a></li>
+                <li><a href="/smirnova#about" className="hover:text-white transition-colors font-light">О Нине</a></li>
+                <li><a href="/faq" className="hover:text-white transition-colors font-light">Частые вопросы</a></li>
+                <li><a href="/smirnova#contact" className="hover:text-white transition-colors font-light">Контакты</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-light mb-4">Курсы</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/smirnova#courses" className="hover:text-emerald-400 transition-colors">Все курсы</a></li>
-                <li><a href="/videos" className="hover:text-emerald-400 transition-colors">Бесплатные видео</a></li>
-                <li><a href="/smirnova#courses" className="hover:text-emerald-400 transition-colors">Мастер-классы</a></li>
+                <li><a href="/smirnova#courses" className="hover:text-white transition-colors font-light">Все курсы</a></li>
+                <li><a href="/videos" className="hover:text-white transition-colors font-light">Бесплатные видео</a></li>
+                <li><a href="/smirnova#courses" className="hover:text-white transition-colors font-light">Мастер-классы</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-light mb-4">Связь</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="https://www.instagram.com/nina.smirnovaa/" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                  <a href="https://www.instagram.com/nina.smirnovaa/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-light">
                     Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:Healthy.smirnova@gmail.com" className="hover:text-emerald-400 transition-colors">
+                  <a href="mailto:Healthy.smirnova@gmail.com" className="hover:text-white transition-colors font-light">
                     Email
                   </a>
                 </li>
                 <li>
-                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-light">
                     Telegram
                   </a>
                 </li>
@@ -286,7 +286,7 @@ export default function FAQ() {
               <h3 className="text-white font-light mb-4">Запись</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                  <a href="https://t.me/nina_smirnova" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-light">
                     Записаться на занятие
                   </a>
                 </li>
@@ -295,8 +295,9 @@ export default function FAQ() {
           </div>
 
           <div className="border-t border-gray-800 pt-8">
-            <p className="text-sm text-gray-400 text-center">
-              © {new Date().getFullYear()} Нина Смирнова. Все права защищены.
+            <p className="text-sm text-gray-500 text-center font-light">
+              © {new Date().getFullYear()} Нина Смирнова.<br />
+              Все права защищены.
             </p>
           </div>
         </div>
