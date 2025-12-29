@@ -43,14 +43,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white relative overflow-hidden flex flex-col items-center justify-center">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+      <div className="absolute inset-0 w-full h-full">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-[0.6] sm:scale-50 md:scale-50"
-          style={{ marginTop: '-15%' }}
+          className="w-full h-full object-cover object-center"
           aria-label="Фон видео"
         >
           <source src="/video/Sand2.mp4" type="video/mp4" />
