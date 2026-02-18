@@ -54,7 +54,7 @@ export async function GET() {
     const spxMap = new Map(spxC.map((c) => [dateKey(c.date), c.close]));
     const goldMap = new Map(goldC.map((c) => [dateKey(c.date), c.close]));
 
-    const allDates = [...btcMap.keys()].filter((d) => spxMap.has(d) && goldMap.has(d)).sort();
+    const allDates = Array.from(btcMap.keys()).filter((d) => spxMap.has(d) && goldMap.has(d)).sort();
 
     const btcP = allDates.map((d) => btcMap.get(d)!);
     const spxP = allDates.map((d) => spxMap.get(d)!);

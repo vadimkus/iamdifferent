@@ -19,15 +19,19 @@ interface DxyData { dxy: number; change_pct: number }
 interface StrategySummary {
   total_trades: number; win_rate: number; wins: number; losses: number;
   avg_return: number; median_return: number; cum_return: number;
-  max_win: number; max_loss: number; sharpe: number;
+  max_win: number; max_loss: number; sharpe: number; label?: string;
 }
 interface DowStat { day: string; trades: number; win_rate: number; avg_return: number; cum_return: number }
 interface MonthStat { month: string; trades: number; win_rate: number; avg_return: number; cum_return: number }
+interface YearStat { year: number; trades: number; win_rate: number; cum_return: number }
 interface EquityPoint { date: string; equity: number }
 interface RecentTrade { date: string; buy: number; sell: number; return_pct: number; dow: string }
-interface StrategyData {
+interface StrategyBlock {
   summary: StrategySummary; by_day: DowStat[]; by_month: MonthStat[];
-  equity_curve: EquityPoint[]; recent_trades: RecentTrade[];
+  by_year: YearStat[]; equity_curve: EquityPoint[]; recent_trades: RecentTrade[];
+}
+interface StrategyData extends StrategyBlock {
+  daily_10y: StrategyBlock;
 }
 interface HourlyStat {
   hour_utc: number; hour_dubai: number; avg_return: number; win_rate: number; volatility: number; count: number;
@@ -58,8 +62,10 @@ export default function BTCPage() {
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [clocks, setClocks] = useState({ dubai: '--:--:--', ny: '--:--:--', utc: '--:--:--' });
   const [chartReady, setChartReady] = useState(false);
+  const [activeTab, setActiveTab] = useState<'2y' | '10y'>('2y');
 
   const equityChartRef = useRef<HTMLCanvasElement>(null);
+  const equity10yChartRef = useRef<HTMLCanvasElement>(null);
   const m2ChartRef = useRef<HTMLCanvasElement>(null);
   const corrChartRef = useRef<HTMLCanvasElement>(null);
   const chartInstances = useRef<any[]>([]); // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -126,6 +132,18 @@ export default function BTCPage() {
       }));
     }
 
+    if (strategy?.daily_10y && equity10yChartRef.current) {
+      const eq = strategy.daily_10y.equity_curve.filter((_: EquityPoint, i: number) => i % 30 === 0);
+      chartInstances.current.push(new Chart(equity10yChartRef.current, {
+        type: 'line',
+        data: {
+          labels: eq.map((e: EquityPoint) => e.date),
+          datasets: [{ label: 'Equity ($)', data: eq.map((e: EquityPoint) => e.equity), borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,.1)', fill: true, tension: .3, pointRadius: 0 }],
+        },
+        options: chartOpts('$'),
+      }));
+    }
+
     if (macro?.m2_history && m2ChartRef.current) {
       const m2 = macro.m2_history.filter((_: { date: string; value: number }, i: number) => i % 6 === 0);
       chartInstances.current.push(new Chart(m2ChartRef.current, {
@@ -152,7 +170,7 @@ export default function BTCPage() {
         options: { ...chartOpts(), scales: { ...chartOpts().scales, y: { ...chartOpts().scales.y, min: -1, max: 1 } } },
       }));
     }
-  }, [chartReady, strategy, macro, corr]);
+  }, [chartReady, strategy, macro, corr, activeTab]);
 
   // Signal logic
   function getSignal(d: LiveData) {
@@ -311,72 +329,125 @@ export default function BTCPage() {
           </div>
         </div>
 
-        {/* Strategy performance + equity */}
-        <div className="grid-2">
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--green)' }} /> Strategy Performance</div>
-            {strategy ? (
-              <>
-                {[
-                  ['Total Trades', strategy.summary.total_trades],
-                  ['Win Rate', <span key="wr" style={{ color: strategy.summary.win_rate > 50 ? 'var(--green)' : 'var(--red)' }}>{strategy.summary.win_rate}%</span>],
-                  ['W / L', <span key="wl"><span style={{ color: 'var(--green)' }}>{strategy.summary.wins}W</span> / <span style={{ color: 'var(--red)' }}>{strategy.summary.losses}L</span></span>],
-                  ['Avg Return/Trade', <span key="ar" style={{ color: pctCol(strategy.summary.avg_return) }}>{pctSign(strategy.summary.avg_return)}</span>],
-                  ['Cumulative Return', <span key="cr" style={{ color: pctCol(strategy.summary.cum_return) }}>{pctSign(strategy.summary.cum_return)}</span>],
-                  ['Best Trade', <span key="bt" style={{ color: 'var(--green)' }}>+{strategy.summary.max_win}%</span>],
-                  ['Worst Trade', <span key="wt" style={{ color: 'var(--red)' }}>{strategy.summary.max_loss}%</span>],
-                  ['Annualized Sharpe', strategy.summary.sharpe],
-                ].map(([label, value]) => (
-                  <div className="mr" key={label as string}><span className="mr-l">{label as string}</span><span className="mr-v">{value as React.ReactNode}</span></div>
-                ))}
-              </>
-            ) : <div className="loading">Loading backtest...</div>}
-          </div>
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--cyan)' }} /> Equity Curve ($10,000 start)</div>
-            <div className="chart-wrap"><canvas ref={equityChartRef} /></div>
-          </div>
+        {/* Tab switcher */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+          <button onClick={() => setActiveTab('2y')} className="tab-btn" style={{ background: activeTab === '2y' ? 'var(--cyan)' : 'var(--card)', color: activeTab === '2y' ? '#000' : 'var(--muted)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 20px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}>
+            2Y Hourly (Precise)
+          </button>
+          <button onClick={() => setActiveTab('10y')} className="tab-btn" style={{ background: activeTab === '10y' ? 'var(--green)' : 'var(--card)', color: activeTab === '10y' ? '#000' : 'var(--muted)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 20px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}>
+            10Y Daily (Full History)
+          </button>
+          <span style={{ color: 'var(--muted)', fontSize: 12, alignSelf: 'center', marginLeft: 8 }}>
+            {activeTab === '2y' ? 'Buy 8PM UTC / Sell 2AM UTC — hourly candles' : 'Buy Daily Close / Sell Next Open — proxy for overnight session since 2016'}
+          </span>
         </div>
 
-        {/* Day / Month tables */}
-        <div className="grid-2">
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--amber)' }} /> By Day of Week</div>
-            {strategy ? (
-              <table>
-                <thead><tr><th>Day</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr></thead>
-                <tbody>
-                  {strategy.by_day.map((r: DowStat) => (
-                    <tr key={r.day}>
-                      <td><strong>{r.day}</strong></td><td>{r.trades}</td>
-                      <td style={{ color: r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{r.win_rate}%</td>
-                      <td style={{ color: pctCol(r.avg_return) }}>{pctSign(r.avg_return)}</td>
-                      <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(r.cum_return) * 5, 100), background: pctCol(r.cum_return) }} /><span style={{ color: pctCol(r.cum_return) }}>{pctSign(r.cum_return)}</span></div></td>
-                    </tr>
+        {/* Strategy performance + equity */}
+        {(() => {
+          const block = activeTab === '2y' ? strategy : strategy?.daily_10y;
+          if (!block) return <div className="loading">Loading backtest...</div>;
+          const s = block.summary;
+          return (
+            <>
+              <div className="grid-2">
+                <div className="card">
+                  <div className="sec-title"><span className="dot" style={{ background: activeTab === '2y' ? 'var(--cyan)' : 'var(--green)' }} /> Strategy Performance — {s.label}</div>
+                  {[
+                    ['Total Trades', s.total_trades],
+                    ['Win Rate', <span key="wr" style={{ color: s.win_rate > 50 ? 'var(--green)' : 'var(--red)' }}>{s.win_rate}%</span>],
+                    ['W / L', <span key="wl"><span style={{ color: 'var(--green)' }}>{s.wins}W</span> / <span style={{ color: 'var(--red)' }}>{s.losses}L</span></span>],
+                    ['Avg Return/Trade', <span key="ar" style={{ color: pctCol(s.avg_return) }}>{pctSign(s.avg_return)}</span>],
+                    ['Cumulative Return', <span key="cr" style={{ color: pctCol(s.cum_return) }}>{pctSign(s.cum_return)}</span>],
+                    ['Best Trade', <span key="bt" style={{ color: 'var(--green)' }}>+{s.max_win}%</span>],
+                    ['Worst Trade', <span key="wt" style={{ color: 'var(--red)' }}>{s.max_loss}%</span>],
+                    ['Annualized Sharpe', s.sharpe],
+                  ].map(([label, value]) => (
+                    <div className="mr" key={label as string}><span className="mr-l">{label as string}</span><span className="mr-v">{value as React.ReactNode}</span></div>
                   ))}
-                </tbody>
-              </table>
-            ) : <div className="loading">Loading...</div>}
-          </div>
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--amber)' }} /> By Month</div>
-            {strategy ? (
-              <table>
-                <thead><tr><th>Month</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr></thead>
-                <tbody>
-                  {strategy.by_month.map((r: MonthStat) => (
-                    <tr key={r.month}>
-                      <td><strong>{r.month}</strong></td><td>{r.trades}</td>
-                      <td style={{ color: r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{r.win_rate}%</td>
-                      <td style={{ color: pctCol(r.avg_return) }}>{pctSign(r.avg_return)}</td>
-                      <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(r.cum_return) * 3, 100), background: pctCol(r.cum_return) }} /><span style={{ color: pctCol(r.cum_return) }}>{pctSign(r.cum_return)}</span></div></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : <div className="loading">Loading...</div>}
-          </div>
-        </div>
+                </div>
+                <div className="card">
+                  <div className="sec-title"><span className="dot" style={{ background: activeTab === '2y' ? 'var(--cyan)' : 'var(--green)' }} /> Equity Curve ($10,000 start)</div>
+                  <div className="chart-wrap">
+                    <canvas ref={activeTab === '2y' ? equityChartRef : equity10yChartRef} key={activeTab} />
+                  </div>
+                </div>
+              </div>
+
+              {/* By Year (10Y only) */}
+              {block.by_year && block.by_year.length > 2 && (
+                <div className="card" style={{ marginBottom: 24 }}>
+                  <div className="sec-title"><span className="dot" style={{ background: 'var(--green)' }} /> By Year</div>
+                  <table>
+                    <thead><tr><th>Year</th><th>Trades</th><th>Win Rate</th><th>Cumulative</th><th></th></tr></thead>
+                    <tbody>
+                      {block.by_year.map((r: YearStat) => (
+                        <tr key={r.year}>
+                          <td><strong>{r.year}</strong></td><td>{r.trades}</td>
+                          <td style={{ color: r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{r.win_rate}%</td>
+                          <td style={{ color: pctCol(r.cum_return) }}>{pctSign(r.cum_return)}</td>
+                          <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(r.cum_return) * 8, 200), background: pctCol(r.cum_return) }} /></div></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Day / Month tables */}
+              <div className="grid-2">
+                <div className="card">
+                  <div className="sec-title"><span className="dot" style={{ background: 'var(--amber)' }} /> By Day of Week</div>
+                  <table>
+                    <thead><tr><th>Day</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr></thead>
+                    <tbody>
+                      {block.by_day.map((r: DowStat) => (
+                        <tr key={r.day}>
+                          <td><strong>{r.day}</strong></td><td>{r.trades}</td>
+                          <td style={{ color: r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{r.win_rate}%</td>
+                          <td style={{ color: pctCol(r.avg_return) }}>{pctSign(r.avg_return)}</td>
+                          <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(r.cum_return) * 5, 100), background: pctCol(r.cum_return) }} /><span style={{ color: pctCol(r.cum_return) }}>{pctSign(r.cum_return)}</span></div></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="card">
+                  <div className="sec-title"><span className="dot" style={{ background: 'var(--amber)' }} /> By Month</div>
+                  <table>
+                    <thead><tr><th>Month</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr></thead>
+                    <tbody>
+                      {block.by_month.map((r: MonthStat) => (
+                        <tr key={r.month}>
+                          <td><strong>{r.month}</strong></td><td>{r.trades}</td>
+                          <td style={{ color: r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{r.win_rate}%</td>
+                          <td style={{ color: pctCol(r.avg_return) }}>{pctSign(r.avg_return)}</td>
+                          <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(r.cum_return) * 3, 100), background: pctCol(r.cum_return) }} /><span style={{ color: pctCol(r.cum_return) }}>{pctSign(r.cum_return)}</span></div></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Recent trades */}
+              <div className="card" style={{ marginBottom: 24 }}>
+                <div className="sec-title"><span className="dot" style={{ background: 'var(--blue)' }} /> Recent 30 Trades</div>
+                <table>
+                  <thead><tr><th>Date</th><th>Day</th><th>Buy</th><th>Sell</th><th>Return</th></tr></thead>
+                  <tbody>
+                    {[...block.recent_trades].reverse().map((t: RecentTrade) => (
+                      <tr key={t.date}>
+                        <td>{t.date}</td><td>{t.dow}</td>
+                        <td>${fmt(t.buy)}</td><td>${fmt(t.sell)}</td>
+                        <td style={{ color: pctCol(t.return_pct), fontWeight: 600 }}>{pctSign(t.return_pct)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          );
+        })()}
 
         {/* Session heatmap + Correlations */}
         <div className="grid-2">
@@ -408,25 +479,6 @@ export default function BTCPage() {
             <div className="sec-title"><span className="dot" style={{ background: 'var(--purple)' }} /> BTC Correlations (30-day rolling)</div>
             <div className="chart-wrap"><canvas ref={corrChartRef} /></div>
           </div>
-        </div>
-
-        {/* Recent trades */}
-        <div className="card" style={{ marginBottom: 24 }}>
-          <div className="sec-title"><span className="dot" style={{ background: 'var(--blue)' }} /> Recent 30 Trades</div>
-          {strategy ? (
-            <table>
-              <thead><tr><th>Date</th><th>Day</th><th>Buy</th><th>Sell</th><th>Return</th></tr></thead>
-              <tbody>
-                {[...strategy.recent_trades].reverse().map((t: RecentTrade) => (
-                  <tr key={t.date}>
-                    <td>{t.date}</td><td>{t.dow}</td>
-                    <td>${fmt(t.buy)}</td><td>${fmt(t.sell)}</td>
-                    <td style={{ color: pctCol(t.return_pct), fontWeight: 600 }}>{pctSign(t.return_pct)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : <div className="loading">Loading...</div>}
         </div>
       </div>
     </>
