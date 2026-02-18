@@ -1,0 +1,4880 @@
+{
+  "generated": "2026-02-18T14:34:51.726536",
+  "analysis_period": "2017-01-01 to 2026-02-17",
+  "total_trading_days": 3335,
+  "total_strategies_tested": 508,
+  "top_by_win_rate": [
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 84.21,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.2105,
+      "cum_return": 25.29,
+      "max_drawdown": 6.91,
+      "sharpe": 4.714,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 2.0,
+          "dow": 1
+        }
+      ],
+      "composite": 51.75399999999999
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + no_earnings | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 82.61,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.2206,
+      "cum_return": 5.16,
+      "max_drawdown": 1.99,
+      "sharpe": 6.179,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 50.88440000000001
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + no_eclipse | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 22,
+      "win_rate": 81.82,
+      "avg_win": 0.4763,
+      "avg_loss": -1.0,
+      "expectancy": 0.2079,
+      "cum_return": 4.64,
+      "max_drawdown": 1.99,
+      "sharpe": 5.727,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 49.4136
+    },
+    {
+      "label": "near_eclipse | tgt=0.5% stp=-3.0% hold=1d",
+      "trades": 43,
+      "win_rate": 81.4,
+      "avg_win": 0.4733,
+      "avg_loss": -2.5722,
+      "expectancy": -0.0933,
+      "cum_return": -4.26,
+      "max_drawdown": 8.42,
+      "sharpe": -1.187,
+      "target_pct": 0.005,
+      "stop_pct": -0.03,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 0.5,
+          "dow": 3
+        },
+        {
+          "date": "2024-09-20",
+          "entry": 63192.98,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-09-30",
+          "entry": 63329.5,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-10-01",
+          "entry": 60837.01,
+          "return_pct": 0.5,
+          "dow": 1
+        },
+        {
+          "date": "2024-10-02",
+          "entry": 60632.79,
+          "return_pct": 0.5,
+          "dow": 2
+        },
+        {
+          "date": "2024-10-03",
+          "entry": 60759.4,
+          "return_pct": 0.5,
+          "dow": 3
+        },
+        {
+          "date": "2024-10-04",
+          "entry": 62067.48,
+          "return_pct": 0.0362,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 0.5,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": 0.5,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 0.5,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-27",
+          "entry": 87177.1,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-28",
+          "entry": 84353.15,
+          "return_pct": -3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-29",
+          "entry": 82597.59,
+          "return_pct": 0.5,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-30",
+          "entry": 82334.52,
+          "return_pct": 0.5,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-31",
+          "entry": 82548.91,
+          "return_pct": 0.5,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 0.5,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 0.5,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 0.5,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 0.5,
+          "dow": 1
+        },
+        {
+          "date": "2025-09-19",
+          "entry": 115688.86,
+          "return_pct": 0.0286,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-20",
+          "entry": 115721.96,
+          "return_pct": -0.3594,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-21",
+          "entry": 115306.09,
+          "return_pct": -2.2181,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-22",
+          "entry": 112748.51,
+          "return_pct": 0.5,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-23",
+          "entry": 112014.5,
+          "return_pct": 0.5,
+          "dow": 1
+        },
+        {
+          "date": "2026-02-15",
+          "entry": 68788.19,
+          "return_pct": 0.5,
+          "dow": 6
+        },
+        {
+          "date": "2026-02-16",
+          "entry": 68843.16,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2026-02-17",
+          "entry": 67494.22,
+          "return_pct": 0.5,
+          "dow": 1
+        }
+      ],
+      "composite": 38.786
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 4.43,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 1.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.9351,
+      "avg_loss": -3.0,
+      "expectancy": 1.0098,
+      "cum_return": 17.09,
+      "max_drawdown": 8.73,
+      "sharpe": 3.701,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.1563,
+          "dow": 3
+        }
+      ],
+      "composite": 47.141200000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + no_earnings + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + bb_above_upper + no_eclipse | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + no_earnings + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    },
+    {
+      "label": "vol_low + dow_fri | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 24,
+      "win_rate": 79.17,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.1697,
+      "cum_return": 4.11,
+      "max_drawdown": 1.99,
+      "sharpe": 4.446,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.03880000000001
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 24,
+      "win_rate": 79.17,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.1697,
+      "cum_return": 4.11,
+      "max_drawdown": 1.99,
+      "sharpe": 4.446,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.03880000000001
+    },
+    {
+      "label": "dxy_down + above_sma200 + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 78.95,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 0.9474,
+      "cum_return": 19.15,
+      "max_drawdown": 4.03,
+      "sharpe": 3.299,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 45.7676
+    },
+    {
+      "label": "vix_falling + dow_fri + vol_low + no_earnings | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 19,
+      "win_rate": 78.95,
+      "avg_win": 0.4715,
+      "avg_loss": -1.0,
+      "expectancy": 0.1617,
+      "cum_return": 3.08,
+      "max_drawdown": 2.0,
+      "sharpe": 4.228,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 44.482800000000005
+    },
+    {
+      "label": "dow_fri + vol_low + no_eclipse | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 78.26,
+      "avg_win": 0.4763,
+      "avg_loss": -1.0,
+      "expectancy": 0.1554,
+      "cum_return": 3.59,
+      "max_drawdown": 1.99,
+      "sharpe": 4.01,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 44.54560000000001
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + no_eclipse | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 78.26,
+      "avg_win": 0.4763,
+      "avg_loss": -1.0,
+      "expectancy": 0.1554,
+      "cum_return": 3.59,
+      "max_drawdown": 1.99,
+      "sharpe": 4.01,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 44.54560000000001
+    },
+    {
+      "label": "dow_fri + near_full_moon + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 17,
+      "win_rate": 76.47,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 0.8235,
+      "cum_return": 14.52,
+      "max_drawdown": 4.03,
+      "sharpe": 2.757,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 42.796
+    },
+    {
+      "label": "above_sma200 + dow_fri + vol_low + no_earnings | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 17,
+      "win_rate": 76.47,
+      "avg_win": 0.4672,
+      "avg_loss": -1.0,
+      "expectancy": 0.122,
+      "cum_return": 2.06,
+      "max_drawdown": 2.0,
+      "sharpe": 3.072,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 40.62
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.375,
+      "cum_return": 7.65,
+      "max_drawdown": 3.48,
+      "sharpe": 3.888,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "composite": 43.275999999999996
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "dxy_down + vol_below_avg + no_earnings + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.375,
+      "cum_return": 7.65,
+      "max_drawdown": 3.48,
+      "sharpe": 3.888,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "composite": 43.275999999999996
+    },
+    {
+      "label": "dxy_down + vol_below_avg + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper + no_eclipse | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.375,
+      "cum_return": 7.65,
+      "max_drawdown": 3.48,
+      "sharpe": 3.888,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "composite": 43.275999999999996
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "vix_falling + vol_below_avg + dow_fri + vol_low | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 0.4715,
+      "avg_loss": -1.0,
+      "expectancy": 0.1037,
+      "cum_return": 2.05,
+      "max_drawdown": 2.0,
+      "sharpe": 2.556,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 39.5268
+    }
+  ],
+  "holy_grail": [
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 84.21,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.2105,
+      "cum_return": 25.29,
+      "max_drawdown": 6.91,
+      "sharpe": 4.714,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 2.0,
+          "dow": 1
+        }
+      ],
+      "composite": 51.75399999999999
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + no_earnings | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 82.61,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.2206,
+      "cum_return": 5.16,
+      "max_drawdown": 1.99,
+      "sharpe": 6.179,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 50.88440000000001
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + no_eclipse | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 22,
+      "win_rate": 81.82,
+      "avg_win": 0.4763,
+      "avg_loss": -1.0,
+      "expectancy": 0.2079,
+      "cum_return": 4.64,
+      "max_drawdown": 1.99,
+      "sharpe": 5.727,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 49.4136
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.9351,
+      "avg_loss": -3.0,
+      "expectancy": 1.0098,
+      "cum_return": 17.09,
+      "max_drawdown": 8.73,
+      "sharpe": 3.701,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.1563,
+          "dow": 3
+        }
+      ],
+      "composite": 47.141200000000005
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 4.43,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 1.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + no_earnings + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + bb_above_upper + no_eclipse | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "dxy_down + dow_fri + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + no_earnings + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    }
+  ],
+  "top_by_expectancy": [
+    {
+      "label": "near_eclipse + near_full_moon | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 19,
+      "win_rate": 73.68,
+      "avg_win": 2.9402,
+      "avg_loss": -2.0,
+      "expectancy": 1.6402,
+      "cum_return": 35.62,
+      "max_drawdown": 3.96,
+      "sharpe": 5.333,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": -2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": -2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.1632,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -2.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 3.0,
+          "dow": 1
+        }
+      ],
+      "composite": 50.4988
+    },
+    {
+      "label": "rsi14_lt50 + near_eclipse | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 23,
+      "win_rate": 65.22,
+      "avg_win": 3.0,
+      "avg_loss": -2.0,
+      "expectancy": 1.2609,
+      "cum_return": 32.55,
+      "max_drawdown": 7.76,
+      "sharpe": 3.759,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-10-01",
+          "entry": 60837.01,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-10-02",
+          "entry": 60632.79,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-10-03",
+          "entry": 60759.4,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -2.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-28",
+          "entry": 84353.15,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-29",
+          "entry": 82597.59,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-30",
+          "entry": 82334.52,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-31",
+          "entry": 82548.91,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2025-09-22",
+          "entry": 112748.51,
+          "return_pct": -2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-23",
+          "entry": 112014.5,
+          "return_pct": -2.0,
+          "dow": 1
+        },
+        {
+          "date": "2026-02-15",
+          "entry": 68788.19,
+          "return_pct": -2.0,
+          "dow": 6
+        },
+        {
+          "date": "2026-02-16",
+          "entry": 68843.16,
+          "return_pct": -2.0,
+          "dow": 0
+        }
+      ],
+      "composite": 43.2496
+    },
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 84.21,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.2105,
+      "cum_return": 25.29,
+      "max_drawdown": 6.91,
+      "sharpe": 4.714,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 2.0,
+          "dow": 1
+        }
+      ],
+      "composite": 51.75399999999999
+    },
+    {
+      "label": "below_ema20_50 + near_eclipse | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 21,
+      "win_rate": 61.9,
+      "avg_win": 3.0,
+      "avg_loss": -2.0,
+      "expectancy": 1.0952,
+      "cum_return": 24.94,
+      "max_drawdown": 7.76,
+      "sharpe": 3.202,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-10-01",
+          "entry": 60837.01,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-10-02",
+          "entry": 60632.79,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-10-03",
+          "entry": 60759.4,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -2.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-28",
+          "entry": 84353.15,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-29",
+          "entry": 82597.59,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-30",
+          "entry": 82334.52,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-03-31",
+          "entry": 82548.91,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2025-09-22",
+          "entry": 112748.51,
+          "return_pct": -2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-23",
+          "entry": 112014.5,
+          "return_pct": -2.0,
+          "dow": 1
+        },
+        {
+          "date": "2026-02-15",
+          "entry": 68788.19,
+          "return_pct": -2.0,
+          "dow": 6
+        },
+        {
+          "date": "2026-02-16",
+          "entry": 68843.16,
+          "return_pct": -2.0,
+          "dow": 0
+        }
+      ],
+      "composite": 39.7448
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.9351,
+      "avg_loss": -3.0,
+      "expectancy": 1.0098,
+      "cum_return": 17.09,
+      "max_drawdown": 8.73,
+      "sharpe": 3.701,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.1563,
+          "dow": 3
+        }
+      ],
+      "composite": 47.141200000000005
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "dxy_down + dow_fri + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "vol_below_avg + near_full_moon + no_earnings + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 15.75,
+      "max_drawdown": 6.91,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 46.1
+    },
+    {
+      "label": "dxy_down + above_sma200 + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 78.95,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 0.9474,
+      "cum_return": 19.15,
+      "max_drawdown": 4.03,
+      "sharpe": 3.299,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 45.7676
+    },
+    {
+      "label": "dow_tue_thu + near_eclipse | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 15,
+      "win_rate": 60.0,
+      "avg_win": 2.907,
+      "avg_loss": -2.0,
+      "expectancy": 0.9442,
+      "cum_return": 14.64,
+      "max_drawdown": 3.96,
+      "sharpe": 2.778,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "composite": 36.332800000000006
+    },
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-2.0% hold=3d",
+      "trades": 19,
+      "win_rate": 73.68,
+      "avg_win": 1.9375,
+      "avg_loss": -2.0,
+      "expectancy": 0.9013,
+      "cum_return": 18.25,
+      "max_drawdown": 4.0,
+      "sharpe": 4.735,
+      "target_pct": 0.02,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 46.3472
+    },
+    {
+      "label": "bb_above_upper + vol_below_avg | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 30,
+      "win_rate": 60.0,
+      "avg_win": 2.7485,
+      "avg_loss": -1.8788,
+      "expectancy": 0.8976,
+      "cum_return": 29.68,
+      "max_drawdown": 3.96,
+      "sharpe": 2.712,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "composite": 39.0144
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper | tgt=2.0% stp=-2.0% hold=3d",
+      "trades": 20,
+      "win_rate": 70.0,
+      "avg_win": 2.0,
+      "avg_loss": -1.6811,
+      "expectancy": 0.8957,
+      "cum_return": 19.17,
+      "max_drawdown": 4.0,
+      "sharpe": 4.741,
+      "target_pct": 0.02,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 45.0648
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "dxy_down + vol_below_avg + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 75.0,
+      "avg_win": 1.9438,
+      "avg_loss": -2.4266,
+      "expectancy": 0.8512,
+      "cum_return": 18.01,
+      "max_drawdown": 6.91,
+      "sharpe": 3.043,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 43.4908
+    },
+    {
+      "label": "dow_fri + near_full_moon + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 17,
+      "win_rate": 76.47,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 0.8235,
+      "cum_return": 14.52,
+      "max_drawdown": 4.03,
+      "sharpe": 2.757,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 42.796
+    },
+    {
+      "label": "dow_fri + near_full_moon + no_eclipse | tgt=2.0% stp=-2.0% hold=3d",
+      "trades": 17,
+      "win_rate": 70.59,
+      "avg_win": 2.0,
+      "avg_loss": -2.0,
+      "expectancy": 0.8235,
+      "cum_return": 14.64,
+      "max_drawdown": 4.04,
+      "sharpe": 4.141,
+      "target_pct": 0.02,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 43.212
+    }
+  ],
+  "top_by_composite": [
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 19,
+      "win_rate": 84.21,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.2105,
+      "cum_return": 25.29,
+      "max_drawdown": 6.91,
+      "sharpe": 4.714,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 2.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 2.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 2.0,
+          "dow": 1
+        }
+      ],
+      "composite": 51.75399999999999
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + no_earnings | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 82.61,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.2206,
+      "cum_return": 5.16,
+      "max_drawdown": 1.99,
+      "sharpe": 6.179,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 50.88440000000001
+    },
+    {
+      "label": "near_eclipse + near_full_moon | tgt=3.0% stp=-2.0% hold=5d",
+      "trades": 19,
+      "win_rate": 73.68,
+      "avg_win": 2.9402,
+      "avg_loss": -2.0,
+      "expectancy": 1.6402,
+      "cum_return": 35.62,
+      "max_drawdown": 3.96,
+      "sharpe": 5.333,
+      "target_pct": 0.03,
+      "stop_pct": -0.02,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-03-23",
+          "entry": 64062.2,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-24",
+          "entry": 67234.17,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-25",
+          "entry": 69958.81,
+          "return_pct": -2.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-26",
+          "entry": 69987.84,
+          "return_pct": -2.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-27",
+          "entry": 69455.34,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-16",
+          "entry": 58192.51,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-09-17",
+          "entry": 60308.54,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-09-18",
+          "entry": 61649.68,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-09-19",
+          "entry": 62940.46,
+          "return_pct": 2.1632,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-12",
+          "entry": 83722.36,
+          "return_pct": -2.0,
+          "dow": 2
+        },
+        {
+          "date": "2025-03-13",
+          "entry": 81066.7,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-03-14",
+          "entry": 83969.1,
+          "return_pct": -2.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-15",
+          "entry": 84343.11,
+          "return_pct": -2.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-03-16",
+          "entry": 82579.69,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-05",
+          "entry": 110650.98,
+          "return_pct": 3.0,
+          "dow": 4
+        },
+        {
+          "date": "2025-09-06",
+          "entry": 110224.7,
+          "return_pct": 3.0,
+          "dow": 5
+        },
+        {
+          "date": "2025-09-07",
+          "entry": 111167.62,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-08",
+          "entry": 112071.43,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2025-09-09",
+          "entry": 111530.55,
+          "return_pct": 3.0,
+          "dow": 1
+        }
+      ],
+      "composite": 50.4988
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 4.43,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 1.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -1.5,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + no_earnings + bb_above_upper | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "vix_falling + vol_below_avg + bb_above_upper + no_eclipse | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5312,
+      "cum_return": 8.76,
+      "max_drawdown": 2.98,
+      "sharpe": 6.111,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "trade_log": [
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 1.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-06",
+          "entry": 3213.94,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -1.5,
+          "dow": 3
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 1.0,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-13",
+          "entry": 61243.09,
+          "return_pct": -1.5,
+          "dow": 5
+        },
+        {
+          "date": "2022-10-04",
+          "entry": 20336.84,
+          "return_pct": -1.5,
+          "dow": 1
+        },
+        {
+          "date": "2023-01-08",
+          "entry": 17091.14,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-12-15",
+          "entry": 104298.7,
+          "return_pct": 1.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.0,
+          "dow": 3
+        },
+        {
+          "date": "2026-01-03",
+          "entry": 90603.19,
+          "return_pct": 1.0,
+          "dow": 5
+        },
+        {
+          "date": "2026-01-04",
+          "entry": 91413.49,
+          "return_pct": 1.0,
+          "dow": 6
+        }
+      ],
+      "composite": 50.046800000000005
+    },
+    {
+      "label": "rsi14_gt80 | tgt=3.0% stp=-3.0% hold=1d",
+      "trades": 125,
+      "win_rate": 56.0,
+      "avg_win": 2.3172,
+      "avg_loss": -1.9924,
+      "expectancy": 0.421,
+      "cum_return": 63.14,
+      "max_drawdown": 12.75,
+      "sharpe": 2.79,
+      "target_pct": 0.03,
+      "stop_pct": -0.03,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2023-01-29",
+          "entry": 23774.57,
+          "return_pct": -3.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-10-23",
+          "entry": 33086.23,
+          "return_pct": 3.0,
+          "dow": 0
+        },
+        {
+          "date": "2023-10-24",
+          "entry": 33901.53,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2023-10-25",
+          "entry": 34502.82,
+          "return_pct": -1.0033,
+          "dow": 2
+        },
+        {
+          "date": "2023-10-26",
+          "entry": 34156.65,
+          "return_pct": -0.7227,
+          "dow": 3
+        },
+        {
+          "date": "2023-10-27",
+          "entry": 33909.8,
+          "return_pct": 0.5302,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-28",
+          "entry": 34089.57,
+          "return_pct": 1.3168,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-29",
+          "entry": 34538.48,
+          "return_pct": -0.1046,
+          "dow": 6
+        },
+        {
+          "date": "2023-10-30",
+          "entry": 34502.36,
+          "return_pct": 0.4794,
+          "dow": 0
+        },
+        {
+          "date": "2023-10-31",
+          "entry": 34667.78,
+          "return_pct": 2.2196,
+          "dow": 1
+        },
+        {
+          "date": "2023-11-01",
+          "entry": 35437.25,
+          "return_pct": -1.4082,
+          "dow": 2
+        },
+        {
+          "date": "2023-11-09",
+          "entry": 36693.12,
+          "return_pct": 1.692,
+          "dow": 3
+        },
+        {
+          "date": "2023-11-10",
+          "entry": 37313.97,
+          "return_pct": -0.4715,
+          "dow": 4
+        },
+        {
+          "date": "2023-11-11",
+          "entry": 37138.05,
+          "return_pct": -0.2249,
+          "dow": 5
+        },
+        {
+          "date": "2023-11-12",
+          "entry": 37054.52,
+          "return_pct": -1.4901,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-05",
+          "entry": 44080.65,
+          "return_pct": -0.7582,
+          "dow": 1
+        },
+        {
+          "date": "2024-02-14",
+          "entry": 51826.7,
+          "return_pct": 0.2158,
+          "dow": 2
+        },
+        {
+          "date": "2024-02-15",
+          "entry": 51938.55,
+          "return_pct": 0.4268,
+          "dow": 3
+        },
+        {
+          "date": "2024-02-16",
+          "entry": 52160.2,
+          "return_pct": -0.9532,
+          "dow": 4
+        },
+        {
+          "date": "2024-02-27",
+          "entry": 57085.37,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-02-28",
+          "entry": 62504.79,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-02-29",
+          "entry": 61198.38,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2024-03-01",
+          "entry": 62440.63,
+          "return_pct": -0.6579,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-03",
+          "entry": 63167.37,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-04",
+          "entry": 68330.41,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-11-11",
+          "entry": 88701.48,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-11-12",
+          "entry": 87955.81,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-11-13",
+          "entry": 90584.16,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-11-21",
+          "entry": 98504.73,
+          "return_pct": 0.5004,
+          "dow": 3
+        },
+        {
+          "date": "2024-11-22",
+          "entry": 98997.66,
+          "return_pct": -1.2327,
+          "dow": 4
+        }
+      ],
+      "composite": 49.664
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + no_eclipse | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 22,
+      "win_rate": 81.82,
+      "avg_win": 0.4763,
+      "avg_loss": -1.0,
+      "expectancy": 0.2079,
+      "cum_return": 4.64,
+      "max_drawdown": 1.99,
+      "sharpe": 5.727,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2017-01-20",
+          "entry": 895.03,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-23",
+          "entry": 2744.91,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-06-30",
+          "entry": 2480.84,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2017-09-22",
+          "entry": 3630.7,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-01-19",
+          "entry": 11607.4,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2018-04-06",
+          "entry": 6636.32,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2019-07-26",
+          "entry": 9870.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-05-22",
+          "entry": 9182.58,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-16",
+          "entry": 11322.12,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2021-03-05",
+          "entry": 48927.3,
+          "return_pct": -1.0,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-18",
+          "entry": 16697.78,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2022-11-25",
+          "entry": 16521.84,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-03-31",
+          "entry": 28478.48,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2023-04-07",
+          "entry": 27925.86,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-29",
+          "entry": 69892.83,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-01-03",
+          "entry": 98107.43,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-02-14",
+          "entry": 97508.97,
+          "return_pct": 0.0732,
+          "dow": 4
+        },
+        {
+          "date": "2025-03-21",
+          "entry": 84043.24,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-04-18",
+          "entry": 84450.8,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2025-10-24",
+          "entry": 111033.92,
+          "return_pct": 0.5,
+          "dow": 4
+        },
+        {
+          "date": "2026-02-13",
+          "entry": 68857.84,
+          "return_pct": 0.5,
+          "dow": 4
+        }
+      ],
+      "composite": 49.4136
+    },
+    {
+      "label": "rsi14_gt75 | tgt=3.0% stp=-3.0% hold=1d",
+      "trades": 247,
+      "win_rate": 55.47,
+      "avg_win": 2.3058,
+      "avg_loss": -2.1575,
+      "expectancy": 0.3181,
+      "cum_return": 103.36,
+      "max_drawdown": 18.97,
+      "sharpe": 2.052,
+      "target_pct": 0.03,
+      "stop_pct": -0.03,
+      "hold_days": 1,
+      "trade_log": [
+        {
+          "date": "2024-02-27",
+          "entry": 57085.37,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-02-28",
+          "entry": 62504.79,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-02-29",
+          "entry": 61198.38,
+          "return_pct": 3.0,
+          "dow": 3
+        },
+        {
+          "date": "2024-03-01",
+          "entry": 62440.63,
+          "return_pct": -0.6579,
+          "dow": 4
+        },
+        {
+          "date": "2024-03-02",
+          "entry": 62029.85,
+          "return_pct": 1.8338,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-03",
+          "entry": 63167.37,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-04",
+          "entry": 68330.41,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-09",
+          "entry": 68498.88,
+          "return_pct": 0.7605,
+          "dow": 5
+        },
+        {
+          "date": "2024-03-10",
+          "entry": 69019.79,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-03-11",
+          "entry": 72123.91,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-03-12",
+          "entry": 71481.29,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-03-13",
+          "entry": 73083.5,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-11-10",
+          "entry": 80474.19,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-11-11",
+          "entry": 88701.48,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2024-11-12",
+          "entry": 87955.81,
+          "return_pct": 3.0,
+          "dow": 1
+        },
+        {
+          "date": "2024-11-13",
+          "entry": 90584.16,
+          "return_pct": -3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-11-15",
+          "entry": 91066.01,
+          "return_pct": -0.5573,
+          "dow": 4
+        },
+        {
+          "date": "2024-11-16",
+          "entry": 90558.48,
+          "return_pct": -0.7869,
+          "dow": 5
+        },
+        {
+          "date": "2024-11-19",
+          "entry": 92343.79,
+          "return_pct": 2.1612,
+          "dow": 1
+        },
+        {
+          "date": "2024-11-20",
+          "entry": 94339.49,
+          "return_pct": 3.0,
+          "dow": 2
+        },
+        {
+          "date": "2024-11-21",
+          "entry": 98504.73,
+          "return_pct": 0.5004,
+          "dow": 3
+        },
+        {
+          "date": "2024-11-22",
+          "entry": 98997.66,
+          "return_pct": -1.2327,
+          "dow": 4
+        },
+        {
+          "date": "2024-11-23",
+          "entry": 97777.28,
+          "return_pct": 0.2419,
+          "dow": 5
+        },
+        {
+          "date": "2024-11-24",
+          "entry": 98013.82,
+          "return_pct": -3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-05-08",
+          "entry": 103241.46,
+          "return_pct": -0.2621,
+          "dow": 3
+        },
+        {
+          "date": "2025-05-10",
+          "entry": 104696.33,
+          "return_pct": -0.5635,
+          "dow": 5
+        },
+        {
+          "date": "2025-05-21",
+          "entry": 109678.08,
+          "return_pct": 1.8191,
+          "dow": 2
+        },
+        {
+          "date": "2025-05-22",
+          "entry": 111673.28,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2025-07-13",
+          "entry": 119116.12,
+          "return_pct": 3.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-07-14",
+          "entry": 119849.7,
+          "return_pct": -3.0,
+          "dow": 0
+        }
+      ],
+      "composite": 47.5644
+    },
+    {
+      "label": "dxy_down + above_sma200 + vol_below_avg + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 16,
+      "win_rate": 81.25,
+      "avg_win": 1.9351,
+      "avg_loss": -3.0,
+      "expectancy": 1.0098,
+      "cum_return": 17.09,
+      "max_drawdown": 8.73,
+      "sharpe": 3.701,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2017-02-22",
+          "entry": 1117.44,
+          "return_pct": 2.0,
+          "dow": 2
+        },
+        {
+          "date": "2017-04-25",
+          "entry": 1265.49,
+          "return_pct": 2.0,
+          "dow": 1
+        },
+        {
+          "date": "2017-08-31",
+          "entry": 4703.39,
+          "return_pct": -3.0,
+          "dow": 3
+        },
+        {
+          "date": "2019-06-17",
+          "entry": 9320.35,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-06-01",
+          "entry": 10167.27,
+          "return_pct": -3.0,
+          "dow": 0
+        },
+        {
+          "date": "2020-10-09",
+          "entry": 11064.46,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2020-10-10",
+          "entry": 11296.36,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2020-10-11",
+          "entry": 11384.18,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2020-10-23",
+          "entry": 12931.54,
+          "return_pct": 2.0,
+          "dow": 4
+        },
+        {
+          "date": "2023-10-21",
+          "entry": 29918.41,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-10-22",
+          "entry": 29993.9,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2023-12-02",
+          "entry": 39476.33,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2023-12-03",
+          "entry": 39978.39,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2024-02-10",
+          "entry": 47771.28,
+          "return_pct": 2.0,
+          "dow": 5
+        },
+        {
+          "date": "2024-02-11",
+          "entry": 48293.92,
+          "return_pct": 2.0,
+          "dow": 6
+        },
+        {
+          "date": "2025-09-11",
+          "entry": 115507.54,
+          "return_pct": 1.1563,
+          "dow": 3
+        }
+      ],
+      "composite": 47.141200000000005
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + no_earnings + bb_above_upper | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "dxy_down + dow_fri + bb_above_upper + no_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 20,
+      "win_rate": 80.0,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.0,
+      "cum_return": 21.53,
+      "max_drawdown": 4.03,
+      "sharpe": 3.55,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 47.1
+    },
+    {
+      "label": "rsi14_gt65 | tgt=3.0% stp=-3.0% hold=1d",
+      "trades": 668,
+      "win_rate": 55.54,
+      "avg_win": 2.0698,
+      "avg_loss": -1.9734,
+      "expectancy": 0.2721,
+      "cum_return": 414.87,
+      "max_drawdown": 34.71,
+      "sharpe": 1.877,
+      "target_pct": 0.03,
+      "stop_pct": -0.03,
+      "hold_days": 1,
+      "composite": 47.0584
+    },
+    {
+      "label": "vol_below_avg + dow_fri + vol_low + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    },
+    {
+      "label": "dow_fri + vol_low + no_earnings + dxy_flat | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 15,
+      "win_rate": 80.0,
+      "avg_win": 0.5,
+      "avg_loss": -1.0,
+      "expectancy": 0.2,
+      "cum_return": 3.01,
+      "max_drawdown": 1.01,
+      "sharpe": 5.292,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.384
+    },
+    {
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-2.0% hold=3d",
+      "trades": 19,
+      "win_rate": 73.68,
+      "avg_win": 1.9375,
+      "avg_loss": -2.0,
+      "expectancy": 0.9013,
+      "cum_return": 18.25,
+      "max_drawdown": 4.0,
+      "sharpe": 4.735,
+      "target_pct": 0.02,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 46.3472
+    },
+    {
+      "label": "bb_above_upper | tgt=3.0% stp=-3.0% hold=1d",
+      "trades": 249,
+      "win_rate": 55.02,
+      "avg_win": 2.0672,
+      "avg_loss": -1.9983,
+      "expectancy": 0.2386,
+      "cum_return": 69.37,
+      "max_drawdown": 23.0,
+      "sharpe": 1.638,
+      "target_pct": 0.03,
+      "stop_pct": -0.03,
+      "hold_days": 1,
+      "composite": 46.2384
+    },
+    {
+      "label": "dxy_down + vol_below_avg + bb_above_upper | tgt=1.0% stp=-1.0% hold=1d",
+      "trades": 20,
+      "win_rate": 70.0,
+      "avg_win": 0.9466,
+      "avg_loss": -1.0,
+      "expectancy": 0.3626,
+      "cum_return": 7.42,
+      "max_drawdown": 1.99,
+      "sharpe": 6.35,
+      "target_pct": 0.01,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 46.150400000000005
+    },
+    {
+      "label": "near_full_moon | tgt=2.0% stp=-3.0% hold=2d",
+      "trades": 130,
+      "win_rate": 60.0,
+      "avg_win": 1.7751,
+      "avg_loss": -2.293,
+      "expectancy": 0.1479,
+      "cum_return": 17.6,
+      "max_drawdown": 23.56,
+      "sharpe": 0.775,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 2,
+      "composite": 46.1416
+    }
+  ]
+}

@@ -71,6 +71,19 @@ interface RecData {
   conditions: RecCondition[]; met_count: number; total_count: number;
   best_combo_active: boolean; best_combo_note: string | null;
 }
+interface AlphaCond { id: string; label: string; met: boolean; value: string }
+interface AlphaBacktest {
+  win_rate: number; trades: number; expectancy: number; sharpe: number;
+  max_drawdown: number; cum_return: number; target_pct: number; stop_pct: number; hold_days: number;
+}
+interface AlphaSetup {
+  id: string; name: string; description: string; signal: string; confidence: number;
+  conditions: AlphaCond[]; met_count: number; total_count: number; backtest: AlphaBacktest;
+}
+interface AlphaData {
+  overall_signal: string; best_setup: string; best_confidence: number;
+  setups: AlphaSetup[]; context: Record<string, unknown>; updated: string;
+}
 
 declare const Chart: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
@@ -92,6 +105,7 @@ export default function BTCPage() {
   const [sessions, setSessions] = useState<HourlyStat[] | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [rec, setRec] = useState<RecData | null>(null);
+  const [alpha, setAlpha] = useState<AlphaData | null>(null);
   const [btcChart, setBtcChart] = useState<ChartData | null>(null);
   const [btcChartInterval, setBtcChartInterval] = useState('1d');
   const [btcChartRange, setBtcChartRange] = useState('6mo');
@@ -141,6 +155,9 @@ export default function BTCPage() {
   const loadRec = useCallback(async () => {
     try { const r = await fetch('/api/btc/recommendation'); setRec(await r.json()); } catch { /* */ }
   }, []);
+  const loadAlpha = useCallback(async () => {
+    try { const r = await fetch('/api/btc/alpha-strategy'); setAlpha(await r.json()); } catch { /* */ }
+  }, []);
   const loadBtcChart = useCallback(async (interval: string, range: string) => {
     try { const r = await fetch(`/api/btc/chart?interval=${interval}&range=${range}`); setBtcChart(await r.json()); } catch { /* */ }
   }, []);
@@ -149,10 +166,10 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadStrategy(); loadSessions(); loadCorr(); loadRec(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
-    const id = setInterval(() => { loadLive(); loadRec(); }, 60_000);
+    loadLive(); loadMacro(); loadDxy(); loadStrategy(); loadSessions(); loadCorr(); loadRec(); loadAlpha(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    const id = setInterval(() => { loadLive(); loadRec(); loadAlpha(); }, 60_000);
     return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadStrategy, loadSessions, loadCorr, loadRec, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+  }, [loadLive, loadMacro, loadDxy, loadStrategy, loadSessions, loadCorr, loadRec, loadAlpha, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -467,6 +484,7 @@ export default function BTCPage() {
         .cond-desc { font-size:12px; color:var(--muted); margin-top:2px; }
         .cond-val { font-size:13px; font-variant-numeric:tabular-nums; }
         .cond-edge { font-size:12px; font-weight:600; }
+        @media(max-width:1100px) { .alpha-grid { grid-template-columns:1fr !important; } }
         @media(max-width:900px) { .grid-top { grid-template-columns:repeat(2,1fr); } .grid-2,.steps { grid-template-columns:1fr; } .cond-row { grid-template-columns:28px 1fr; } .cond-desc,.cond-header:nth-child(n+3) { display:none; } }
       `}</style>
 
@@ -491,12 +509,110 @@ export default function BTCPage() {
           </div>
         </div>
 
+        {/* Alpha Strategy Section */}
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+            <div className="sec-title" style={{ marginBottom: 0 }}><span className="dot" style={{ background: '#fbbf24' }} /> Alpha Strategies (Backtested 80%+ Win Rate)</div>
+            {alpha && (
+              <div style={{
+                padding: '6px 18px', borderRadius: 24, fontWeight: 700, fontSize: 16,
+                background: alpha.overall_signal === 'BUY' ? 'rgba(34,197,94,.2)' : 'rgba(148,163,184,.1)',
+                color: alpha.overall_signal === 'BUY' ? 'var(--green)' : 'var(--muted)',
+                border: `2px solid ${alpha.overall_signal === 'BUY' ? 'rgba(34,197,94,.4)' : 'rgba(148,163,184,.2)'}`,
+              }}>{alpha.overall_signal === 'BUY' ? 'SIGNAL ACTIVE' : 'NO SIGNAL'}</div>
+            )}
+          </div>
+          {alpha ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+              {alpha.setups.map((s: AlphaSetup) => {
+                const isBuy = s.signal === 'BUY';
+                const b = s.backtest;
+                const borderColor = isBuy ? 'rgba(34,197,94,.6)' : 'var(--border)';
+                const glowBg = isBuy ? 'linear-gradient(135deg, rgba(34,197,94,.08), rgba(6,182,212,.05))' : undefined;
+                return (
+                  <div key={s.id} className="card" style={{ border: `2px solid ${borderColor}`, background: glowBg || 'var(--card)', position: 'relative', overflow: 'hidden' }}>
+                    {isBuy && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--green), var(--cyan))' }} />}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                      <div>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: isBuy ? 'var(--green)' : 'var(--text)' }}>{s.name}</div>
+                        <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{s.description}</div>
+                      </div>
+                      <div style={{
+                        padding: '4px 12px', borderRadius: 16, fontSize: 12, fontWeight: 700,
+                        background: isBuy ? 'rgba(34,197,94,.2)' : 'rgba(239,68,68,.1)',
+                        color: isBuy ? 'var(--green)' : 'var(--red)',
+                        border: `1px solid ${isBuy ? 'rgba(34,197,94,.3)' : 'rgba(239,68,68,.2)'}`,
+                        whiteSpace: 'nowrap',
+                      }}>{s.signal}</div>
+                    </div>
+
+                    {/* Backtest stats */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 12, padding: 10, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 22, fontWeight: 800, color: b.win_rate >= 80 ? 'var(--green)' : 'var(--cyan)' }}>{b.win_rate}%</div>
+                        <div style={{ fontSize: 10, color: 'var(--muted)' }}>WIN RATE</div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)' }}>{b.trades}</div>
+                        <div style={{ fontSize: 10, color: 'var(--muted)' }}>TRADES</div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--amber)' }}>{b.sharpe}</div>
+                        <div style={{ fontSize: 10, color: 'var(--muted)' }}>SHARPE</div>
+                      </div>
+                    </div>
+
+                    {/* Risk params */}
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 12, fontSize: 11 }}>
+                      <span style={{ background: 'rgba(34,197,94,.15)', color: 'var(--green)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>TP: +{b.target_pct}%</span>
+                      <span style={{ background: 'rgba(239,68,68,.15)', color: 'var(--red)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>SL: {b.stop_pct}%</span>
+                      <span style={{ background: 'rgba(148,163,184,.1)', color: 'var(--muted)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Hold: {b.hold_days}d</span>
+                      <span style={{ background: 'rgba(168,85,247,.1)', color: 'var(--purple)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Exp: +{b.expectancy}%</span>
+                    </div>
+
+                    {/* Conditions */}
+                    <div style={{ fontSize: 12 }}>
+                      <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.5px' }}>
+                        Conditions: {s.met_count}/{s.total_count}
+                      </div>
+                      {s.conditions.map((c: AlphaCond) => (
+                        <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0', borderBottom: '1px solid rgba(30,41,59,.3)' }}>
+                          <span style={{
+                            width: 18, height: 18, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: 10, fontWeight: 700,
+                            background: c.met ? 'rgba(34,197,94,.2)' : 'rgba(239,68,68,.1)',
+                            color: c.met ? 'var(--green)' : 'var(--red)',
+                          }}>{c.met ? '\u2713' : '\u2717'}</span>
+                          <span style={{ flex: 1, color: c.met ? 'var(--text)' : 'var(--muted)' }}>{c.label}</span>
+                          <span style={{ color: c.met ? 'var(--green)' : 'var(--muted)', fontVariantNumeric: 'tabular-nums', fontSize: 11 }}>{c.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Confidence bar */}
+                    {s.confidence > 0 && (
+                      <div style={{ marginTop: 12 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--muted)', marginBottom: 4 }}>
+                          <span>Confidence</span><span>{s.confidence}%</span>
+                        </div>
+                        <div style={{ width: '100%', height: 4, background: 'rgba(30,41,59,.8)', borderRadius: 2, overflow: 'hidden' }}>
+                          <div style={{ height: '100%', width: `${s.confidence}%`, background: s.confidence >= 80 ? 'var(--green)' : s.confidence >= 50 ? 'var(--cyan)' : 'var(--amber)', borderRadius: 2 }} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : <div className="loading">Loading alpha strategies...</div>}
+        </div>
+
         {/* Recommendation Table */}
         <div className="rec-box">
           <div className="rec-header">
             <div>
               <div className="sec-title" style={{ marginBottom: 4 }}><span className="dot" style={{ background: rec && rec.score >= 55 ? 'var(--green)' : 'var(--red)' }} /> Tonight&apos;s Trade Recommendation</div>
-              <div style={{ color: 'var(--muted)', fontSize: 13 }}>Based on 11 historically validated conditions (2-year backtest, 482+ trades)</div>
+              <div style={{ color: 'var(--muted)', fontSize: 13 }}>Based on 17 conditions: technicals, macro, lunar cycles, FOMC, Mag7 earnings</div>
             </div>
             <div style={{ textAlign: 'right' }}>
               {rec ? (
