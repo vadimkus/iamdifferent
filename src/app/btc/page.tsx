@@ -65,6 +65,28 @@ interface AlphaData {
   setups: AlphaSetup[]; context: Record<string, unknown>; updated: string;
 }
 
+interface FridayHourStat {
+  entry_hour_utc: number; entry_hour_dubai: number; entry_hour_et: number;
+  trades: number; tp_hit_rate: number; sl_hit_rate: number; neither_rate: number;
+  sat_4am_utc_wr: number | null; sat_4am_utc_avg: number | null;
+  score: number;
+}
+interface FridayMonthlyStat {
+  month: string; month_num: number; fridays: number;
+  avg_return_1d: number; win_rate_1d: number; avg_return_2d: number; win_rate_2d: number;
+}
+interface FridayCrossCell {
+  month: string; month_num: number; entry_hour_utc: number; entry_hour_dubai: number;
+  trades: number; win_rate: number; avg_return: number;
+}
+interface FridayTimingData {
+  best_entry: { hour_dubai: number; hour_utc: number; hour_et: number; tp_hit_rate: number; win_rate_sat_8am: number; avg_return: number };
+  ranked_entry_hours: FridayHourStat[];
+  monthly_friday_stats: FridayMonthlyStat[];
+  month_hour_cross_table: FridayCrossCell[];
+  yearly_friday_stats: { year: number; fridays: number; avg_return: number; win_rate: number }[];
+}
+
 declare const Chart: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 // ---------- helpers ----------
@@ -84,6 +106,7 @@ export default function BTCPage() {
   const [sessions, setSessions] = useState<HourlyStat[] | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [alpha, setAlpha] = useState<AlphaData | null>(null);
+  const [fridayTiming, setFridayTiming] = useState<FridayTimingData | null>(null);
   const [btcChart, setBtcChart] = useState<ChartData | null>(null);
   const [btcChartInterval, setBtcChartInterval] = useState('1d');
   const [btcChartRange, setBtcChartRange] = useState('6mo');
@@ -127,6 +150,9 @@ export default function BTCPage() {
   const loadAlpha = useCallback(async () => {
     try { const r = await fetch('/api/btc/alpha-strategy'); setAlpha(await r.json()); } catch { /* */ }
   }, []);
+  const loadFridayTiming = useCallback(async () => {
+    try { const r = await fetch('/api/btc/friday-timing'); setFridayTiming(await r.json()); } catch { /* */ }
+  }, []);
   const loadBtcChart = useCallback(async (interval: string, range: string) => {
     try { const r = await fetch(`/api/btc/chart?interval=${interval}&range=${range}`); setBtcChart(await r.json()); } catch { /* */ }
   }, []);
@@ -135,10 +161,10 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadSessions(); loadCorr(); loadAlpha(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    loadLive(); loadMacro(); loadDxy(); loadSessions(); loadCorr(); loadAlpha(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
     const id = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
     return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadSessions, loadCorr, loadAlpha, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+  }, [loadLive, loadMacro, loadDxy, loadSessions, loadCorr, loadAlpha, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -546,6 +572,160 @@ export default function BTCPage() {
             </div>
           ) : <div className="loading">Loading alpha strategies...</div>}
         </div>
+
+        {/* Friday Optimal Entry Timing */}
+        {fridayTiming && (
+          <div className="card" style={{ marginBottom: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+              <div className="sec-title" style={{ marginBottom: 0 }}><span className="dot" style={{ background: '#f59e0b' }} /> Friday Optimal Entry Time</div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <span style={{ fontSize: 11, color: 'var(--muted)' }}>10yr daily + 2yr hourly backtest</span>
+                <span style={{ background: 'rgba(245,158,11,.15)', color: '#f59e0b', padding: '4px 12px', borderRadius: 8, fontSize: 13, fontWeight: 700, border: '1px solid rgba(245,158,11,.3)' }}>
+                  BEST: {String(fridayTiming.best_entry.hour_dubai).padStart(2, '0')}:00 Dubai
+                </span>
+              </div>
+            </div>
+
+            {/* Best entry highlight */}
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(245,158,11,.1), rgba(234,179,8,.05))',
+              border: '1px solid rgba(245,158,11,.25)', borderRadius: 10, padding: 16, marginBottom: 20,
+              display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, textAlign: 'center',
+            }}>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Entry (Dubai)</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#f59e0b' }}>{String(fridayTiming.best_entry.hour_dubai).padStart(2, '0')}:00</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>{String(fridayTiming.best_entry.hour_utc).padStart(2, '0')}:00 UTC / {String(fridayTiming.best_entry.hour_et).padStart(2, '0')}:00 ET</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>TP +0.5% Hit Rate</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--green)' }}>{fridayTiming.best_entry.tp_hit_rate}%</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>within 24h</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Win Rate (Sat 8AM)</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: fridayTiming.best_entry.win_rate_sat_8am >= 55 ? 'var(--green)' : 'var(--cyan)' }}>{fridayTiming.best_entry.win_rate_sat_8am}%</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>exit Sat 8AM Dubai</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Avg Return</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: pctCol(fridayTiming.best_entry.avg_return) }}>{pctSign(fridayTiming.best_entry.avg_return)}</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>per trade</div>
+              </div>
+            </div>
+
+            {/* Hourly ranking table */}
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>Entry Hour Ranking (Friday US Session → Sat 8AM Dubai)</div>
+              <table>
+                <thead><tr>
+                  <th>Rank</th><th>Dubai</th><th>UTC</th><th>ET</th>
+                  <th>TP Hit</th><th>SL Hit</th><th>WR (Sat 8AM)</th><th>Avg Ret</th><th>Trades</th><th>Score</th>
+                </tr></thead>
+                <tbody>
+                  {fridayTiming.ranked_entry_hours.map((h: FridayHourStat, i: number) => (
+                    <tr key={h.entry_hour_utc} style={{ background: i === 0 ? 'rgba(245,158,11,.08)' : i < 3 ? 'rgba(34,197,94,.04)' : 'transparent' }}>
+                      <td style={{ fontWeight: 700, color: i === 0 ? '#f59e0b' : i < 3 ? 'var(--green)' : 'var(--muted)' }}>#{i + 1}</td>
+                      <td style={{ fontWeight: 700 }}>{String(h.entry_hour_dubai).padStart(2, '0')}:00</td>
+                      <td>{String(h.entry_hour_utc).padStart(2, '0')}:00</td>
+                      <td>{String(h.entry_hour_et).padStart(2, '0')}:00</td>
+                      <td style={{ color: h.tp_hit_rate >= 60 ? 'var(--green)' : h.tp_hit_rate >= 50 ? 'var(--cyan)' : 'var(--text)' }}>{h.tp_hit_rate}%</td>
+                      <td style={{ color: h.sl_hit_rate <= 20 ? 'var(--green)' : h.sl_hit_rate <= 30 ? 'var(--text)' : 'var(--red)' }}>{h.sl_hit_rate}%</td>
+                      <td style={{ color: (h.sat_4am_utc_wr ?? 0) >= 55 ? 'var(--green)' : 'var(--text)' }}>{h.sat_4am_utc_wr ?? '--'}%</td>
+                      <td style={{ color: pctCol(h.sat_4am_utc_avg ?? 0), fontWeight: 600 }}>{h.sat_4am_utc_avg != null ? pctSign(h.sat_4am_utc_avg) : '--'}</td>
+                      <td>{h.trades}</td>
+                      <td style={{ fontWeight: 700, color: i === 0 ? '#f59e0b' : 'var(--muted)' }}>{h.score}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Month × Hour cross table */}
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>Month × Hour Win Rate Heatmap (Friday → Sat 8AM Dubai)</div>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ fontSize: 12 }}>
+                  <thead><tr>
+                    <th>Month</th>
+                    {[18, 19, 20, 21, 22, 23, 0, 1].map((h) => (
+                      <th key={h} style={{ textAlign: 'center', minWidth: 60 }}>{String(h).padStart(2, '0')}:00</th>
+                    ))}
+                  </tr></thead>
+                  <tbody>
+                    {['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map((m, mi) => (
+                      <tr key={m}>
+                        <td style={{ fontWeight: 700 }}>{m}</td>
+                        {[18, 19, 20, 21, 22, 23, 0, 1].map((dh) => {
+                          const utcH = (dh - 4 + 24) % 24;
+                          const cell = fridayTiming.month_hour_cross_table.find(
+                            (c: FridayCrossCell) => c.month_num === mi + 1 && c.entry_hour_utc === utcH
+                          );
+                          if (!cell || cell.trades < 2) return <td key={dh} style={{ textAlign: 'center', color: 'var(--muted)' }}>--</td>;
+                          const wr = cell.win_rate;
+                          const intensity = Math.min(Math.max((wr - 30) / 50, 0), 1);
+                          const bg = wr >= 60
+                            ? `rgba(34,197,94,${intensity * 0.35})`
+                            : wr >= 50
+                              ? `rgba(6,182,212,${intensity * 0.2})`
+                              : `rgba(239,68,68,${(1 - intensity) * 0.2})`;
+                          return (
+                            <td key={dh} style={{
+                              textAlign: 'center', background: bg, fontWeight: wr >= 70 ? 700 : 400,
+                              color: wr >= 70 ? 'var(--green)' : wr >= 55 ? 'var(--text)' : wr < 40 ? 'var(--red)' : 'var(--muted)',
+                            }}>
+                              {wr}%
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 6 }}>Hours shown in Dubai time (GST = UTC+4). Green = high win rate, Red = avoid.</div>
+            </div>
+
+            {/* 10-Year Monthly Friday Stats */}
+            <div className="grid-2">
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>10-Year Monthly Friday Performance</div>
+                <table>
+                  <thead><tr><th>Month</th><th>Fridays</th><th>1d WR</th><th>1d Avg</th><th>2d WR</th><th>2d Avg</th></tr></thead>
+                  <tbody>
+                    {fridayTiming.monthly_friday_stats.map((m: FridayMonthlyStat) => (
+                      <tr key={m.month}>
+                        <td style={{ fontWeight: 700 }}>{m.month}</td>
+                        <td>{m.fridays}</td>
+                        <td style={{ color: m.win_rate_1d >= 55 ? 'var(--green)' : m.win_rate_1d < 48 ? 'var(--red)' : 'var(--text)' }}>{m.win_rate_1d}%</td>
+                        <td style={{ color: pctCol(m.avg_return_1d), fontWeight: 600 }}>{pctSign(m.avg_return_1d)}</td>
+                        <td style={{ color: m.win_rate_2d >= 55 ? 'var(--green)' : m.win_rate_2d < 48 ? 'var(--red)' : 'var(--text)' }}>{m.win_rate_2d}%</td>
+                        <td style={{ color: pctCol(m.avg_return_2d), fontWeight: 600 }}>{pctSign(m.avg_return_2d)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>10-Year Yearly Friday Performance</div>
+                <table>
+                  <thead><tr><th>Year</th><th>Fridays</th><th>Win Rate</th><th>Avg Return</th><th></th></tr></thead>
+                  <tbody>
+                    {fridayTiming.yearly_friday_stats.map((y: { year: number; fridays: number; avg_return: number; win_rate: number }) => (
+                      <tr key={y.year}>
+                        <td style={{ fontWeight: 700 }}>{y.year}</td>
+                        <td>{y.fridays}</td>
+                        <td style={{ color: y.win_rate >= 55 ? 'var(--green)' : y.win_rate < 48 ? 'var(--red)' : 'var(--text)' }}>{y.win_rate}%</td>
+                        <td style={{ color: pctCol(y.avg_return), fontWeight: 600 }}>{pctSign(y.avg_return)}</td>
+                        <td><div className="bar-w"><div className="bar" style={{ width: Math.min(Math.abs(y.avg_return) * 200, 120), background: pctCol(y.avg_return) }} /></div></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* BTC Chart */}
         <div className="card" style={{ marginBottom: 24 }}>
