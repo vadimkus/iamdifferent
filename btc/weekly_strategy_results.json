@@ -1,0 +1,1155 @@
+{
+  "generated": "2026-02-18T11:38:57.706418",
+  "best_tier1": {
+    "label": "T1 (>=6/7) TP+2.0% SL-3.0% 5d",
+    "tp_pct": 2.0,
+    "sl_pct": -3.0,
+    "hold_days": 5,
+    "trades": 8,
+    "wins": 7,
+    "losses": 1,
+    "win_rate": 87.5,
+    "tp_hit_rate": 87.5,
+    "sl_hit_rate": 0.0,
+    "hold_exit_rate": 12.5,
+    "avg_win": 2.0,
+    "avg_loss": -1.3851,
+    "expectancy": 1.5769,
+    "cum_return": 13.28,
+    "max_drawdown": 1.39,
+    "sharpe": 10.16,
+    "yearly": [
+      {
+        "year": 2017,
+        "trades": 3,
+        "win_rate": 100.0,
+        "cum_return": 6.12
+      },
+      {
+        "year": 2019,
+        "trades": 1,
+        "win_rate": 100.0,
+        "cum_return": 2.0
+      },
+      {
+        "year": 2021,
+        "trades": 1,
+        "win_rate": 100.0,
+        "cum_return": 2.0
+      },
+      {
+        "year": 2023,
+        "trades": 1,
+        "win_rate": 0.0,
+        "cum_return": -1.39
+      },
+      {
+        "year": 2024,
+        "trades": 1,
+        "win_rate": 100.0,
+        "cum_return": 2.0
+      },
+      {
+        "year": 2025,
+        "trades": 1,
+        "win_rate": 100.0,
+        "cum_return": 2.0
+      }
+    ],
+    "trades_per_year": 1.3,
+    "recent_trades": [
+      {
+        "date": "2017-01-20",
+        "entry": 895.03,
+        "exit": 912.93,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2017-03-31",
+        "entry": 1071.79,
+        "exit": 1093.23,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2017-07-07",
+        "entry": 2518.66,
+        "exit": 2569.03,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2019-09-06",
+        "entry": 10353.3,
+        "exit": 10560.37,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2021-11-12",
+        "entry": 64155.94,
+        "exit": 65439.06,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2023-07-14",
+        "entry": 30334.07,
+        "exit": 29913.92,
+        "return_pct": -1.3851,
+        "outcome": "hold_exit"
+      },
+      {
+        "date": "2024-03-29",
+        "entry": 69892.83,
+        "exit": 71290.68,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-24",
+        "entry": 111033.92,
+        "exit": 113254.6,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      }
+    ],
+    "t1_threshold": 6,
+    "per_year": 1.3
+  },
+  "best_tier2": {
+    "label": "T2 (>=4/5, not T1) TP+1.0% SL-2.0% 3d",
+    "tp_pct": 1.0,
+    "sl_pct": -2.0,
+    "hold_days": 3,
+    "trades": 260,
+    "wins": 176,
+    "losses": 84,
+    "win_rate": 67.7,
+    "tp_hit_rate": 62.3,
+    "sl_hit_rate": 29.2,
+    "hold_exit_rate": 8.5,
+    "avg_win": 0.9503,
+    "avg_loss": -1.8671,
+    "expectancy": 0.0401,
+    "cum_return": 8.37,
+    "max_drawdown": 13.59,
+    "sharpe": 0.21,
+    "yearly": [
+      {
+        "year": 2016,
+        "trades": 27,
+        "win_rate": 66.7,
+        "cum_return": 0.39
+      },
+      {
+        "year": 2017,
+        "trades": 21,
+        "win_rate": 61.9,
+        "cum_return": -4.07
+      },
+      {
+        "year": 2018,
+        "trades": 28,
+        "win_rate": 60.7,
+        "cum_return": -2.82
+      },
+      {
+        "year": 2019,
+        "trades": 34,
+        "win_rate": 64.7,
+        "cum_return": 0.27
+      },
+      {
+        "year": 2020,
+        "trades": 17,
+        "win_rate": 100.0,
+        "cum_return": 17.42
+      },
+      {
+        "year": 2021,
+        "trades": 29,
+        "win_rate": 55.2,
+        "cum_return": -9.83
+      },
+      {
+        "year": 2022,
+        "trades": 19,
+        "win_rate": 78.9,
+        "cum_return": 5.69
+      },
+      {
+        "year": 2023,
+        "trades": 25,
+        "win_rate": 72.0,
+        "cum_return": 3.83
+      },
+      {
+        "year": 2024,
+        "trades": 26,
+        "win_rate": 61.5,
+        "cum_return": -4.19
+      },
+      {
+        "year": 2025,
+        "trades": 29,
+        "win_rate": 72.4,
+        "cum_return": 4.85
+      },
+      {
+        "year": 2026,
+        "trades": 5,
+        "win_rate": 60.0,
+        "cum_return": -1.05
+      }
+    ],
+    "trades_per_year": 23.6,
+    "recent_trades": [
+      {
+        "date": "2025-02-14",
+        "entry": 97508.97,
+        "exit": 95558.79,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-03-07",
+        "entry": 86742.67,
+        "exit": 85007.82,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-03-14",
+        "entry": 83969.1,
+        "exit": 82289.72,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-03-21",
+        "entry": 84043.24,
+        "exit": 84883.67,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-04-18",
+        "entry": 84450.8,
+        "exit": 85295.31,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-05-30",
+        "entry": 103998.57,
+        "exit": 105038.56,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-06-06",
+        "entry": 104390.34,
+        "exit": 105434.25,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-06-13",
+        "entry": 106090.97,
+        "exit": 107151.88,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-06-20",
+        "entry": 103309.6,
+        "exit": 101243.41,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-06-27",
+        "entry": 107088.43,
+        "exit": 108159.31,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-07-04",
+        "entry": 108034.34,
+        "exit": 109114.68,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-07-18",
+        "entry": 118003.23,
+        "exit": 119183.26,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-07-25",
+        "entry": 117635.88,
+        "exit": 118812.24,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-08-08",
+        "entry": 116688.73,
+        "exit": 117855.61,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-08-15",
+        "entry": 117398.35,
+        "exit": 118572.34,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-08-29",
+        "entry": 108410.84,
+        "exit": 109494.94,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-09-19",
+        "entry": 115688.86,
+        "exit": 113375.08,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-09-26",
+        "entry": 109712.83,
+        "exit": 110809.96,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-31",
+        "entry": 109556.16,
+        "exit": 110651.73,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-11-07",
+        "entry": 103372.41,
+        "exit": 104406.13,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-11-28",
+        "entry": 90919.27,
+        "exit": 91828.46,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-12-05",
+        "entry": 89387.76,
+        "exit": 90281.64,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-12-12",
+        "entry": 90270.41,
+        "exit": 88465.01,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-12-19",
+        "entry": 88103.38,
+        "exit": 88984.42,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-12-26",
+        "entry": 87301.43,
+        "exit": 88174.44,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-02",
+        "entry": 89944.7,
+        "exit": 90844.14,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-09",
+        "entry": 90513.1,
+        "exit": 91418.23,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-16",
+        "entry": 95525.12,
+        "exit": 93614.61,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-02-06",
+        "entry": 70555.39,
+        "exit": 69144.28,
+        "return_pct": -2.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-02-13",
+        "entry": 68857.84,
+        "exit": 69546.42,
+        "return_pct": 1.0,
+        "outcome": "tp"
+      }
+    ],
+    "t2_threshold": 4,
+    "per_year": 23.6
+  },
+  "best_tier3": {
+    "label": "T3 TP+2.0% SL-3.0% 5d",
+    "tp_pct": 2.0,
+    "sl_pct": -3.0,
+    "hold_days": 5,
+    "trades": 522,
+    "wins": 319,
+    "losses": 203,
+    "win_rate": 61.1,
+    "tp_hit_rate": 58.4,
+    "sl_hit_rate": 33.7,
+    "hold_exit_rate": 7.9,
+    "avg_win": 1.9429,
+    "avg_loss": -2.7827,
+    "expectancy": 0.1052,
+    "cum_return": 49.85,
+    "max_drawdown": 35.8,
+    "sharpe": 0.32,
+    "yearly": [
+      {
+        "year": 2016,
+        "trades": 46,
+        "win_rate": 65.2,
+        "cum_return": 16.24
+      },
+      {
+        "year": 2017,
+        "trades": 52,
+        "win_rate": 61.5,
+        "cum_return": 2.48
+      },
+      {
+        "year": 2018,
+        "trades": 52,
+        "win_rate": 57.7,
+        "cum_return": -5.01
+      },
+      {
+        "year": 2019,
+        "trades": 52,
+        "win_rate": 61.5,
+        "cum_return": 6.7
+      },
+      {
+        "year": 2020,
+        "trades": 52,
+        "win_rate": 69.2,
+        "cum_return": 26.37
+      },
+      {
+        "year": 2021,
+        "trades": 53,
+        "win_rate": 58.5,
+        "cum_return": -5.47
+      },
+      {
+        "year": 2022,
+        "trades": 52,
+        "win_rate": 57.7,
+        "cum_return": -3.43
+      },
+      {
+        "year": 2023,
+        "trades": 52,
+        "win_rate": 63.5,
+        "cum_return": 15.46
+      },
+      {
+        "year": 2024,
+        "trades": 52,
+        "win_rate": 57.7,
+        "cum_return": -0.94
+      },
+      {
+        "year": 2025,
+        "trades": 52,
+        "win_rate": 61.5,
+        "cum_return": 0.13
+      },
+      {
+        "year": 2026,
+        "trades": 7,
+        "win_rate": 42.9,
+        "cum_return": -6.05
+      }
+    ],
+    "trades_per_year": 47.5,
+    "recent_trades": [
+      {
+        "date": "2025-07-25",
+        "entry": 117635.88,
+        "exit": 117831.19,
+        "return_pct": 0.166,
+        "outcome": "hold_exit"
+      },
+      {
+        "date": "2025-08-01",
+        "entry": 113320.09,
+        "exit": 115586.49,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-08-08",
+        "entry": 116688.73,
+        "exit": 119022.5,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-08-15",
+        "entry": 117398.35,
+        "exit": 113876.4,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-08-22",
+        "entry": 116874.09,
+        "exit": 113367.86,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-08-29",
+        "entry": 108410.84,
+        "exit": 110579.05,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-09-05",
+        "entry": 110650.98,
+        "exit": 112864.0,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-09-12",
+        "entry": 116101.58,
+        "exit": 116468.51,
+        "return_pct": 0.316,
+        "outcome": "hold_exit"
+      },
+      {
+        "date": "2025-09-19",
+        "entry": 115688.86,
+        "exit": 112218.19,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-09-26",
+        "entry": 109712.83,
+        "exit": 111907.08,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-03",
+        "entry": 122266.53,
+        "exit": 124711.86,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-10",
+        "entry": 113214.37,
+        "exit": 109817.94,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-10-17",
+        "entry": 106467.79,
+        "exit": 108597.14,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-24",
+        "entry": 111033.92,
+        "exit": 113254.6,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-10-31",
+        "entry": 109556.16,
+        "exit": 106269.48,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-11-07",
+        "entry": 103372.41,
+        "exit": 105439.85,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-11-14",
+        "entry": 94397.79,
+        "exit": 96285.74,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-11-21",
+        "entry": 85090.69,
+        "exit": 86792.5,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-11-28",
+        "entry": 90919.27,
+        "exit": 88191.69,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-12-05",
+        "entry": 89387.76,
+        "exit": 91175.51,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-12-12",
+        "entry": 90270.41,
+        "exit": 87562.3,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2025-12-19",
+        "entry": 88103.38,
+        "exit": 89865.45,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2025-12-26",
+        "entry": 87301.43,
+        "exit": 89047.46,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-02",
+        "entry": 89944.7,
+        "exit": 91743.59,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-09",
+        "entry": 90513.1,
+        "exit": 92323.36,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      },
+      {
+        "date": "2026-01-16",
+        "entry": 95525.12,
+        "exit": 92659.36,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-01-23",
+        "entry": 89503.88,
+        "exit": 86818.76,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-01-30",
+        "entry": 84128.66,
+        "exit": 81604.8,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-02-06",
+        "entry": 70555.39,
+        "exit": 68438.73,
+        "return_pct": -3.0,
+        "outcome": "sl"
+      },
+      {
+        "date": "2026-02-13",
+        "entry": 68857.84,
+        "exit": 70235.0,
+        "return_pct": 2.0,
+        "outcome": "tp"
+      }
+    ]
+  },
+  "t1_threshold": 6,
+  "t2_threshold": 4,
+  "combined": {
+    "total_trades": 522,
+    "trades_per_year": 47.5,
+    "n_years": 11,
+    "win_rate": 64.0,
+    "expectancy": 0.0501,
+    "cum_return": 17.67,
+    "max_drawdown": 31.99,
+    "sharpe": 0.19,
+    "by_tier": {
+      "1": {
+        "trades": 8,
+        "trades_per_year": 0.7,
+        "win_rate": 87.5,
+        "expectancy": 1.5769
+      },
+      "2": {
+        "trades": 260,
+        "trades_per_year": 23.6,
+        "win_rate": 67.7,
+        "expectancy": 0.0401
+      },
+      "3": {
+        "trades": 254,
+        "trades_per_year": 23.1,
+        "win_rate": 59.4,
+        "expectancy": 0.0122
+      }
+    },
+    "yearly": [
+      {
+        "year": 2016,
+        "trades": 46,
+        "win_rate": 67.4,
+        "cum_return": 9.8,
+        "by_tier": {
+          "1": 0,
+          "2": 27,
+          "3": 19
+        }
+      },
+      {
+        "year": 2017,
+        "trades": 52,
+        "win_rate": 59.6,
+        "cum_return": -7.79,
+        "by_tier": {
+          "1": 3,
+          "2": 21,
+          "3": 28
+        }
+      },
+      {
+        "year": 2018,
+        "trades": 52,
+        "win_rate": 63.5,
+        "cum_return": 4.56,
+        "by_tier": {
+          "1": 0,
+          "2": 28,
+          "3": 24
+        }
+      },
+      {
+        "year": 2019,
+        "trades": 52,
+        "win_rate": 63.5,
+        "cum_return": 2.43,
+        "by_tier": {
+          "1": 1,
+          "2": 34,
+          "3": 17
+        }
+      },
+      {
+        "year": 2020,
+        "trades": 52,
+        "win_rate": 75.0,
+        "cum_return": 23.21,
+        "by_tier": {
+          "1": 0,
+          "2": 17,
+          "3": 35
+        }
+      },
+      {
+        "year": 2021,
+        "trades": 53,
+        "win_rate": 54.7,
+        "cum_return": -16.56,
+        "by_tier": {
+          "1": 1,
+          "2": 29,
+          "3": 23
+        }
+      },
+      {
+        "year": 2022,
+        "trades": 52,
+        "win_rate": 63.5,
+        "cum_return": -3.54,
+        "by_tier": {
+          "1": 0,
+          "2": 19,
+          "3": 33
+        }
+      },
+      {
+        "year": 2023,
+        "trades": 52,
+        "win_rate": 71.2,
+        "cum_return": 23.31,
+        "by_tier": {
+          "1": 1,
+          "2": 25,
+          "3": 26
+        }
+      },
+      {
+        "year": 2024,
+        "trades": 52,
+        "win_rate": 57.7,
+        "cum_return": -10.13,
+        "by_tier": {
+          "1": 1,
+          "2": 26,
+          "3": 25
+        }
+      },
+      {
+        "year": 2025,
+        "trades": 52,
+        "win_rate": 67.3,
+        "cum_return": 6.06,
+        "by_tier": {
+          "1": 1,
+          "2": 29,
+          "3": 22
+        }
+      },
+      {
+        "year": 2026,
+        "trades": 7,
+        "win_rate": 42.9,
+        "cum_return": -6.9,
+        "by_tier": {
+          "1": 0,
+          "2": 5,
+          "3": 2
+        }
+      }
+    ],
+    "projection_270k": {
+      "annual_trades": 47,
+      "annual_pnl": 6417,
+      "annual_roi_pct": 2.4
+    }
+  },
+  "tier_conditions": {
+    "tier1": {
+      "label": "6+ of 7 strict conditions",
+      "conditions": [
+        "vol_very_low (vol < 0.6x 20d avg)",
+        "dxy_flat (|chg| < 0.2%)",
+        "vix_calm (< 18)",
+        "rsi_sweet (40-55)",
+        "above_sma200",
+        "no_events (no FOMC/earnings/eclipse within 3d)",
+        "btc_green_week (weekly return > 0)"
+      ]
+    },
+    "tier2": {
+      "label": "4+ of 5 relaxed conditions (and not T1)",
+      "conditions": [
+        "vol_below_avg (vol < 0.9x 20d avg)",
+        "dxy_stable (|chg| < 0.5%)",
+        "vix_ok (< 25)",
+        "rsi_range (30-65)",
+        "spx_stable (daily ret > -1.5%)"
+      ]
+    },
+    "tier3": {
+      "label": "Every remaining Friday",
+      "conditions": [
+        "friday"
+      ]
+    }
+  },
+  "recent_combined_trades": [
+    {
+      "date": "2025-07-25",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 117635.88,
+      "exit": 118812.24
+    },
+    {
+      "date": "2025-08-01",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 113320.09,
+      "exit": 115586.49
+    },
+    {
+      "date": "2025-08-08",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 116688.73,
+      "exit": 117855.61
+    },
+    {
+      "date": "2025-08-15",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 117398.35,
+      "exit": 118572.34
+    },
+    {
+      "date": "2025-08-22",
+      "tier": 3,
+      "return_pct": -3.0,
+      "outcome": "sl",
+      "entry": 116874.09,
+      "exit": 113367.86
+    },
+    {
+      "date": "2025-08-29",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 108410.84,
+      "exit": 109494.94
+    },
+    {
+      "date": "2025-09-05",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 110650.98,
+      "exit": 112864.0
+    },
+    {
+      "date": "2025-09-12",
+      "tier": 3,
+      "return_pct": 0.316,
+      "outcome": "hold_exit",
+      "entry": 116101.58,
+      "exit": 116468.51
+    },
+    {
+      "date": "2025-09-19",
+      "tier": 2,
+      "return_pct": -2.0,
+      "outcome": "sl",
+      "entry": 115688.86,
+      "exit": 113375.08
+    },
+    {
+      "date": "2025-09-26",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 109712.83,
+      "exit": 110809.96
+    },
+    {
+      "date": "2025-10-03",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 122266.53,
+      "exit": 124711.86
+    },
+    {
+      "date": "2025-10-10",
+      "tier": 3,
+      "return_pct": -3.0,
+      "outcome": "sl",
+      "entry": 113214.37,
+      "exit": 109817.94
+    },
+    {
+      "date": "2025-10-17",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 106467.79,
+      "exit": 108597.14
+    },
+    {
+      "date": "2025-10-24",
+      "tier": 1,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 111033.92,
+      "exit": 113254.6
+    },
+    {
+      "date": "2025-10-31",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 109556.16,
+      "exit": 110651.73
+    },
+    {
+      "date": "2025-11-07",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 103372.41,
+      "exit": 104406.13
+    },
+    {
+      "date": "2025-11-14",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 94397.79,
+      "exit": 96285.74
+    },
+    {
+      "date": "2025-11-21",
+      "tier": 3,
+      "return_pct": 2.0,
+      "outcome": "tp",
+      "entry": 85090.69,
+      "exit": 86792.5
+    },
+    {
+      "date": "2025-11-28",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 90919.27,
+      "exit": 91828.46
+    },
+    {
+      "date": "2025-12-05",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 89387.76,
+      "exit": 90281.64
+    },
+    {
+      "date": "2025-12-12",
+      "tier": 2,
+      "return_pct": -2.0,
+      "outcome": "sl",
+      "entry": 90270.41,
+      "exit": 88465.01
+    },
+    {
+      "date": "2025-12-19",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 88103.38,
+      "exit": 88984.42
+    },
+    {
+      "date": "2025-12-26",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 87301.43,
+      "exit": 88174.44
+    },
+    {
+      "date": "2026-01-02",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 89944.7,
+      "exit": 90844.14
+    },
+    {
+      "date": "2026-01-09",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 90513.1,
+      "exit": 91418.23
+    },
+    {
+      "date": "2026-01-16",
+      "tier": 2,
+      "return_pct": -2.0,
+      "outcome": "sl",
+      "entry": 95525.12,
+      "exit": 93614.61
+    },
+    {
+      "date": "2026-01-23",
+      "tier": 3,
+      "return_pct": -3.0,
+      "outcome": "sl",
+      "entry": 89503.88,
+      "exit": 86818.76
+    },
+    {
+      "date": "2026-01-30",
+      "tier": 3,
+      "return_pct": -3.0,
+      "outcome": "sl",
+      "entry": 84128.66,
+      "exit": 81604.8
+    },
+    {
+      "date": "2026-02-06",
+      "tier": 2,
+      "return_pct": -2.0,
+      "outcome": "sl",
+      "entry": 70555.39,
+      "exit": 69144.28
+    },
+    {
+      "date": "2026-02-13",
+      "tier": 2,
+      "return_pct": 1.0,
+      "outcome": "tp",
+      "entry": 68857.84,
+      "exit": 69546.42
+    }
+  ]
+}

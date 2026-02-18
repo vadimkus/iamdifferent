@@ -77,6 +77,35 @@ interface AlphaData {
   setups: AlphaSetup[]; context: Record<string, unknown>; updated: string;
 }
 
+interface WeeklyTierCond { id: string; label: string; met: boolean; value: string }
+interface WeeklyTierConfig {
+  tp_pct: number; sl_pct: number; hold_days: number; win_rate: number;
+  trades: number; trades_per_year: number; expectancy: number; sharpe: number;
+  max_drawdown: number; cum_return: number;
+}
+interface WeeklyTierInfo { config: WeeklyTierConfig; conditions: WeeklyTierCond[]; met: number; total: number; threshold: number }
+interface WeeklyThisFriday {
+  tier: number; tier_label: string; color: string; signal: string;
+  config: WeeklyTierConfig; conditions: WeeklyTierCond[]; met_count: number; total_count: number;
+  trade_params: {
+    entry_price: number | null; tp_price: number | null; sl_price: number | null;
+    tp_dollar: number | null; sl_dollar: number | null; hold_days: number; position_size: number;
+  };
+  timing: { entry_dubai: string; exit_dubai: string; buy_window_active: boolean; window_note: string };
+}
+interface WeeklyCombined {
+  total_trades: number; trades_per_year: number; win_rate: number; expectancy: number;
+  cum_return: number; max_drawdown: number; sharpe: number;
+  projection_270k: { annual_trades: number; annual_pnl: number; annual_roi_pct: number };
+}
+interface WeeklyStrategyData {
+  this_friday: WeeklyThisFriday;
+  all_tiers: { tier1: WeeklyTierInfo; tier2: WeeklyTierInfo; tier3: WeeklyTierInfo };
+  combined_backtest: WeeklyCombined;
+  context: Record<string, unknown>;
+  updated: string;
+}
+
 interface FridayHourStat {
   entry_hour_utc: number; entry_hour_dubai: number; entry_hour_et: number;
   trades: number; tp_hit_rate: number; sl_hit_rate: number; neither_rate: number;
@@ -119,6 +148,7 @@ export default function BTCPage() {
   const [alpha, setAlpha] = useState<AlphaData | null>(null);
   const [binance, setBinance] = useState<BinanceData | null>(null);
   const [fridayTiming, setFridayTiming] = useState<FridayTimingData | null>(null);
+  const [weekly, setWeekly] = useState<WeeklyStrategyData | null>(null);
   const [btcChart, setBtcChart] = useState<ChartData | null>(null);
   const [btcChartInterval, setBtcChartInterval] = useState('1d');
   const [btcChartRange, setBtcChartRange] = useState('6mo');
@@ -169,6 +199,9 @@ export default function BTCPage() {
   const loadFridayTiming = useCallback(async () => {
     try { const r = await fetch('/api/btc/friday-timing'); setFridayTiming(await r.json()); } catch { /* */ }
   }, []);
+  const loadWeekly = useCallback(async () => {
+    try { const r = await fetch('/api/btc/weekly-strategy'); const d = await r.json(); if (d && !d.error) setWeekly(d); } catch { /* */ }
+  }, []);
   const loadBtcChart = useCallback(async (interval: string, range: string) => {
     try { const r = await fetch(`/api/btc/chart?interval=${interval}&range=${range}`); setBtcChart(await r.json()); } catch { /* */ }
   }, []);
@@ -177,11 +210,11 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadCorr(); loadAlpha(); loadBinance(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
-    const id1 = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
+    loadLive(); loadMacro(); loadDxy(); loadCorr(); loadAlpha(); loadBinance(); loadFridayTiming(); loadWeekly(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    const id1 = setInterval(() => { loadLive(); loadAlpha(); loadWeekly(); }, 60_000);
     const id2 = setInterval(() => { loadBinance(); }, 10_000);
     return () => { clearInterval(id1); clearInterval(id2); };
-  }, [loadLive, loadMacro, loadDxy, loadCorr, loadAlpha, loadBinance, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+  }, [loadLive, loadMacro, loadDxy, loadCorr, loadAlpha, loadBinance, loadFridayTiming, loadWeekly, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -563,6 +596,185 @@ export default function BTCPage() {
             </div>
           ) : <div className="loading">Loading alpha strategies...</div>}
         </div>
+
+        {/* Weekly Friday Strategy — This Friday's Trade */}
+        {weekly && (() => {
+          const f = weekly.this_friday;
+          const cb = weekly.combined_backtest;
+          const tp = f.trade_params;
+          const tierColors: Record<number, string> = { 1: '#10b981', 2: '#06b6d4', 3: '#f59e0b' };
+          const tierBg: Record<number, string> = { 1: 'rgba(16,185,129,.08)', 2: 'rgba(6,182,212,.06)', 3: 'rgba(245,158,11,.06)' };
+          const isBuy = f.signal === 'BUY';
+          return (
+            <div className="card" style={{ marginBottom: 24, border: `2px solid ${isBuy ? tierColors[f.tier] : 'var(--border)'}`, background: isBuy ? tierBg[f.tier] : undefined }}>
+              {isBuy && <div style={{ height: 3, background: `linear-gradient(90deg, ${tierColors[f.tier]}, ${tierColors[f.tier]}88)`, marginBottom: 8, borderRadius: 2 }} />}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+                <div className="sec-title" style={{ marginBottom: 0 }}>
+                  <span className="dot" style={{ background: tierColors[f.tier] }} />
+                  This Friday&apos;s Trade — Weekly Strategy
+                </div>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <span style={{
+                    padding: '4px 14px', borderRadius: 16, fontSize: 12, fontWeight: 800,
+                    background: `${tierColors[f.tier]}22`, color: tierColors[f.tier], border: `1px solid ${tierColors[f.tier]}44`,
+                  }}>TIER {f.tier} — {f.tier_label}</span>
+                  <span style={{
+                    padding: '4px 14px', borderRadius: 16, fontSize: 12, fontWeight: 800,
+                    background: isBuy ? 'rgba(34,197,94,.2)' : 'rgba(148,163,184,.1)',
+                    color: isBuy ? 'var(--green)' : 'var(--muted)',
+                    border: `1px solid ${isBuy ? 'rgba(34,197,94,.4)' : 'rgba(148,163,184,.2)'}`,
+                  }}>{isBuy ? 'TRADE TODAY' : 'WAIT FOR FRIDAY'}</span>
+                </div>
+              </div>
+
+              {/* Trade parameters grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 16 }}>
+                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>ENTRY</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text)' }}>${tp.entry_price?.toLocaleString()}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>Friday evening Dubai</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(34,197,94,.08)', borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>TAKE PROFIT</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--green)' }}>${tp.tp_price?.toLocaleString()}</div>
+                  <div style={{ fontSize: 10, color: 'var(--green)' }}>+{f.config.tp_pct}% (+${tp.tp_dollar?.toLocaleString()})</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(239,68,68,.08)', borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>STOP LOSS</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--red)' }}>${tp.sl_price?.toLocaleString()}</div>
+                  <div style={{ fontSize: 10, color: 'var(--red)' }}>{f.config.sl_pct}% (-${tp.sl_dollar?.toLocaleString()})</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>HOLD</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--cyan)' }}>{f.config.hold_days}d</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>max hold time</div>
+                </div>
+                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>POSITION</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--amber)' }}>${(tp.position_size / 1000).toFixed(0)}K</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>full position</div>
+                </div>
+              </div>
+
+              {/* Buy window status */}
+              <div style={{
+                padding: 12, borderRadius: 8, marginBottom: 16, fontSize: 12,
+                background: f.timing.buy_window_active ? 'linear-gradient(135deg, rgba(34,197,94,.12), rgba(6,182,212,.08))' : 'rgba(30,41,59,.4)',
+                border: f.timing.buy_window_active ? '1px solid rgba(34,197,94,.3)' : '1px solid rgba(30,41,59,.5)',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontWeight: 700, color: f.timing.buy_window_active ? 'var(--green)' : 'var(--text)' }}>
+                      {f.timing.buy_window_active ? 'BUY WINDOW OPEN' : 'Entry Window'}
+                    </span>
+                    {f.timing.buy_window_active && <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--green)', boxShadow: '0 0 6px var(--green)', animation: 'pulse 1.5s infinite' }} />}
+                  </div>
+                  <div style={{ color: 'var(--muted)', fontSize: 11 }}>
+                    Entry: <span style={{ color: 'var(--amber)', fontWeight: 600 }}>{f.timing.entry_dubai}</span> | Exit: <span style={{ color: 'var(--cyan)', fontWeight: 600 }}>{f.timing.exit_dubai}</span>
+                  </div>
+                </div>
+                <div style={{ marginTop: 6, fontSize: 11, color: f.timing.buy_window_active ? 'var(--green)' : 'var(--muted)', fontStyle: 'italic' }}>{f.timing.window_note}</div>
+              </div>
+
+              {/* Tier conditions + backtest stats */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                {/* Conditions */}
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '.5px' }}>
+                    Tier {f.tier} Conditions: {f.met_count}/{f.total_count}
+                  </div>
+                  {f.conditions.map((c: WeeklyTierCond) => (
+                    <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 0', borderBottom: '1px solid rgba(30,41,59,.3)' }}>
+                      <span style={{
+                        width: 18, height: 18, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 10, fontWeight: 700,
+                        background: c.met ? 'rgba(34,197,94,.2)' : 'rgba(239,68,68,.1)',
+                        color: c.met ? 'var(--green)' : 'var(--red)',
+                      }}>{c.met ? '\u2713' : '\u2717'}</span>
+                      <span style={{ flex: 1, color: c.met ? 'var(--text)' : 'var(--muted)', fontSize: 12 }}>{c.label}</span>
+                      <span style={{ color: c.met ? 'var(--green)' : 'var(--muted)', fontVariantNumeric: 'tabular-nums', fontSize: 11 }}>{c.value}</span>
+                    </div>
+                  ))}
+
+                  {/* Show all 3 tier summaries */}
+                  <div style={{ marginTop: 12, fontSize: 11, color: 'var(--muted)' }}>
+                    <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>All Tiers This Week:</div>
+                    {[
+                      { t: 1, info: weekly.all_tiers.tier1, c: '#10b981' },
+                      { t: 2, info: weekly.all_tiers.tier2, c: '#06b6d4' },
+                      { t: 3, info: weekly.all_tiers.tier3, c: '#f59e0b' },
+                    ].map(({ t, info, c }) => (
+                      <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 0' }}>
+                        <span style={{
+                          width: 8, height: 8, borderRadius: '50%', background: f.tier === t ? c : 'var(--border)',
+                          boxShadow: f.tier === t ? `0 0 6px ${c}` : 'none',
+                        }} />
+                        <span style={{ color: f.tier === t ? c : 'var(--muted)', fontWeight: f.tier === t ? 700 : 400 }}>
+                          Tier {t}: {info.met}/{info.total} conditions
+                          {f.tier === t && ' (ACTIVE)'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Backtest stats */}
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '.5px' }}>
+                    Backtest Stats (10yr, 522 Fridays)
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 12 }}>
+                    <div style={{ textAlign: 'center', padding: 10, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                      <div style={{ fontSize: 22, fontWeight: 800, color: cb.win_rate >= 65 ? 'var(--green)' : cb.win_rate >= 60 ? 'var(--cyan)' : 'var(--amber)' }}>{cb.win_rate}%</div>
+                      <div style={{ fontSize: 9, color: 'var(--muted)' }}>COMBINED WR</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: 10, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                      <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)' }}>{cb.trades_per_year}</div>
+                      <div style={{ fontSize: 9, color: 'var(--muted)' }}>TRADES/YR</div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: 10, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                      <div style={{ fontSize: 22, fontWeight: 800, color: cb.expectancy > 0 ? 'var(--green)' : 'var(--red)' }}>{cb.expectancy > 0 ? '+' : ''}{cb.expectancy}%</div>
+                      <div style={{ fontSize: 9, color: 'var(--muted)' }}>EXPECTANCY</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12, fontSize: 12 }}>
+                    <div className="mr"><span className="mr-l">Tier 1 WR</span><span className="mr-v" style={{ color: '#10b981' }}>{f.tier === 1 ? f.config.win_rate : weekly.all_tiers.tier1.config.win_rate}%</span></div>
+                    <div className="mr"><span className="mr-l">Tier 1 Freq</span><span className="mr-v">{weekly.all_tiers.tier1.config.trades_per_year}/yr</span></div>
+                    <div className="mr"><span className="mr-l">Tier 2 WR</span><span className="mr-v" style={{ color: '#06b6d4' }}>{weekly.all_tiers.tier2.config.win_rate}%</span></div>
+                    <div className="mr"><span className="mr-l">Tier 2 Freq</span><span className="mr-v">{weekly.all_tiers.tier2.config.trades_per_year}/yr</span></div>
+                    <div className="mr"><span className="mr-l">Tier 3 WR</span><span className="mr-v" style={{ color: '#f59e0b' }}>{weekly.all_tiers.tier3.config.win_rate}%</span></div>
+                    <div className="mr"><span className="mr-l">Tier 3 Freq</span><span className="mr-v">{weekly.all_tiers.tier3.config.trades_per_year}/yr</span></div>
+                  </div>
+
+                  {/* Annual projection */}
+                  <div style={{
+                    padding: 12, borderRadius: 8, marginTop: 8,
+                    background: 'linear-gradient(135deg, rgba(245,158,11,.08), rgba(234,179,8,.04))',
+                    border: '1px solid rgba(245,158,11,.2)',
+                  }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.5px' }}>$270K Annual Projection</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 18, fontWeight: 800, color: cb.projection_270k.annual_pnl > 0 ? 'var(--green)' : 'var(--red)' }}>
+                          ${cb.projection_270k.annual_pnl > 0 ? '+' : ''}{cb.projection_270k.annual_pnl.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 9, color: 'var(--muted)' }}>ANNUAL P&L</div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--amber)' }}>{cb.projection_270k.annual_roi_pct}%</div>
+                        <div style={{ fontSize: 9, color: 'var(--muted)' }}>ANNUAL ROI</div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--red)' }}>{cb.max_drawdown}%</div>
+                        <div style={{ fontSize: 9, color: 'var(--muted)' }}>MAX DRAWDOWN</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Friday Optimal Entry Timing */}
         {fridayTiming && (

@@ -162,3 +162,59 @@ Based on backtested data (assuming ~20-25 valid Friday setups per year):
 | Max drawdown | -$5,400 | -$5,400 | -$5,400 |
 
 These are conservative estimates for a spot-only, no-leverage strategy. The edge is small per trade but consistent.
+
+---
+
+# Execution Playbook — Weekly Tiered Friday System
+
+## How It Works
+
+Unlike the Alpha Strategies (2-3 trades/year), the Weekly Tiered System trades **every single Friday**. The dashboard automatically assigns a tier based on current conditions:
+
+| Tier | Color | Conditions | TP | SL | Hold | WR |
+|------|-------|------------|----|----|------|----|
+| 1 (HIGH) | Green | 6+/7 strict | +2.0% | -3.0% | 5d | 87.5% |
+| 2 (MEDIUM) | Cyan | 4+/5 relaxed | +1.0% | -2.0% | 3d | 67.7% |
+| 3 (BASE) | Amber | Every other Friday | +2.0% | -3.0% | 5d | 61.1% |
+
+## Weekly Routine
+
+| Day | Time (Dubai) | Action |
+|-----|-------------|--------|
+| Thursday | Evening | Open dashboard, check "This Friday's Trade" section |
+| Friday | Morning | Note which tier is showing and trade parameters |
+| Friday | **20:00** | **EXECUTE: Buy BTC at market** |
+| Friday | 20:01 | Set TP and SL on exchange immediately |
+| Sat-Wed | As needed | Monitor — TP/SL will auto-execute |
+| Hold day | **20:00** | If TP/SL not hit by max hold, exit at market |
+
+## Position Sizing
+
+All tiers use the full $270K position. The tier system adjusts **TP/SL width**, not position size.
+
+| Tier | TP Profit | SL Loss | Risk/Reward |
+|------|-----------|---------|-------------|
+| 1 | +$5,400 | -$8,100 | 1:1.5 |
+| 2 | +$2,700 | -$5,400 | 1:2.0 |
+| 3 | +$5,400 | -$8,100 | 1:1.5 |
+
+## Dashboard Section
+
+The "This Friday's Trade" card shows:
+- Active tier (color-coded) with all conditions checked/unchecked
+- Exact entry, TP, and SL prices calculated from live BTC price
+- Dollar amounts for TP and SL at $270K position
+- Buy window status (green pulse when active)
+- Annual projection based on backtest results
+
+## Key Differences from Alpha Strategies
+
+| | Alpha Strategies | Weekly Tiered |
+|-|-----------------|---------------|
+| Frequency | 2-3/year | 47/year |
+| Win Rate | 80-85% | 61-88% (tier-dependent) |
+| Conditions | All must align | Tiered — always trades |
+| Risk per Trade | Higher confidence | Spread across more trades |
+| Annual P&L ($270K) | ~$8-15K (rare) | ~$6.4K (consistent) |
+
+**Recommendation:** Run both systems in parallel. The Weekly Tiered system provides steady income while you wait for the rare Alpha Strategy signals.

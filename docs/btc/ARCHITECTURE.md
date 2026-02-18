@@ -52,6 +52,18 @@
 
 **Returns:** Overall signal, 3 strategy setups with conditions, timing, backtest stats.
 
+### /api/btc/weekly-strategy (60s refresh)
+**Sources:** Binance (price, volume) + Yahoo Finance (2y BTC, 1mo DXY/VIX/SPX) + market-events.ts
+
+**Logic:**
+1. Fetches Binance real-time BTC price + Yahoo 2y daily BTC, 1mo DXY/VIX/SPX in parallel
+2. Computes RSI(14), SMA(200), weekly return from Yahoo daily data
+3. Evaluates 7 strict Tier 1 conditions and 5 relaxed Tier 2 conditions
+4. Assigns the current Friday to Tier 1 (6+/7), Tier 2 (4+/5 and not T1), or Tier 3 (remainder)
+5. Returns active tier with TP/SL/hold, exact dollar amounts for $270K position, and buy window status
+
+**Returns:** Active tier signal, conditions, trade params, annual projection, all-tier backtest stats.
+
 ### /api/btc/live (60s refresh)
 **Source:** Yahoo Finance (`yfinance` via `yfChart`)
 - BTC-USD 2y daily — RSI, MACD, Bollinger, EMA, SMA 200
@@ -123,6 +135,7 @@ Hardcoded event calendars (2024-2026):
 |------|---------|--------|
 | Binance price/volume/order book | 10 seconds | `setInterval` |
 | Alpha strategy conditions | 60 seconds | `setInterval` |
+| Weekly strategy tier | 60 seconds | `setInterval` |
 | Yahoo Finance live data | 60 seconds | `setInterval` |
 | Macro, DXY, correlations | Once on load | `useEffect` |
 | Friday timing | Once on load | `useEffect` |
@@ -145,6 +158,14 @@ btc/research.py
   ├── Evaluates TP/SL/Hold for each using vectorized NumPy
   └── Outputs btc/research_results.json
 
+btc/weekly_strategy.py
+  ├── Fetches 10yr BTC, DXY, VIX, SPX, Gold from yfinance
+  ├── Builds Friday-only DataFrame with 12 conditions
+  ├── Defines 3 tiers (strict, relaxed, base) with different thresholds
+  ├── Exhaustive TP/SL scan per tier (21 combos each)
+  ├── Combined simulation across all 522 Fridays
+  └── Outputs btc/weekly_strategy_results.json
+
 btc/friday_timing.py
   ├── Fetches 10yr daily + 2yr hourly BTC
   ├── Analyzes every Friday entry hour (12-23 UTC)
@@ -158,5 +179,6 @@ To re-run research:
 cd btc
 pip3 install -r requirements.txt
 python3 research.py          # ~2 minutes, outputs research_results.json
+python3 weekly_strategy.py    # ~12 seconds, outputs weekly_strategy_results.json
 python3 friday_timing.py     # ~15 seconds, outputs friday_timing_results.json
 ```

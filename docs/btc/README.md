@@ -12,7 +12,7 @@ A live trading dashboard and backtested strategy engine for BTC spot trading, op
 
 | Document | Description |
 |----------|-------------|
-| [STRATEGY.md](./STRATEGY.md) | All 3 Alpha Strategies with entry/exit rules, conditions, and risk parameters |
+| [STRATEGY.md](./STRATEGY.md) | 3 Alpha Strategies (80%+ WR) + Weekly Friday Tiered System (64% WR, 47 trades/yr) |
 | [FRIDAY_TIMING.md](./FRIDAY_TIMING.md) | Friday optimal entry time analysis — 10yr backtest results |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | System architecture, APIs, data sources, refresh cycles |
 | [BACKTESTING.md](./BACKTESTING.md) | Deep backtesting methodology, results, and research findings |
@@ -26,7 +26,15 @@ A live trading dashboard and backtested strategy engine for BTC spot trading, op
 
 Friday afternoon (Dubai time), when US session volume dies and no catalysts are present, BTC drifts upward into the weekend. This pattern has been backtested across 10 years of daily data and 2 years of hourly data.
 
-### Three Alpha Strategies (80%+ Win Rate)
+### Weekly Friday Strategy (Trade Every Week)
+
+4. **Tiered Friday System** — 64.0% WR, 47.5 trades/yr, 3-tier confidence model
+   - **Tier 1** (HIGH): 87.5% WR, ~0.7/yr — 6+/7 strict conditions, TP +2%, SL -3%
+   - **Tier 2** (MEDIUM): 67.7% WR, ~23.6/yr — 4+/5 relaxed conditions, TP +1%, SL -2%
+   - **Tier 3** (BASE): 61.1% WR, ~23.1/yr — every remaining Friday, TP +2%, SL -3%
+   - **$270K projection**: ~$6,417/yr (+2.4% ROI)
+
+### Three Alpha Strategies (80%+ Win Rate, Rare)
 
 1. **Cosmic Convergence** — 84.2% WR, 19 trades, Eclipse + Full Moon window
 2. **Friday Low-Vol Scalp** — 82.6% WR, 23 trades, Friday + low volume + no catalysts
@@ -57,6 +65,7 @@ IAMDIFFERENT/
 │   ├── binance/route.ts              # Binance real-time feed
 │   ├── live/route.ts                 # Yahoo Finance BTC + SPX + VIX
 │   ├── alpha-strategy/route.ts       # Alpha strategy engine (Binance + Yahoo)
+│   ├── weekly-strategy/route.ts      # Weekly Friday tiered strategy (Binance + Yahoo)
 │   ├── friday-timing/route.ts        # Friday timing analysis results
 │   ├── chart/route.ts                # BTC OHLC chart data
 │   ├── events/route.ts               # Calendar events (lunar, FOMC, earnings)
@@ -70,6 +79,8 @@ IAMDIFFERENT/
 ├── btc/
 │   ├── research.py                   # Deep backtesting engine (Python)
 │   ├── research_results.json         # Backtesting output (508 strategies)
+│   ├── weekly_strategy.py             # Weekly tiered Friday backtest (Python)
+│   ├── weekly_strategy_results.json   # Weekly strategy output (522 Fridays)
 │   ├── friday_timing.py              # Friday entry time analysis (Python)
 │   ├── friday_timing_results.json    # Friday timing output
 │   ├── server.py                     # Legacy local Flask server
