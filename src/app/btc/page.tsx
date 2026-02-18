@@ -38,9 +38,6 @@ interface CalEvent {
   date: string; type: string; label: string; color: string; icon: string;
 }
 interface EventsData { events: CalEvent[]; count: number }
-interface HourlyStat {
-  hour_utc: number; hour_dubai: number; avg_return: number; win_rate: number; volatility: number; count: number;
-}
 interface CorrData {
   matrix: { btc_spx: number; btc_gold: number; spx_gold: number };
   rolling_30d: { date: string; btc_spx: number | null; btc_gold: number | null }[];
@@ -103,7 +100,6 @@ export default function BTCPage() {
   const [live, setLive] = useState<LiveData | null>(null);
   const [macro, setMacro] = useState<MacroData | null>(null);
   const [dxy, setDxy] = useState<DxyData | null>(null);
-  const [sessions, setSessions] = useState<HourlyStat[] | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [alpha, setAlpha] = useState<AlphaData | null>(null);
   const [fridayTiming, setFridayTiming] = useState<FridayTimingData | null>(null);
@@ -141,9 +137,6 @@ export default function BTCPage() {
   const loadDxy = useCallback(async () => {
     try { const r = await fetch('/api/btc/dxy'); setDxy(await r.json()); } catch { /* */ }
   }, []);
-  const loadSessions = useCallback(async () => {
-    try { const r = await fetch('/api/btc/sessions'); const d = await r.json(); setSessions(d.hourly_stats); } catch { /* */ }
-  }, []);
   const loadCorr = useCallback(async () => {
     try { const r = await fetch('/api/btc/correlations'); setCorr(await r.json()); } catch { /* */ }
   }, []);
@@ -161,10 +154,10 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadSessions(); loadCorr(); loadAlpha(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    loadLive(); loadMacro(); loadDxy(); loadCorr(); loadAlpha(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
     const id = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
     return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadSessions, loadCorr, loadAlpha, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+  }, [loadLive, loadMacro, loadDxy, loadCorr, loadAlpha, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -398,9 +391,6 @@ export default function BTCPage() {
         th { text-align:left; color:var(--muted); font-weight:500; padding:8px 12px; border-bottom:1px solid var(--border); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
         td { padding:8px 12px; border-bottom:1px solid rgba(30,41,59,.5); font-variant-numeric:tabular-nums; }
         .chart-wrap { position:relative; height:280px; }
-        .hg { display:grid; grid-template-columns:repeat(6,1fr); gap:4px; }
-        .hc { padding:8px 4px; border-radius:6px; text-align:center; font-size:11px; font-weight:600; }
-        .hc .hl { font-size:10px; color:rgba(255,255,255,.7); margin-bottom:2px; }
         .bar-w { display:flex; align-items:center; gap:6px; }
         .bar { height:6px; border-radius:3px; min-width:2px; }
         .loading { color:var(--muted); padding:40px; text-align:center; }
@@ -884,36 +874,10 @@ export default function BTCPage() {
           </div>
         </div>
 
-        {/* Session heatmap + Correlations */}
-        <div className="grid-2">
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--red)' }} /> Hourly Session Heatmap (Avg Return %)</div>
-            {sessions ? (
-              <>
-                <div className="hg">
-                  {sessions.map((h: HourlyStat) => {
-                    const intensity = Math.min(Math.abs(h.avg_return) * 300, 1);
-                    const bg = h.avg_return >= 0 ? `rgba(34,197,94,${intensity})` : `rgba(239,68,68,${intensity})`;
-                    const isBuy = h.hour_utc === 20;
-                    const isSell = h.hour_utc === 2;
-                    const border = isBuy ? '2px solid var(--green)' : isSell ? '2px solid var(--cyan)' : 'none';
-                    return (
-                      <div className="hc" key={h.hour_utc} style={{ background: bg, border }}>
-                        <div className="hl">{String(h.hour_dubai).padStart(2, '0')}:00 GST</div>
-                        <div>{h.avg_return >= 0 ? '+' : ''}{h.avg_return.toFixed(3)}%</div>
-                        <div className="hl">Win {h.win_rate}%</div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div style={{ marginTop: 12, fontSize: 11, color: 'var(--muted)' }}>Green border = BUY window | Cyan border = SELL window</div>
-              </>
-            ) : <div className="loading">Loading...</div>}
-          </div>
-          <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--purple)' }} /> BTC Correlations (30-day rolling)</div>
-            <div className="chart-wrap"><canvas ref={corrChartRef} /></div>
-          </div>
+        {/* Correlations */}
+        <div className="card" style={{ marginBottom: 24 }}>
+          <div className="sec-title"><span className="dot" style={{ background: 'var(--purple)' }} /> BTC Correlations (30-day rolling)</div>
+          <div className="chart-wrap"><canvas ref={corrChartRef} /></div>
         </div>
       </div>
     </>
