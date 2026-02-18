@@ -46,6 +46,15 @@ interface StrategyBlock {
 interface StrategyData extends StrategyBlock {
   daily_10y: StrategyBlock;
 }
+interface ChartCandle {
+  date: string; open: number; high: number; low: number; close: number;
+  volume: number; ema_20: number; ema_50: number; sma_200: number | null; rsi: number | null;
+}
+interface ChartData { interval: string; range: string; candles: ChartCandle[] }
+interface CalEvent {
+  date: string; type: string; label: string; color: string; icon: string;
+}
+interface EventsData { events: CalEvent[]; count: number }
 interface HourlyStat {
   hour_utc: number; hour_dubai: number; avg_return: number; win_rate: number; volatility: number; count: number;
 }
@@ -83,6 +92,11 @@ export default function BTCPage() {
   const [sessions, setSessions] = useState<HourlyStat[] | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [rec, setRec] = useState<RecData | null>(null);
+  const [btcChart, setBtcChart] = useState<ChartData | null>(null);
+  const [btcChartInterval, setBtcChartInterval] = useState('1d');
+  const [btcChartRange, setBtcChartRange] = useState('6mo');
+  const [chartEvents, setChartEvents] = useState<CalEvent[]>([]);
+  const [eventsVisible, setEventsVisible] = useState({ full_moon: true, new_moon: false, lunar_eclipse: true, solar_eclipse: true, fomc: true, earnings: true });
   const [clocks, setClocks] = useState({ dubai: '--:--:--', ny: '--:--:--', utc: '--:--:--' });
   const [chartReady, setChartReady] = useState(false);
   const [activeTab, setActiveTab] = useState<'2y' | '10y'>('2y');
@@ -91,6 +105,9 @@ export default function BTCPage() {
   const equity10yChartRef = useRef<HTMLCanvasElement>(null);
   const m2ChartRef = useRef<HTMLCanvasElement>(null);
   const corrChartRef = useRef<HTMLCanvasElement>(null);
+  const btcPriceChartRef = useRef<HTMLCanvasElement>(null);
+  const btcVolChartRef = useRef<HTMLCanvasElement>(null);
+  const btcRsiChartRef = useRef<HTMLCanvasElement>(null);
   const chartInstances = useRef<any[]>([]); // eslint-disable-line @typescript-eslint/no-explicit-any
 
   // Clocks
@@ -124,12 +141,18 @@ export default function BTCPage() {
   const loadRec = useCallback(async () => {
     try { const r = await fetch('/api/btc/recommendation'); setRec(await r.json()); } catch { /* */ }
   }, []);
+  const loadBtcChart = useCallback(async (interval: string, range: string) => {
+    try { const r = await fetch(`/api/btc/chart?interval=${interval}&range=${range}`); setBtcChart(await r.json()); } catch { /* */ }
+  }, []);
+  const loadEvents = useCallback(async () => {
+    try { const r = await fetch('/api/btc/events?from=2024-01-01&to=2027-01-01'); const d: EventsData = await r.json(); setChartEvents(d.events); } catch { /* */ }
+  }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadStrategy(); loadSessions(); loadCorr(); loadRec();
+    loadLive(); loadMacro(); loadDxy(); loadStrategy(); loadSessions(); loadCorr(); loadRec(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
     const id = setInterval(() => { loadLive(); loadRec(); }, 60_000);
     return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadStrategy, loadSessions, loadCorr, loadRec]);
+  }, [loadLive, loadMacro, loadDxy, loadStrategy, loadSessions, loadCorr, loadRec, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -145,6 +168,162 @@ export default function BTCPage() {
       },
       plugins: { legend: { labels: { color: '#94a3b8' } } },
     });
+
+    // BTC Price Chart with event overlays
+    if (btcChart?.candles && btcPriceChartRef.current) {
+      const c = btcChart.candles;
+      const step = c.length > 300 ? Math.floor(c.length / 300) : 1;
+      const sampled = c.filter((_: ChartCandle, i: number) => i % step === 0 || i === c.length - 1);
+      const labels = sampled.map((d: ChartCandle) => d.date);
+
+      // Map visible events to chart label indices
+      const visibleEvents = chartEvents.filter((e) => eventsVisible[e.type as keyof typeof eventsVisible]);
+      const eventIndices: { idx: number; ev: CalEvent }[] = [];
+      for (const ev of visibleEvents) {
+        const datePrefix = ev.date.slice(0, 10);
+        const idx = labels.findIndex((l) => l.startsWith(datePrefix));
+        if (idx !== -1) eventIndices.push({ idx, ev });
+      }
+
+      chartInstances.current.push(new Chart(btcPriceChartRef.current, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label: 'BTC Close', data: sampled.map((d: ChartCandle) => d.close), borderColor: '#e2e8f0', backgroundColor: 'rgba(226,232,240,.05)', fill: true, tension: .2, pointRadius: 0, borderWidth: 2, order: 2 },
+            { label: 'EMA 20', data: sampled.map((d: ChartCandle) => d.ema_20), borderColor: '#3b82f6', borderWidth: 1.5, pointRadius: 0, borderDash: [4, 2], tension: .2, order: 3 },
+            { label: 'EMA 50', data: sampled.map((d: ChartCandle) => d.ema_50), borderColor: '#f59e0b', borderWidth: 1.5, pointRadius: 0, borderDash: [4, 2], tension: .2, order: 3 },
+            { label: 'SMA 200', data: sampled.map((d: ChartCandle) => d.sma_200), borderColor: '#a855f7', borderWidth: 1.5, pointRadius: 0, borderDash: [6, 3], tension: .2, order: 3 },
+          ],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            x: { ticks: { color: '#64748b', maxTicksLimit: 10, maxRotation: 0 }, grid: { color: 'rgba(30,41,59,.3)' } },
+            y: { position: 'right', ticks: { color: '#64748b', callback: (v: number) => '$' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v) }, grid: { color: 'rgba(30,41,59,.3)' } },
+          },
+          plugins: {
+            legend: { labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'line', boxWidth: 20 } },
+            tooltip: {
+              callbacks: {
+                afterBody: (ctx: { dataIndex: number }[]) => {
+                  if (!ctx.length) return '';
+                  const di = ctx[0].dataIndex;
+                  const matchingEvents = eventIndices.filter((e) => e.idx === di);
+                  if (matchingEvents.length === 0) return '';
+                  return matchingEvents.map((e) => `${e.ev.icon} ${e.ev.label}`).join('\n');
+                },
+              },
+            },
+          },
+        },
+        plugins: [{
+          id: 'eventMarkers',
+          afterDraw(chart: { ctx: CanvasRenderingContext2D; scales: { x: { getPixelForValue: (v: number) => number }; y: { top: number; bottom: number } }; chartArea: { top: number; bottom: number } }) {
+            const { ctx } = chart;
+            const xScale = chart.scales.x;
+            const { top, bottom } = chart.chartArea;
+            ctx.save();
+
+            for (const { idx, ev } of eventIndices) {
+              const x = xScale.getPixelForValue(idx);
+              ctx.strokeStyle = ev.color;
+              ctx.globalAlpha = 0.5;
+              ctx.lineWidth = 1;
+              ctx.setLineDash([3, 3]);
+              ctx.beginPath();
+              ctx.moveTo(x, top);
+              ctx.lineTo(x, bottom);
+              ctx.stroke();
+
+              ctx.globalAlpha = 1;
+              ctx.setLineDash([]);
+              ctx.font = '12px sans-serif';
+              ctx.textAlign = 'center';
+              ctx.fillText(ev.icon, x, top - 4);
+            }
+            ctx.restore();
+          },
+        }],
+      }));
+    }
+
+    // BTC Volume Chart
+    if (btcChart?.candles && btcVolChartRef.current) {
+      const c = btcChart.candles;
+      const step = c.length > 200 ? Math.floor(c.length / 200) : 1;
+      const sampled = c.filter((_: ChartCandle, i: number) => i % step === 0 || i === c.length - 1);
+      const labels = sampled.map((d: ChartCandle) => d.date);
+      const colors = sampled.map((d: ChartCandle) => d.close >= d.open ? 'rgba(34,197,94,.6)' : 'rgba(239,68,68,.6)');
+
+      chartInstances.current.push(new Chart(btcVolChartRef.current, {
+        type: 'bar',
+        data: { labels, datasets: [{ label: 'Volume', data: sampled.map((d: ChartCandle) => d.volume), backgroundColor: colors, borderWidth: 0 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { display: false },
+            y: { position: 'right', ticks: { color: '#64748b', callback: (v: number) => (v / 1e9).toFixed(0) + 'B' }, grid: { color: 'rgba(30,41,59,.3)' } },
+          },
+          plugins: { legend: { display: false } },
+        },
+      }));
+    }
+
+    // BTC RSI Chart
+    if (btcChart?.candles && btcRsiChartRef.current) {
+      const c = btcChart.candles;
+      const step = c.length > 200 ? Math.floor(c.length / 200) : 1;
+      const sampled = c.filter((_: ChartCandle, i: number) => i % step === 0 || i === c.length - 1);
+      const labels = sampled.map((d: ChartCandle) => d.date);
+
+      chartInstances.current.push(new Chart(btcRsiChartRef.current, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label: 'RSI 14', data: sampled.map((d: ChartCandle) => d.rsi), borderColor: '#06b6d4', borderWidth: 1.5, pointRadius: 0, tension: .3, fill: false },
+          ],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { display: false },
+            y: { position: 'right', min: 0, max: 100, ticks: { color: '#64748b', stepSize: 20 }, grid: { color: 'rgba(30,41,59,.3)' } },
+          },
+          plugins: {
+            legend: { display: false },
+            annotation: undefined,
+          },
+        },
+        plugins: [{
+          id: 'rsiZones',
+          beforeDraw(chart: { ctx: CanvasRenderingContext2D; scales: { y: { getPixelForValue: (v: number) => number }; x: { left: number; right: number } } }) {
+            const { ctx } = chart;
+            const yScale = chart.scales.y;
+            const xScale = chart.scales.x;
+            ctx.save();
+            // Overbought zone (70-100)
+            ctx.fillStyle = 'rgba(239,68,68,.08)';
+            ctx.fillRect(xScale.left, yScale.getPixelForValue(100), xScale.right - xScale.left, yScale.getPixelForValue(70) - yScale.getPixelForValue(100));
+            // Oversold zone (0-30)
+            ctx.fillStyle = 'rgba(34,197,94,.08)';
+            ctx.fillRect(xScale.left, yScale.getPixelForValue(30), xScale.right - xScale.left, yScale.getPixelForValue(0) - yScale.getPixelForValue(30));
+            // Lines at 30 and 70
+            ctx.strokeStyle = 'rgba(148,163,184,.3)';
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(xScale.left, yScale.getPixelForValue(70));
+            ctx.lineTo(xScale.right, yScale.getPixelForValue(70));
+            ctx.moveTo(xScale.left, yScale.getPixelForValue(30));
+            ctx.lineTo(xScale.right, yScale.getPixelForValue(30));
+            ctx.stroke();
+            ctx.restore();
+          }
+        }],
+      }));
+    }
 
     if (strategy && equityChartRef.current) {
       const eq = strategy.equity_curve.filter((_: EquityPoint, i: number) => i % 15 === 0);
@@ -196,7 +375,7 @@ export default function BTCPage() {
         options: { ...chartOpts(), scales: { ...chartOpts().scales, y: { ...chartOpts().scales.y, min: -1, max: 1 } } },
       }));
     }
-  }, [chartReady, strategy, macro, corr, activeTab]);
+  }, [chartReady, strategy, macro, corr, activeTab, btcChart, chartEvents, eventsVisible]);
 
   // Signal logic
   function getSignal(d: LiveData) {
@@ -367,6 +546,82 @@ export default function BTCPage() {
               ))}
             </>
           )}
+        </div>
+
+        {/* BTC Chart */}
+        <div className="card" style={{ marginBottom: 24 }}>
+          {/* Header row: title + interval buttons + range buttons */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
+            <div className="sec-title" style={{ marginBottom: 0 }}><span className="dot" style={{ background: 'var(--text)' }} /> BTC / USD</div>
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+              {/* Interval selector */}
+              <div style={{ display: 'flex', gap: 2, background: 'rgba(30,41,59,.5)', borderRadius: 8, padding: 2 }}>
+                {[{ v: '1h', l: '1H' }, { v: '2h', l: '2H' }, { v: '4h', l: '4H' }, { v: '1d', l: '1D' }].map(({ v, l }) => (
+                  <button key={v} onClick={() => {
+                    setBtcChartInterval(v);
+                    const defaultRange = v === '1h' ? '7d' : v === '2h' ? '14d' : v === '4h' ? '30d' : '6mo';
+                    setBtcChartRange(defaultRange);
+                    loadBtcChart(v, defaultRange);
+                  }} style={{
+                    background: btcChartInterval === v ? 'var(--cyan)' : 'transparent',
+                    color: btcChartInterval === v ? '#000' : 'var(--muted)',
+                    border: 'none', borderRadius: 6, padding: '5px 14px', fontSize: 12,
+                    fontWeight: 700, cursor: 'pointer',
+                  }}>{l}</button>
+                ))}
+              </div>
+              {/* Range selector */}
+              <div style={{ display: 'flex', gap: 2 }}>
+                {(btcChartInterval === '1d'
+                  ? ['1mo', '3mo', '6mo', '1y', '2y']
+                  : btcChartInterval === '4h'
+                    ? ['7d', '14d', '30d', '60d', '90d']
+                    : btcChartInterval === '2h'
+                      ? ['7d', '14d', '30d', '60d']
+                      : ['1d', '3d', '5d', '7d', '14d', '30d']
+                ).map((r) => (
+                  <button key={r} onClick={() => { setBtcChartRange(r); loadBtcChart(btcChartInterval, r); }} style={{
+                    background: btcChartRange === r ? 'var(--blue)' : 'transparent',
+                    color: btcChartRange === r ? '#fff' : 'var(--muted)',
+                    border: '1px solid var(--border)', borderRadius: 6, padding: '4px 10px',
+                    fontSize: 11, fontWeight: 600, cursor: 'pointer', textTransform: 'uppercase',
+                  }}>{r}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Event toggle row */}
+          <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+            {([
+              { key: 'full_moon', icon: '🌕', label: 'Full Moon', c: '#fbbf24' },
+              { key: 'new_moon', icon: '🌑', label: 'New Moon', c: '#64748b' },
+              { key: 'lunar_eclipse', icon: '🌒', label: 'Lunar Eclipse', c: '#ef4444' },
+              { key: 'solar_eclipse', icon: '☀️', label: 'Solar Eclipse', c: '#f97316' },
+              { key: 'fomc', icon: '🏛️', label: 'FOMC', c: '#3b82f6' },
+              { key: 'earnings', icon: '📊', label: 'Mag7 Earnings', c: '#22c55e' },
+            ] as const).map(({ key, icon, label, c }) => {
+              const on = eventsVisible[key as keyof typeof eventsVisible];
+              return (
+                <button key={key} onClick={() => setEventsVisible((prev) => ({ ...prev, [key]: !prev[key as keyof typeof prev] }))} style={{
+                  display: 'flex', alignItems: 'center', gap: 4,
+                  background: on ? `${c}22` : 'transparent',
+                  border: `1px solid ${on ? c : 'var(--border)'}`,
+                  borderRadius: 20, padding: '3px 12px', fontSize: 11, fontWeight: 600,
+                  color: on ? c : 'var(--muted)', cursor: 'pointer', opacity: on ? 1 : 0.5,
+                }}>{icon} {label}</button>
+              );
+            })}
+          </div>
+          {btcChart ? (
+            <>
+              <div style={{ position: 'relative', height: 380 }}><canvas ref={btcPriceChartRef} /></div>
+              <div style={{ position: 'relative', height: 80, marginTop: 4 }}><canvas ref={btcVolChartRef} /></div>
+              <div style={{ position: 'relative', height: 100, marginTop: 4 }}>
+                <div style={{ position: 'absolute', top: 4, left: 8, fontSize: 10, color: 'var(--muted)', zIndex: 1 }}>RSI (14)</div>
+                <canvas ref={btcRsiChartRef} />
+              </div>
+            </>
+          ) : <div className="loading" style={{ height: 560 }}>Loading chart...</div>}
         </div>
 
         {/* Top metrics */}

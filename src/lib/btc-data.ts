@@ -13,7 +13,7 @@ interface YFCandle {
 // Yahoo Finance v8 chart API (public, no key needed)
 // ---------------------------------------------------------------------------
 
-async function yfChart(
+export async function yfChart(
   symbol: string,
   range: string,
   interval: string
@@ -49,7 +49,7 @@ async function yfChart(
 // Technical indicators
 // ---------------------------------------------------------------------------
 
-function calcRSI(closes: number[], period = 14): (number | null)[] {
+export function calcRSI(closes: number[], period = 14): (number | null)[] {
   const rsi: (number | null)[] = new Array(closes.length).fill(null);
   if (closes.length < period + 1) return rsi;
 
@@ -75,7 +75,7 @@ function calcRSI(closes: number[], period = 14): (number | null)[] {
   return rsi;
 }
 
-function ema(data: number[], span: number): number[] {
+export function ema(data: number[], span: number): number[] {
   const k = 2 / (span + 1);
   const out: number[] = [data[0]];
   for (let i = 1; i < data.length; i++) {
@@ -84,7 +84,7 @@ function ema(data: number[], span: number): number[] {
   return out;
 }
 
-function sma(data: number[], period: number): (number | null)[] {
+export function sma(data: number[], period: number): (number | null)[] {
   const out: (number | null)[] = [];
   for (let i = 0; i < data.length; i++) {
     if (i < period - 1) { out.push(null); continue; }
@@ -95,7 +95,7 @@ function sma(data: number[], period: number): (number | null)[] {
   return out;
 }
 
-function calcMACD(closes: number[]) {
+export function calcMACD(closes: number[]) {
   const ema12 = ema(closes, 12);
   const ema26 = ema(closes, 26);
   const macdLine = ema12.map((v, i) => v - ema26[i]);
@@ -104,7 +104,7 @@ function calcMACD(closes: number[]) {
   return { macdLine, signal, histogram };
 }
 
-function calcBollinger(closes: number[], period = 20, stdDev = 2) {
+export function calcBollinger(closes: number[], period = 20, stdDev = 2) {
   const mid = sma(closes, period);
   const upper: (number | null)[] = [];
   const lower: (number | null)[] = [];
@@ -123,7 +123,7 @@ function calcBollinger(closes: number[], period = 20, stdDev = 2) {
 // FRED
 // ---------------------------------------------------------------------------
 
-async function fredSeries(seriesId: string, start: string): Promise<{ date: string; value: number }[]> {
+export async function fredSeries(seriesId: string, start: string): Promise<{ date: string; value: number }[]> {
   const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&observation_start=${start}&api_key=${FRED_API_KEY}&file_type=json`;
   const res = await fetch(url, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`FRED ${seriesId}: ${res.status}`);
@@ -136,17 +136,4 @@ async function fredSeries(seriesId: string, start: string): Promise<{ date: stri
     }));
 }
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
-export {
-  yfChart,
-  calcRSI,
-  calcMACD,
-  calcBollinger,
-  ema,
-  sma,
-  fredSeries,
-};
 export type { YFCandle };
