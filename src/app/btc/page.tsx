@@ -366,24 +366,6 @@ export default function BTCPage() {
   }, [chartReady, macro, corr, btcChart, chartEvents, eventsVisible]);
 
   // Signal logic
-  function getSignal(d: LiveData) {
-    let signals = 0;
-    const reasons: string[] = [];
-    if (d.rsi_14 < 40) { signals++; reasons.push('RSI < 40'); }
-    if (d.macd_hist < 0) { signals++; reasons.push('MACD bearish'); }
-    if (d.price < d.bb_mid) { signals++; reasons.push('Below BB mid'); }
-    if (d.price < d.ema_20) { signals++; reasons.push('Below EMA20'); }
-
-    const dubaiHour = parseInt(new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Dubai', hour: 'numeric', hour12: false }));
-    const inWindow = dubaiHour >= 23 || dubaiHour < 1;
-
-    if (signals >= 3 && inWindow) return { badge: 'buy', label: 'BUY WINDOW ACTIVE', reason: reasons.join(' + ') + ' | Dubai buy window open' };
-    if (signals >= 3) return { badge: 'wait', label: 'WAIT FOR 12AM DUBAI', reason: reasons.join(' + ') };
-    if (signals >= 2) return { badge: 'neutral', label: 'MIXED SIGNALS', reason: reasons.join(' + ') };
-    return { badge: 'sell', label: 'NO TRADE', reason: 'Conditions not favorable' };
-  }
-
-  const signal = live ? getSignal(live) : null;
 
   return (
     <>
@@ -406,11 +388,6 @@ export default function BTCPage() {
         .card-title { font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:8px; }
         .card-value { font-size:32px; font-weight:700; font-variant-numeric:tabular-nums; }
         .card-sub { font-size:14px; margin-top:4px; }
-        .sb { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
-        .sb-buy { background:rgba(34,197,94,.15); color:var(--green); border:1px solid rgba(34,197,94,.3); }
-        .sb-sell { background:rgba(239,68,68,.15); color:var(--red); border:1px solid rgba(239,68,68,.3); }
-        .sb-neutral { background:rgba(148,163,184,.1); color:var(--muted); border:1px solid rgba(148,163,184,.2); }
-        .sb-wait { background:rgba(245,158,11,.15); color:var(--amber); border:1px solid rgba(245,158,11,.3); }
         .sec-title { font-size:18px; font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
         .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
         .mr { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(30,41,59,.5); }
@@ -847,11 +824,6 @@ export default function BTCPage() {
                 </div>
               </>
             ) : <div className="card-value" style={{ fontSize: 28 }}>--</div>}
-          </div>
-          <div className="card">
-            <div className="card-title">Trade Signal</div>
-            <div style={{ marginTop: 8 }}>{signal ? <span className={`sb sb-${signal.badge}`}>{signal.label}</span> : <span className="sb sb-neutral">LOADING</span>}</div>
-            <div className="card-sub" style={{ marginTop: 8 }}>{signal?.reason ?? '--'}</div>
           </div>
         </div>
 
