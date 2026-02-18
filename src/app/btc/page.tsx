@@ -103,8 +103,8 @@ declare const Chart: any; // eslint-disable-line @typescript-eslint/no-explicit-
 
 // ---------- helpers ----------
 const fmt = (n: number | null | undefined) => n == null ? '--' : Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
-const pctSign = (v: number) => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
-const pctCol = (v: number) => (v >= 0 ? '#22c55e' : '#ef4444');
+const pctSign = (v: number | null | undefined) => v == null ? '--' : (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+const pctCol = (v: number | null | undefined) => (!v || v >= 0) ? '#22c55e' : '#ef4444';
 
 function clockStr(tz: string) {
   return new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour12: false });
@@ -160,7 +160,11 @@ export default function BTCPage() {
     try { const r = await fetch('/api/btc/alpha-strategy'); setAlpha(await r.json()); } catch { /* */ }
   }, []);
   const loadBinance = useCallback(async () => {
-    try { const r = await fetch('/api/btc/binance'); setBinance(await r.json()); } catch { /* */ }
+    try {
+      const r = await fetch('/api/btc/binance');
+      const d = await r.json();
+      if (d && d.price && !d.error) setBinance(d);
+    } catch { /* Binance unavailable — dashboard works without it */ }
   }, []);
   const loadFridayTiming = useCallback(async () => {
     try { const r = await fetch('/api/btc/friday-timing'); setFridayTiming(await r.json()); } catch { /* */ }

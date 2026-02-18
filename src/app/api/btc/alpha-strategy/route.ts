@@ -53,14 +53,27 @@ interface AlphaSetup {
   };
 }
 
+const BINANCE_BASES = ['https://api.binance.com', 'https://api.binance.us', 'https://api1.binance.com'];
+
+async function binanceFetch<T>(path: string): Promise<T> {
+  for (const base of BINANCE_BASES) {
+    try {
+      const r = await fetch(`${base}${path}`, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
+      if (r.ok) return r.json() as Promise<T>;
+    } catch { /* try next */ }
+  }
+  throw new Error('Binance unavailable');
+}
+
 async function fetchBinancePrice(): Promise<{ price: number; volRatio: number; isLowVol: boolean } | null> {
   try {
     const [ticker, klines] = await Promise.all([
-      fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', { cache: 'no-store' }).then((r) => r.json()),
-      fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24', { cache: 'no-store' }).then((r) => r.json()),
+      binanceFetch<Record<string, string>>('/api/v3/ticker/24hr?symbol=BTCUSDT'),
+      binanceFetch<unknown[][]>('/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24'),
     ]);
     const price = parseFloat(ticker.lastPrice);
-    const hourlyVols = (klines as unknown[][]).map((k: unknown[]) => parseFloat(k[5] as string));
+    if (isNaN(price) || price <= 0) return null;
+    const hourlyVols = klines.map((k: unknown[]) => parseFloat(k[5] as string));
     const avg = hourlyVols.reduce((s: number, v: number) => s + v, 0) / hourlyVols.length;
     const current = hourlyVols[hourlyVols.length - 1] ?? 0;
     const ratio = avg > 0 ? current / avg : 1;

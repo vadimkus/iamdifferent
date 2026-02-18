@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export const revalidate = 0; // no cache — always fresh
 
-const BASE = 'https://api.binance.com';
+const BASES = ['https://api.binance.com', 'https://api.binance.us', 'https://api1.binance.com', 'https://api3.binance.com'];
 
 interface BinanceTicker {
   symbol: string;
@@ -23,18 +23,22 @@ interface BinanceDepthEntry {
   total: number;
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const r = await fetch(url, { cache: 'no-store' });
-  if (!r.ok) throw new Error(`Binance API ${r.status}: ${r.statusText}`);
-  return r.json() as Promise<T>;
+async function fetchJson<T>(path: string): Promise<T> {
+  for (const base of BASES) {
+    try {
+      const r = await fetch(`${base}${path}`, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
+      if (r.ok) return r.json() as Promise<T>;
+    } catch { /* try next */ }
+  }
+  throw new Error('All Binance endpoints failed');
 }
 
 export async function GET() {
   try {
     const [ticker, depth, klines] = await Promise.all([
-      fetchJson<BinanceTicker>(`${BASE}/api/v3/ticker/24hr?symbol=BTCUSDT`),
-      fetchJson<{ bids: string[][]; asks: string[][] }>(`${BASE}/api/v3/depth?symbol=BTCUSDT&limit=10`),
-      fetchJson<unknown[][]>(`${BASE}/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24`),
+      fetchJson<BinanceTicker>('/api/v3/ticker/24hr?symbol=BTCUSDT'),
+      fetchJson<{ bids: string[][]; asks: string[][] }>('/api/v3/depth?symbol=BTCUSDT&limit=10'),
+      fetchJson<unknown[][]>('/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24'),
     ]);
 
     const price = parseFloat(ticker.lastPrice);
