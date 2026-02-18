@@ -1,11 +1,11 @@
 {
-  "generated": "2026-02-18T14:40:39.469727",
+  "generated": "2026-02-18T14:53:06.291584",
   "analysis_period": "2017-01-01 to 2026-02-17",
   "total_trading_days": 3335,
   "total_strategies_tested": 2518,
   "top_by_win_rate": [
     {
-      "label": "dow_tue_thu + vix_falling + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vol_below_avg + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 21,
       "win_rate": 95.24,
       "avg_win": 1.9182,
@@ -169,7 +169,7 @@
       "composite": 70.694
     },
     {
-      "label": "near_new_moon + month_q4 + rsi14_lt50 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + rsi14_lt50 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 93.75,
       "avg_win": 2.0,
@@ -298,7 +298,7 @@
       "composite": 67.24600000000001
     },
     {
-      "label": "dow_tue_thu + vix_lt15 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 90.0,
       "avg_win": 2.0,
@@ -455,7 +455,7 @@
       "composite": 60.198
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 88.24,
       "avg_win": 2.0,
@@ -470,7 +470,7 @@
       "composite": 56.7872
     },
     {
-      "label": "month_q4 + vix_gt25 + vol_below_avg + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + vol_below_avg + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 88.0,
       "avg_win": 2.0,
@@ -662,7 +662,7 @@
       "composite": 58.034000000000006
     },
     {
-      "label": "dxy_flat + dow_tue_thu + macd_bullish + vol_low | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "macd_bullish + dow_tue_thu + vol_low + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 87.5,
       "avg_win": 2.0,
@@ -791,266 +791,22 @@
       "composite": 55.506
     },
     {
-      "label": "dxy_flat + bb_above_80pct + fomc_pre + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + near_full_moon + vix_lt15 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
       "trades": 15,
       "win_rate": 86.67,
-      "avg_win": 1.7953,
-      "avg_loss": -3.0,
-      "expectancy": 1.156,
-      "cum_return": 18.56,
-      "max_drawdown": 5.91,
-      "sharpe": 4.841,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "trade_log": [
-        {
-          "date": "2024-09-20",
-          "entry": 63192.98,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2024-09-21",
-          "entry": 63394.84,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2024-09-22",
-          "entry": 63648.71,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-09-23",
-          "entry": 63329.8,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2024-12-13",
-          "entry": 101459.26,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2024-12-14",
-          "entry": 101372.97,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2024-12-15",
-          "entry": 104298.7,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-16",
-          "entry": 106029.72,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-05-09",
-          "entry": 102970.85,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-05-10",
-          "entry": 104696.33,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2025-05-11",
-          "entry": 104106.36,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 6
-        },
-        {
-          "date": "2025-09-12",
-          "entry": 116101.58,
-          "return_pct": 0.316,
-          "reason": "expire",
-          "dow": 4
-        },
-        {
-          "date": "2025-09-13",
-          "entry": 115950.51,
-          "return_pct": 1.0234,
-          "reason": "expire",
-          "dow": 5
-        },
-        {
-          "date": "2025-09-14",
-          "entry": 115407.66,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2025-09-15",
-          "entry": 115444.88,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        }
-      ],
-      "composite": 51.974000000000004
+      "avg_win": 1.4488,
+      "avg_loss": -2.0,
+      "expectancy": 0.989,
+      "cum_return": 15.79,
+      "max_drawdown": 2.52,
+      "sharpe": 7.656,
+      "target_pct": 0.015,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 56.93600000000001
     },
     {
-      "label": "dxy_flat + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 15,
-      "win_rate": 86.67,
-      "avg_win": 2.0,
-      "avg_loss": -3.0,
-      "expectancy": 1.3333,
-      "cum_return": 21.72,
-      "max_drawdown": 3.0,
-      "sharpe": 5.569,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "trade_log": [
-        {
-          "date": "2024-11-02",
-          "entry": 69289.27,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-11-03",
-          "entry": 68741.12,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-03",
-          "entry": 96002.16,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 1
-        },
-        {
-          "date": "2024-12-28",
-          "entry": 95163.93,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-12-29",
-          "entry": 93530.23,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-30",
-          "entry": 92643.21,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-10-19",
-          "entry": 108666.71,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2025-10-20",
-          "entry": 110588.93,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-11-21",
-          "entry": 85090.69,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-11-22",
-          "entry": 84648.36,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-17",
-          "entry": 86143.76,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 2
-        },
-        {
-          "date": "2025-12-18",
-          "entry": 85462.51,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 3
-        },
-        {
-          "date": "2025-12-19",
-          "entry": 88103.38,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-12-20",
-          "entry": 88344.0,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-21",
-          "entry": 88621.75,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        }
-      ],
-      "composite": 54.139199999999995
-    },
-    {
-      "label": "dxy_flat + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 15,
-      "win_rate": 86.67,
-      "avg_win": 2.0,
-      "avg_loss": -2.3536,
-      "expectancy": 1.4195,
-      "cum_return": 23.34,
-      "max_drawdown": 3.0,
-      "sharpe": 6.725,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "composite": 56.79600000000001
-    },
-    {
-      "label": "dow_tue_thu + bb_above_80pct + above_sma200 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + dow_tue_thu + spx_down_1 + bb_above_80pct | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -1172,22 +928,159 @@
       "composite": 54.139199999999995
     },
     {
-      "label": "vix_lt15 + near_full_moon + above_sma200 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
+      "label": "month_q4 + near_new_moon + no_earnings + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
-      "avg_win": 1.4488,
-      "avg_loss": -2.0,
-      "expectancy": 0.989,
-      "cum_return": 15.79,
-      "max_drawdown": 2.52,
-      "sharpe": 7.656,
-      "target_pct": 0.015,
-      "stop_pct": -0.02,
-      "hold_days": 3,
-      "composite": 56.93600000000001
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.3333,
+      "cum_return": 21.72,
+      "max_drawdown": 3.0,
+      "sharpe": 5.569,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-11-02",
+          "entry": 69289.27,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-11-03",
+          "entry": 68741.12,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-03",
+          "entry": 96002.16,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 1
+        },
+        {
+          "date": "2024-12-28",
+          "entry": 95163.93,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-12-29",
+          "entry": 93530.23,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-30",
+          "entry": 92643.21,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-10-19",
+          "entry": 108666.71,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2025-10-20",
+          "entry": 110588.93,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-11-21",
+          "entry": 85090.69,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-11-22",
+          "entry": 84648.36,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-17",
+          "entry": 86143.76,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 2
+        },
+        {
+          "date": "2025-12-18",
+          "entry": 85462.51,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 3
+        },
+        {
+          "date": "2025-12-19",
+          "entry": 88103.38,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-12-20",
+          "entry": 88344.0,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-21",
+          "entry": 88621.75,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        }
+      ],
+      "composite": 54.139199999999995
     },
     {
-      "label": "macd_bullish + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + vix_gt25 + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 86.67,
+      "avg_win": 2.0,
+      "avg_loss": -2.3536,
+      "expectancy": 1.4195,
+      "cum_return": 23.34,
+      "max_drawdown": 3.0,
+      "sharpe": 6.725,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 56.79600000000001
+    },
+    {
+      "label": "no_earnings + fomc_pre + bb_above_80pct + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 86.67,
+      "avg_win": 1.7953,
+      "avg_loss": -3.0,
+      "expectancy": 1.156,
+      "cum_return": 18.56,
+      "max_drawdown": 5.91,
+      "sharpe": 4.841,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 51.974000000000004
+    },
+    {
+      "label": "macd_bullish + vol_below_avg + rsi14_gt60 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 85.0,
       "avg_win": 1.8156,
@@ -1217,7 +1110,7 @@
       "composite": 53.65720000000001
     },
     {
-      "label": "near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 19,
       "win_rate": 84.21,
       "avg_win": 2.0,
@@ -1232,7 +1125,7 @@
       "composite": 51.75399999999999
     },
     {
-      "label": "vix_gt25 + vol_below_avg + dxy_down + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 19,
       "win_rate": 84.21,
       "avg_win": 1.8977,
@@ -1247,7 +1140,7 @@
       "composite": 50.74159999999999
     },
     {
-      "label": "above_sma200 + dxy_down + rsi14_gt65 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + spx_down_1 + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 84.0,
       "avg_win": 2.0,
@@ -1262,7 +1155,7 @@
       "composite": 52.696000000000005
     },
     {
-      "label": "macd_bullish + above_sma200 + month_q4 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + macd_bullish + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 36,
       "win_rate": 83.33,
       "avg_win": 1.9501,
@@ -1277,22 +1170,7 @@
       "composite": 56.071600000000004
     },
     {
-      "label": "vix_falling + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 18,
-      "win_rate": 83.33,
-      "avg_win": 2.0,
-      "avg_loss": -3.0,
-      "expectancy": 1.1667,
-      "cum_return": 22.83,
-      "max_drawdown": 5.05,
-      "sharpe": 4.445,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "composite": 50.488800000000005
-    },
-    {
-      "label": "above_sma200 + month_q4 + vix_gt25 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + vol_below_avg + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 18,
       "win_rate": 83.33,
       "avg_win": 1.9002,
@@ -1307,37 +1185,22 @@
       "composite": 51.101200000000006
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 23,
-      "win_rate": 82.61,
+      "label": "month_q4 + near_new_moon + no_earnings + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 18,
+      "win_rate": 83.33,
       "avg_win": 2.0,
       "avg_loss": -3.0,
-      "expectancy": 1.1304,
-      "cum_return": 28.97,
-      "max_drawdown": 8.73,
-      "sharpe": 4.235,
+      "expectancy": 1.1667,
+      "cum_return": 22.83,
+      "max_drawdown": 5.05,
+      "sharpe": 4.445,
       "target_pct": 0.02,
       "stop_pct": -0.03,
       "hold_days": 5,
-      "composite": 50.635600000000004
+      "composite": 50.488800000000005
     },
     {
-      "label": "dow_fri + vol_below_avg + no_earnings + vol_low | tgt=0.5% stp=-1.0% hold=1d",
-      "trades": 23,
-      "win_rate": 82.61,
-      "avg_win": 0.4775,
-      "avg_loss": -1.0,
-      "expectancy": 0.2206,
-      "cum_return": 5.16,
-      "max_drawdown": 1.99,
-      "sharpe": 6.179,
-      "target_pct": 0.005,
-      "stop_pct": -0.01,
-      "hold_days": 1,
-      "composite": 50.88440000000001
-    },
-    {
-      "label": "vix_lt15 + near_full_moon + vol_below_avg + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 23,
       "win_rate": 82.61,
       "avg_win": 2.0,
@@ -1352,7 +1215,22 @@
       "composite": 50.635600000000004
     },
     {
-      "label": "macd_bullish + dxy_down + rsi14_gt65 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + no_earnings + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 23,
+      "win_rate": 82.61,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.1304,
+      "cum_return": 28.97,
+      "max_drawdown": 8.73,
+      "sharpe": 4.235,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "composite": 50.635600000000004
+    },
+    {
+      "label": "rsi14_gt65 + macd_bullish + spx_down_1 + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 23,
       "win_rate": 82.61,
       "avg_win": 2.0,
@@ -1367,37 +1245,22 @@
       "composite": 50.635600000000004
     },
     {
-      "label": "dxy_flat + dow_fri + vix_gt25 + vol_below_avg | tgt=1.0% stp=-1.5% hold=2d",
-      "trades": 17,
-      "win_rate": 82.35,
-      "avg_win": 1.0,
-      "avg_loss": -1.5,
-      "expectancy": 0.5588,
-      "cum_return": 9.85,
-      "max_drawdown": 1.5,
-      "sharpe": 6.582,
-      "target_pct": 0.01,
-      "stop_pct": -0.015,
-      "hold_days": 2,
-      "composite": 51.7392
+      "label": "vol_below_avg + no_earnings + vol_low + dow_fri | tgt=0.5% stp=-1.0% hold=1d",
+      "trades": 23,
+      "win_rate": 82.61,
+      "avg_win": 0.4775,
+      "avg_loss": -1.0,
+      "expectancy": 0.2206,
+      "cum_return": 5.16,
+      "max_drawdown": 1.99,
+      "sharpe": 6.179,
+      "target_pct": 0.005,
+      "stop_pct": -0.01,
+      "hold_days": 1,
+      "composite": 50.88440000000001
     },
     {
-      "label": "dxy_flat + dow_fri + vix_gt25 + vol_below_avg | tgt=1.5% stp=-2.0% hold=3d",
-      "trades": 17,
-      "win_rate": 82.35,
-      "avg_win": 1.5,
-      "avg_loss": -1.5961,
-      "expectancy": 0.9536,
-      "cum_return": 17.37,
-      "max_drawdown": 2.0,
-      "sharpe": 7.257,
-      "target_pct": 0.015,
-      "stop_pct": -0.02,
-      "hold_days": 3,
-      "composite": 54.66839999999999
-    },
-    {
-      "label": "dxy_flat + vix_falling + fomc_pre + rsi14_lt50 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + spx_down_1 + bb_above_80pct | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 82.35,
       "avg_win": 2.0,
@@ -1412,7 +1275,7 @@
       "composite": 49.136399999999995
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + vol_below_avg | tgt=1.5% stp=-2.0% hold=3d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + dxy_flat | tgt=1.5% stp=-2.0% hold=3d",
       "trades": 17,
       "win_rate": 82.35,
       "avg_win": 1.5,
@@ -1427,7 +1290,37 @@
       "composite": 51.9916
     },
     {
-      "label": "bb_above_80pct + above_sma200 + month_q4 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + vix_gt25 + dxy_flat + dow_fri | tgt=1.0% stp=-1.5% hold=2d",
+      "trades": 17,
+      "win_rate": 82.35,
+      "avg_win": 1.0,
+      "avg_loss": -1.5,
+      "expectancy": 0.5588,
+      "cum_return": 9.85,
+      "max_drawdown": 1.5,
+      "sharpe": 6.582,
+      "target_pct": 0.01,
+      "stop_pct": -0.015,
+      "hold_days": 2,
+      "composite": 51.7392
+    },
+    {
+      "label": "vol_below_avg + vix_gt25 + dxy_flat + dow_fri | tgt=1.5% stp=-2.0% hold=3d",
+      "trades": 17,
+      "win_rate": 82.35,
+      "avg_win": 1.5,
+      "avg_loss": -1.5961,
+      "expectancy": 0.9536,
+      "cum_return": 17.37,
+      "max_drawdown": 2.0,
+      "sharpe": 7.257,
+      "target_pct": 0.015,
+      "stop_pct": -0.02,
+      "hold_days": 3,
+      "composite": 54.66839999999999
+    },
+    {
+      "label": "fomc_pre + vix_falling + rsi14_lt50 + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 82.35,
       "avg_win": 2.0,
@@ -1442,7 +1335,7 @@
       "composite": 49.136399999999995
     },
     {
-      "label": "dow_fri + no_eclipse + no_earnings + vol_low | tgt=0.5% stp=-1.0% hold=1d",
+      "label": "no_eclipse + no_earnings + vol_low + dow_fri | tgt=0.5% stp=-1.0% hold=1d",
       "trades": 22,
       "win_rate": 81.82,
       "avg_win": 0.4763,
@@ -1457,7 +1350,7 @@
       "composite": 49.4136
     },
     {
-      "label": "dow_tue_thu + bb_above_80pct + above_sma200 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + dow_tue_thu + vix_gt25 + bb_above_80pct | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 27,
       "win_rate": 81.48,
       "avg_win": 1.8575,
@@ -1474,7 +1367,7 @@
   ],
   "holy_grail": [
     {
-      "label": "dow_tue_thu + vix_falling + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vol_below_avg + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 21,
       "win_rate": 95.24,
       "avg_win": 1.9182,
@@ -1638,7 +1531,7 @@
       "composite": 70.694
     },
     {
-      "label": "near_new_moon + month_q4 + rsi14_lt50 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + rsi14_lt50 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 93.75,
       "avg_win": 2.0,
@@ -1767,7 +1660,7 @@
       "composite": 67.24600000000001
     },
     {
-      "label": "dow_tue_thu + vix_lt15 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 90.0,
       "avg_win": 2.0,
@@ -1924,7 +1817,7 @@
       "composite": 60.198
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 88.24,
       "avg_win": 2.0,
@@ -1939,7 +1832,7 @@
       "composite": 56.7872
     },
     {
-      "label": "month_q4 + vix_gt25 + vol_below_avg + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + vol_below_avg + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 88.0,
       "avg_win": 2.0,
@@ -2131,7 +2024,7 @@
       "composite": 58.034000000000006
     },
     {
-      "label": "dxy_flat + dow_tue_thu + macd_bullish + vol_low | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "macd_bullish + dow_tue_thu + vol_low + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 87.5,
       "avg_win": 2.0,
@@ -2260,7 +2153,7 @@
       "composite": 55.506
     },
     {
-      "label": "dxy_flat + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + vix_gt25 + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -2275,129 +2168,7 @@
       "composite": 56.79600000000001
     },
     {
-      "label": "dxy_flat + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 15,
-      "win_rate": 86.67,
-      "avg_win": 2.0,
-      "avg_loss": -3.0,
-      "expectancy": 1.3333,
-      "cum_return": 21.72,
-      "max_drawdown": 3.0,
-      "sharpe": 5.569,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "trade_log": [
-        {
-          "date": "2024-11-02",
-          "entry": 69289.27,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-11-03",
-          "entry": 68741.12,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-03",
-          "entry": 96002.16,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 1
-        },
-        {
-          "date": "2024-12-28",
-          "entry": 95163.93,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-12-29",
-          "entry": 93530.23,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-30",
-          "entry": 92643.21,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-10-19",
-          "entry": 108666.71,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2025-10-20",
-          "entry": 110588.93,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-11-21",
-          "entry": 85090.69,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-11-22",
-          "entry": 84648.36,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-17",
-          "entry": 86143.76,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 2
-        },
-        {
-          "date": "2025-12-18",
-          "entry": 85462.51,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 3
-        },
-        {
-          "date": "2025-12-19",
-          "entry": 88103.38,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-12-20",
-          "entry": 88344.0,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-21",
-          "entry": 88621.75,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        }
-      ],
-      "composite": 54.139199999999995
-    },
-    {
-      "label": "dow_tue_thu + bb_above_80pct + above_sma200 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + dow_tue_thu + spx_down_1 + bb_above_80pct | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -2519,7 +2290,129 @@
       "composite": 54.139199999999995
     },
     {
-      "label": "dxy_flat + bb_above_80pct + fomc_pre + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 86.67,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.3333,
+      "cum_return": 21.72,
+      "max_drawdown": 3.0,
+      "sharpe": 5.569,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-11-02",
+          "entry": 69289.27,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-11-03",
+          "entry": 68741.12,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-03",
+          "entry": 96002.16,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 1
+        },
+        {
+          "date": "2024-12-28",
+          "entry": 95163.93,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-12-29",
+          "entry": 93530.23,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-30",
+          "entry": 92643.21,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-10-19",
+          "entry": 108666.71,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2025-10-20",
+          "entry": 110588.93,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-11-21",
+          "entry": 85090.69,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-11-22",
+          "entry": 84648.36,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-17",
+          "entry": 86143.76,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 2
+        },
+        {
+          "date": "2025-12-18",
+          "entry": 85462.51,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 3
+        },
+        {
+          "date": "2025-12-19",
+          "entry": 88103.38,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-12-20",
+          "entry": 88344.0,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-21",
+          "entry": 88621.75,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        }
+      ],
+      "composite": 54.139199999999995
+    },
+    {
+      "label": "no_earnings + fomc_pre + bb_above_80pct + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 1.7953,
@@ -2531,117 +2424,10 @@
       "target_pct": 0.02,
       "stop_pct": -0.03,
       "hold_days": 5,
-      "trade_log": [
-        {
-          "date": "2024-09-20",
-          "entry": 63192.98,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2024-09-21",
-          "entry": 63394.84,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2024-09-22",
-          "entry": 63648.71,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-09-23",
-          "entry": 63329.8,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2024-12-13",
-          "entry": 101459.26,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2024-12-14",
-          "entry": 101372.97,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2024-12-15",
-          "entry": 104298.7,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-16",
-          "entry": 106029.72,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-05-09",
-          "entry": 102970.85,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-05-10",
-          "entry": 104696.33,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2025-05-11",
-          "entry": 104106.36,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 6
-        },
-        {
-          "date": "2025-09-12",
-          "entry": 116101.58,
-          "return_pct": 0.316,
-          "reason": "expire",
-          "dow": 4
-        },
-        {
-          "date": "2025-09-13",
-          "entry": 115950.51,
-          "return_pct": 1.0234,
-          "reason": "expire",
-          "dow": 5
-        },
-        {
-          "date": "2025-09-14",
-          "entry": 115407.66,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2025-09-15",
-          "entry": 115444.88,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        }
-      ],
       "composite": 51.974000000000004
     },
     {
-      "label": "vix_lt15 + near_full_moon + above_sma200 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
+      "label": "above_sma200 + near_full_moon + vix_lt15 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 1.4488,
@@ -2656,7 +2442,7 @@
       "composite": 56.93600000000001
     },
     {
-      "label": "macd_bullish + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "macd_bullish + vol_below_avg + rsi14_gt60 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 85.0,
       "avg_win": 1.8156,
@@ -2686,7 +2472,7 @@
       "composite": 53.65720000000001
     },
     {
-      "label": "near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 19,
       "win_rate": 84.21,
       "avg_win": 2.0,
@@ -2701,7 +2487,7 @@
       "composite": 51.75399999999999
     },
     {
-      "label": "vix_gt25 + vol_below_avg + dxy_down + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 19,
       "win_rate": 84.21,
       "avg_win": 1.8977,
@@ -2716,7 +2502,7 @@
       "composite": 50.74159999999999
     },
     {
-      "label": "above_sma200 + dxy_down + rsi14_gt65 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + spx_down_1 + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 84.0,
       "avg_win": 2.0,
@@ -2731,7 +2517,7 @@
       "composite": 52.696000000000005
     },
     {
-      "label": "macd_bullish + above_sma200 + month_q4 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + macd_bullish + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 36,
       "win_rate": 83.33,
       "avg_win": 1.9501,
@@ -2746,7 +2532,7 @@
       "composite": 56.071600000000004
     },
     {
-      "label": "vix_falling + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 18,
       "win_rate": 83.33,
       "avg_win": 2.0,
@@ -2761,7 +2547,7 @@
       "composite": 50.488800000000005
     },
     {
-      "label": "above_sma200 + month_q4 + vix_gt25 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + vol_below_avg + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 18,
       "win_rate": 83.33,
       "avg_win": 1.9002,
@@ -2776,14 +2562,14 @@
       "composite": 51.101200000000006
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 23,
       "win_rate": 82.61,
       "avg_win": 2.0,
       "avg_loss": -3.0,
       "expectancy": 1.1304,
       "cum_return": 28.97,
-      "max_drawdown": 8.73,
+      "max_drawdown": 6.91,
       "sharpe": 4.235,
       "target_pct": 0.02,
       "stop_pct": -0.03,
@@ -2793,7 +2579,7 @@
   ],
   "top_by_expectancy": [
     {
-      "label": "near_new_moon + month_q4 + rsi14_lt50 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + rsi14_lt50 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 93.75,
       "avg_win": 2.0,
@@ -2922,7 +2708,7 @@
       "composite": 67.24600000000001
     },
     {
-      "label": "dow_tue_thu + vix_falling + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vol_below_avg + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 21,
       "win_rate": 95.24,
       "avg_win": 1.9182,
@@ -3086,7 +2872,7 @@
       "composite": 70.694
     },
     {
-      "label": "near_full_moon + near_eclipse | tgt=3.0% stp=-2.0% hold=5d",
+      "label": "near_eclipse + near_full_moon | tgt=3.0% stp=-2.0% hold=5d",
       "trades": 19,
       "win_rate": 73.68,
       "avg_win": 2.9402,
@@ -3236,7 +3022,7 @@
       "composite": 50.4988
     },
     {
-      "label": "dow_tue_thu + vix_lt15 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 90.0,
       "avg_win": 2.0,
@@ -3393,7 +3179,7 @@
       "composite": 60.198
     },
     {
-      "label": "dxy_flat + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + vix_gt25 + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -3408,7 +3194,7 @@
       "composite": 56.79600000000001
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 88.24,
       "avg_win": 2.0,
@@ -3423,7 +3209,7 @@
       "composite": 56.7872
     },
     {
-      "label": "month_q4 + vix_gt25 + vol_below_avg + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + vol_below_avg + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 88.0,
       "avg_win": 2.0,
@@ -3615,7 +3401,7 @@
       "composite": 58.034000000000006
     },
     {
-      "label": "dxy_flat + dow_tue_thu + macd_bullish + vol_low | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "macd_bullish + dow_tue_thu + vol_low + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 87.5,
       "avg_win": 2.0,
@@ -3744,129 +3530,7 @@
       "composite": 55.506
     },
     {
-      "label": "dxy_flat + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
-      "trades": 15,
-      "win_rate": 86.67,
-      "avg_win": 2.0,
-      "avg_loss": -3.0,
-      "expectancy": 1.3333,
-      "cum_return": 21.72,
-      "max_drawdown": 3.0,
-      "sharpe": 5.569,
-      "target_pct": 0.02,
-      "stop_pct": -0.03,
-      "hold_days": 5,
-      "trade_log": [
-        {
-          "date": "2024-11-02",
-          "entry": 69289.27,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-11-03",
-          "entry": 68741.12,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-03",
-          "entry": 96002.16,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 1
-        },
-        {
-          "date": "2024-12-28",
-          "entry": 95163.93,
-          "return_pct": -3.0,
-          "reason": "stop",
-          "dow": 5
-        },
-        {
-          "date": "2024-12-29",
-          "entry": 93530.23,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2024-12-30",
-          "entry": 92643.21,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-10-19",
-          "entry": 108666.71,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        },
-        {
-          "date": "2025-10-20",
-          "entry": 110588.93,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 0
-        },
-        {
-          "date": "2025-11-21",
-          "entry": 85090.69,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-11-22",
-          "entry": 84648.36,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-17",
-          "entry": 86143.76,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 2
-        },
-        {
-          "date": "2025-12-18",
-          "entry": 85462.51,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 3
-        },
-        {
-          "date": "2025-12-19",
-          "entry": 88103.38,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 4
-        },
-        {
-          "date": "2025-12-20",
-          "entry": 88344.0,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 5
-        },
-        {
-          "date": "2025-12-21",
-          "entry": 88621.75,
-          "return_pct": 2.0,
-          "reason": "target",
-          "dow": 6
-        }
-      ],
-      "composite": 54.139199999999995
-    },
-    {
-      "label": "dow_tue_thu + bb_above_80pct + above_sma200 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + dow_tue_thu + spx_down_1 + bb_above_80pct | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -3988,7 +3652,129 @@
       "composite": 54.139199999999995
     },
     {
-      "label": "macd_bullish + rsi14_lt30 | tgt=3.0% stp=-2.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
+      "trades": 15,
+      "win_rate": 86.67,
+      "avg_win": 2.0,
+      "avg_loss": -3.0,
+      "expectancy": 1.3333,
+      "cum_return": 21.72,
+      "max_drawdown": 3.0,
+      "sharpe": 5.569,
+      "target_pct": 0.02,
+      "stop_pct": -0.03,
+      "hold_days": 5,
+      "trade_log": [
+        {
+          "date": "2024-11-02",
+          "entry": 69289.27,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-11-03",
+          "entry": 68741.12,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-03",
+          "entry": 96002.16,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 1
+        },
+        {
+          "date": "2024-12-28",
+          "entry": 95163.93,
+          "return_pct": -3.0,
+          "reason": "stop",
+          "dow": 5
+        },
+        {
+          "date": "2024-12-29",
+          "entry": 93530.23,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2024-12-30",
+          "entry": 92643.21,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-10-19",
+          "entry": 108666.71,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        },
+        {
+          "date": "2025-10-20",
+          "entry": 110588.93,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 0
+        },
+        {
+          "date": "2025-11-21",
+          "entry": 85090.69,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-11-22",
+          "entry": 84648.36,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-17",
+          "entry": 86143.76,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 2
+        },
+        {
+          "date": "2025-12-18",
+          "entry": 85462.51,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 3
+        },
+        {
+          "date": "2025-12-19",
+          "entry": 88103.38,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 4
+        },
+        {
+          "date": "2025-12-20",
+          "entry": 88344.0,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 5
+        },
+        {
+          "date": "2025-12-21",
+          "entry": 88621.75,
+          "return_pct": 2.0,
+          "reason": "target",
+          "dow": 6
+        }
+      ],
+      "composite": 54.139199999999995
+    },
+    {
+      "label": "rsi14_lt30 + macd_bullish | tgt=3.0% stp=-2.0% hold=5d",
       "trades": 15,
       "win_rate": 66.67,
       "avg_win": 3.0,
@@ -4018,7 +3804,7 @@
       "composite": 43.2496
     },
     {
-      "label": "macd_bullish + above_sma200 + month_q4 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + macd_bullish + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 36,
       "win_rate": 83.33,
       "avg_win": 1.9501,
@@ -4063,7 +3849,7 @@
       "composite": 53.65720000000001
     },
     {
-      "label": "near_full_moon + near_eclipse | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_eclipse + near_full_moon | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 19,
       "win_rate": 84.21,
       "avg_win": 2.0,
@@ -4078,7 +3864,7 @@
       "composite": 51.75399999999999
     },
     {
-      "label": "above_sma200 + dxy_down + rsi14_gt65 + spx_down_1 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + spx_down_1 + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 84.0,
       "avg_win": 2.0,
@@ -4093,7 +3879,7 @@
       "composite": 52.696000000000005
     },
     {
-      "label": "macd_bullish + near_full_moon + rsi14_lt50 | tgt=2.0% stp=-2.0% hold=3d",
+      "label": "near_full_moon + macd_bullish + rsi14_lt50 | tgt=2.0% stp=-2.0% hold=3d",
       "trades": 15,
       "win_rate": 80.0,
       "avg_win": 2.0,
@@ -4108,7 +3894,7 @@
       "composite": 53.547999999999995
     },
     {
-      "label": "macd_bullish + vix_gt25 + dxy_down + vol_low | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "macd_bullish + dxy_down + vix_gt25 + vol_low | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 80.0,
       "avg_win": 2.0,
@@ -4123,7 +3909,7 @@
       "composite": 49.1896
     },
     {
-      "label": "vix_falling + near_new_moon + month_q4 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 18,
       "win_rate": 83.33,
       "avg_win": 2.0,
@@ -4140,7 +3926,7 @@
   ],
   "top_by_composite": [
     {
-      "label": "dow_tue_thu + vix_falling + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vol_below_avg + vix_falling | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 21,
       "win_rate": 95.24,
       "avg_win": 1.9182,
@@ -4304,7 +4090,7 @@
       "composite": 70.694
     },
     {
-      "label": "near_new_moon + month_q4 + rsi14_lt50 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + near_new_moon + no_earnings + rsi14_lt50 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 16,
       "win_rate": 93.75,
       "avg_win": 2.0,
@@ -4433,7 +4219,7 @@
       "composite": 67.24600000000001
     },
     {
-      "label": "dow_tue_thu + vix_lt15 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + dow_tue_thu + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 20,
       "win_rate": 90.0,
       "avg_win": 2.0,
@@ -4590,7 +4376,7 @@
       "composite": 60.198
     },
     {
-      "label": "macd_bullish + above_sma200 + month_q4 + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + macd_bullish + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 148,
       "win_rate": 75.68,
       "avg_win": 2.0,
@@ -4817,7 +4603,7 @@
       "composite": 59.076800000000006
     },
     {
-      "label": "month_q4 + vix_gt25 + vol_below_avg + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "month_q4 + vol_below_avg + dxy_down + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 25,
       "win_rate": 88.0,
       "avg_win": 2.0,
@@ -5009,7 +4795,7 @@
       "composite": 58.034000000000006
     },
     {
-      "label": "dxy_flat + above_sma200 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 106,
       "win_rate": 74.53,
       "avg_win": 1.9793,
@@ -5236,7 +5022,7 @@
       "composite": 57.5072
     },
     {
-      "label": "vix_lt15 + above_sma200 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 86,
       "win_rate": 76.74,
       "avg_win": 2.0,
@@ -5463,7 +5249,7 @@
       "composite": 57.370000000000005
     },
     {
-      "label": "dxy_flat + vix_falling + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + vol_below_avg + vix_falling + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 64,
       "win_rate": 81.25,
       "avg_win": 1.9685,
@@ -5690,7 +5476,7 @@
       "composite": 56.99759999999999
     },
     {
-      "label": "vix_lt15 + near_full_moon + above_sma200 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
+      "label": "above_sma200 + near_full_moon + vix_lt15 + dxy_down | tgt=1.5% stp=-2.0% hold=3d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 1.4488,
@@ -5705,7 +5491,7 @@
       "composite": 56.93600000000001
     },
     {
-      "label": "rsi14_gt65 + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vix_lt15 + rsi14_gt65 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 90,
       "win_rate": 75.56,
       "avg_win": 2.0,
@@ -5932,7 +5718,7 @@
       "composite": 56.93000000000001
     },
     {
-      "label": "no_eclipse + vix_lt15 + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "no_eclipse + rsi14_gt65 + vix_lt15 + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 90,
       "win_rate": 75.56,
       "avg_win": 2.0,
@@ -5947,7 +5733,7 @@
       "composite": 56.93000000000001
     },
     {
-      "label": "vix_lt15 + vol_below_avg + rsi14_gt65 + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + vix_lt15 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 90,
       "win_rate": 75.56,
       "avg_win": 2.0,
@@ -5962,7 +5748,7 @@
       "composite": 56.93000000000001
     },
     {
-      "label": "vix_lt15 + vol_below_avg + rsi14_gt65 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + vix_lt15 + vol_below_avg + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 90,
       "win_rate": 75.56,
       "avg_win": 2.0,
@@ -5977,7 +5763,7 @@
       "composite": 56.93000000000001
     },
     {
-      "label": "dxy_flat + vix_gt25 + vol_below_avg + rsi14_gt60 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "vol_below_avg + rsi14_gt60 + vix_gt25 + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 15,
       "win_rate": 86.67,
       "avg_win": 2.0,
@@ -5992,7 +5778,7 @@
       "composite": 56.79600000000001
     },
     {
-      "label": "dxy_flat + vix_lt15 + near_full_moon + vol_below_avg | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "near_full_moon + vix_lt15 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 17,
       "win_rate": 88.24,
       "avg_win": 2.0,
@@ -6007,7 +5793,7 @@
       "composite": 56.7872
     },
     {
-      "label": "macd_bullish + month_q4 + dxy_down + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + month_q4 + macd_bullish + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 107,
       "win_rate": 72.9,
       "avg_win": 2.0,
@@ -6022,7 +5808,7 @@
       "composite": 56.1908
     },
     {
-      "label": "above_sma200 + vol_below_avg + dxy_down + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + rsi14_gt65 + vol_below_avg + dxy_down | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 109,
       "win_rate": 73.39,
       "avg_win": 1.9591,
@@ -6037,7 +5823,7 @@
       "composite": 56.0788
     },
     {
-      "label": "macd_bullish + above_sma200 + month_q4 + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "above_sma200 + month_q4 + macd_bullish + vix_gt25 | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 36,
       "win_rate": 83.33,
       "avg_win": 1.9501,
@@ -6052,7 +5838,7 @@
       "composite": 56.071600000000004
     },
     {
-      "label": "dxy_flat + vol_below_avg + rsi14_gt65 + no_earnings | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "rsi14_gt65 + vol_below_avg + no_earnings + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 106,
       "win_rate": 72.64,
       "avg_win": 1.9787,
@@ -6067,7 +5853,7 @@
       "composite": 55.992
     },
     {
-      "label": "dxy_flat + no_eclipse + vol_below_avg + rsi14_gt65 | tgt=2.0% stp=-3.0% hold=5d",
+      "label": "no_eclipse + rsi14_gt65 + vol_below_avg + dxy_flat | tgt=2.0% stp=-3.0% hold=5d",
       "trades": 109,
       "win_rate": 72.48,
       "avg_win": 1.9793,
