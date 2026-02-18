@@ -76,9 +76,15 @@ interface AlphaBacktest {
   win_rate: number; trades: number; expectancy: number; sharpe: number;
   max_drawdown: number; cum_return: number; target_pct: number; stop_pct: number; hold_days: number;
 }
+interface AlphaTiming {
+  entry_dubai: string; entry_utc: string; entry_ny: string;
+  exit_dubai: string; exit_utc: string; exit_ny: string;
+  buy_window_active: boolean; window_note: string;
+}
 interface AlphaSetup {
   id: string; name: string; description: string; signal: string; confidence: number;
-  conditions: AlphaCond[]; met_count: number; total_count: number; backtest: AlphaBacktest;
+  conditions: AlphaCond[]; met_count: number; total_count: number;
+  timing: AlphaTiming; backtest: AlphaBacktest;
 }
 interface AlphaData {
   overall_signal: string; best_setup: string; best_confidence: number;
@@ -484,6 +490,7 @@ export default function BTCPage() {
         .cond-desc { font-size:12px; color:var(--muted); margin-top:2px; }
         .cond-val { font-size:13px; font-variant-numeric:tabular-nums; }
         .cond-edge { font-size:12px; font-weight:600; }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
         @media(max-width:1100px) { .alpha-grid { grid-template-columns:1fr !important; } }
         @media(max-width:900px) { .grid-top { grid-template-columns:repeat(2,1fr); } .grid-2,.steps { grid-template-columns:1fr; } .cond-row { grid-template-columns:28px 1fr; } .cond-desc,.cond-header:nth-child(n+3) { display:none; } }
       `}</style>
@@ -563,11 +570,44 @@ export default function BTCPage() {
                     </div>
 
                     {/* Risk params */}
-                    <div style={{ display: 'flex', gap: 8, marginBottom: 12, fontSize: 11 }}>
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 8, fontSize: 11, flexWrap: 'wrap' }}>
                       <span style={{ background: 'rgba(34,197,94,.15)', color: 'var(--green)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>TP: +{b.target_pct}%</span>
                       <span style={{ background: 'rgba(239,68,68,.15)', color: 'var(--red)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>SL: {b.stop_pct}%</span>
                       <span style={{ background: 'rgba(148,163,184,.1)', color: 'var(--muted)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Hold: {b.hold_days}d</span>
                       <span style={{ background: 'rgba(168,85,247,.1)', color: 'var(--purple)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Exp: +{b.expectancy}%</span>
+                    </div>
+
+                    {/* Trade Timing */}
+                    <div style={{
+                      marginBottom: 12, padding: 10, borderRadius: 8, fontSize: 11,
+                      background: s.timing.buy_window_active
+                        ? 'linear-gradient(135deg, rgba(34,197,94,.15), rgba(6,182,212,.1))'
+                        : 'rgba(30,41,59,.4)',
+                      border: s.timing.buy_window_active ? '1px solid rgba(34,197,94,.3)' : '1px solid rgba(30,41,59,.5)',
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                        <span style={{ fontWeight: 700, color: s.timing.buy_window_active ? 'var(--green)' : 'var(--text)', fontSize: 12 }}>
+                          {s.timing.buy_window_active ? 'BUY WINDOW OPEN' : 'Trade Timing'}
+                        </span>
+                        {s.timing.buy_window_active && (
+                          <span style={{
+                            width: 8, height: 8, borderRadius: '50%', background: 'var(--green)',
+                            boxShadow: '0 0 6px var(--green)', display: 'inline-block',
+                            animation: 'pulse 1.5s infinite',
+                          }} />
+                        )}
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, color: 'var(--muted)' }}>
+                        <div>Entry (Dubai): <span style={{ color: 'var(--amber)', fontWeight: 600 }}>{s.timing.entry_dubai}</span></div>
+                        <div>Exit (Dubai): <span style={{ color: 'var(--cyan)', fontWeight: 600 }}>{s.timing.exit_dubai}</span></div>
+                        <div>Entry (UTC): <span style={{ color: 'var(--text)' }}>{s.timing.entry_utc}</span></div>
+                        <div>Exit (UTC): <span style={{ color: 'var(--text)' }}>{s.timing.exit_utc}</span></div>
+                        <div>Entry (NY): <span style={{ color: 'var(--text)' }}>{s.timing.entry_ny}</span></div>
+                        <div>Exit (NY): <span style={{ color: 'var(--text)' }}>{s.timing.exit_ny}</span></div>
+                      </div>
+                      <div style={{ marginTop: 6, fontSize: 10, color: s.timing.buy_window_active ? 'var(--green)' : 'var(--muted)', fontStyle: 'italic' }}>
+                        {s.timing.window_note}
+                      </div>
                     </div>
 
                     {/* Conditions */}

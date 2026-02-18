@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTC Dubai Session Trader</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --card: #111827;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+      --cyan: #06b6d4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .header h1 span { color: var(--amber); }
+    .header .clocks { display: flex; gap: 24px; font-size: 13px; color: var(--muted); }
+    .header .clocks .time-val { font-size: 18px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+
+    .container { max-width: 1440px; margin: 0 auto; padding: 24px; }
+
+    .grid-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .card-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .card-value {
+      font-size: 32px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .card-sub { font-size: 14px; margin-top: 4px; }
+    .card-value.green { color: var(--green); }
+    .card-value.red { color: var(--red); }
+
+    .signal-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .signal-badge.buy { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.3); }
+    .signal-badge.sell { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.3); }
+    .signal-badge.neutral { background: rgba(148,163,184,.1); color: var(--muted); border: 1px solid rgba(148,163,184,.2); }
+    .signal-badge.wait { background: rgba(245,158,11,.15); color: var(--amber); border: 1px solid rgba(245,158,11,.3); }
+
+    .section-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .section-title .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; color: var(--muted); font-weight: 500; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 12px; border-bottom: 1px solid rgba(30,41,59,.5); font-variant-numeric: tabular-nums; }
+    tr:hover td { background: rgba(59,130,246,.03); }
+
+    .bar-cell { display: flex; align-items: center; gap: 6px; }
+    .bar { height: 6px; border-radius: 3px; min-width: 2px; }
+    .bar.green { background: var(--green); }
+    .bar.red { background: var(--red); }
+
+    .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(30,41,59,.5); }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-label { color: var(--muted); font-size: 13px; }
+    .metric-value { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    .chart-container { position: relative; height: 280px; }
+
+    .loading { color: var(--muted); font-size: 14px; padding: 40px; text-align: center; }
+    .loading::after { content: ''; animation: dots 1.5s infinite; }
+    @keyframes dots { 0% { content: ''; } 33% { content: '.'; } 66% { content: '..'; } 100% { content: '...'; } }
+
+    .heatmap-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+    .heat-cell {
+      padding: 8px 4px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .heat-cell .label { font-size: 10px; color: rgba(255,255,255,.7); margin-bottom: 2px; }
+
+    .strategy-box {
+      background: linear-gradient(135deg, rgba(34,197,94,.08) 0%, rgba(6,182,212,.08) 100%);
+      border: 1px solid rgba(34,197,94,.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .strategy-box h2 { font-size: 20px; margin-bottom: 12px; }
+    .strategy-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+    .step { text-align: center; padding: 16px; background: rgba(0,0,0,.2); border-radius: 8px; }
+    .step .num { font-size: 28px; font-weight: 700; color: var(--cyan); }
+    .step .desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .step .time { font-size: 16px; font-weight: 600; margin-top: 4px; }
+
+    @media (max-width: 900px) {
+      .grid-top { grid-template-columns: repeat(2, 1fr); }
+      .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+      .strategy-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>BTC <span>Dubai Session</span> Trader</h1>
+  <div class="clocks">
+    <div>
+      <div>Dubai (GST)</div>
+      <div class="time-val" id="clock-dubai">--:--:--</div>
+    </div>
+    <div>
+      <div>New York (ET)</div>
+      <div class="time-val" id="clock-ny">--:--:--</div>
+    </div>
+    <div>
+      <div>UTC</div>
+      <div class="time-val" id="clock-utc">--:--:--</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Strategy Summary -->
+  <div class="strategy-box">
+    <h2>Strategy: US Session Close &rarr; Dubai Morning Recovery</h2>
+    <p style="color:var(--muted);font-size:14px;">Buy BTC during late US session weakness, sell during Asian/Dubai early morning recovery. Backtested over 722 trades (2 years).</p>
+    <div class="strategy-steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div class="desc">BUY at end of US session</div>
+        <div class="time">12:00 AM Dubai / 8 PM UTC</div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="desc">HOLD for ~6 hours</div>
+        <div class="time">Asian session recovery</div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="desc">SELL at Dubai morning</div>
+        <div class="time">6:00 AM Dubai / 2 AM UTC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top metrics -->
+  <div class="grid-top">
+    <div class="card">
+      <div class="card-title">BTC / USD</div>
+      <div class="card-value" id="btc-price">--</div>
+      <div class="card-sub" id="btc-change">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">RSI (14)</div>
+      <div class="card-value" id="rsi-value">--</div>
+      <div class="card-sub" id="rsi-signal">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">M2 Money Supply</div>
+      <div class="card-value" id="m2-value">--</div>
+      <div class="card-sub" id="m2-change">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">DXY (Dollar Index)</div>
+      <div class="card-value" id="dxy-value">--</div>
+      <div class="card-sub" id="dxy-change">--</div>
+    </div>
+  </div>
+
+  <!-- Macro row -->
+  <div class="grid-top">
+    <div class="card">
+      <div class="card-title">Fed Funds Rate</div>
+      <div class="card-value" id="ffr-value" style="font-size:28px">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Fed Balance Sheet</div>
+      <div class="card-value" id="fed-bs" style="font-size:28px">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Yield Curve (10Y-2Y)</div>
+      <div class="card-value" id="yc-value" style="font-size:28px">--</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Trade Signal</div>
+      <div id="trade-signal" style="margin-top:8px"><span class="signal-badge neutral">LOADING</span></div>
+      <div class="card-sub" id="signal-reason" style="margin-top:8px">--</div>
+    </div>
+  </div>
+
+  <!-- Technical indicators -->
+  <div class="grid-2col">
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--blue)"></span> Technical Indicators</div>
+      <div id="technicals-list"><div class="loading">Loading</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--purple)"></span> M2 vs BTC (10 Years)</div>
+      <div class="chart-container"><canvas id="m2Chart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Strategy backtest -->
+  <div class="grid-2col">
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--green)"></span> Strategy Performance</div>
+      <div id="strategy-summary"><div class="loading">Loading backtest</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--cyan)"></span> Equity Curve ($10,000 start)</div>
+      <div class="chart-container"><canvas id="equityChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Day/Month breakdown -->
+  <div class="grid-2col">
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--amber)"></span> By Day of Week</div>
+      <div id="dow-table"><div class="loading">Loading</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--amber)"></span> By Month</div>
+      <div id="month-table"><div class="loading">Loading</div></div>
+    </div>
+  </div>
+
+  <!-- Session heatmap & Correlations -->
+  <div class="grid-2col">
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--red)"></span> Hourly Session Heatmap (Avg Return %)</div>
+      <div id="session-heatmap"><div class="loading">Loading</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="dot" style="background:var(--purple)"></span> BTC Correlations (30-day rolling)</div>
+      <div class="chart-container"><canvas id="corrChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Recent trades -->
+  <div class="card" style="margin-bottom:24px">
+    <div class="section-title"><span class="dot" style="background:var(--blue)"></span> Recent 30 Trades</div>
+    <div id="recent-trades"><div class="loading">Loading</div></div>
+  </div>
+
+</div>
+
+<script>
+const API = '';
+
+// Clocks
+function updateClocks() {
+  const now = new Date();
+  const fmt = (d, tz) => d.toLocaleTimeString('en-GB', { timeZone: tz, hour12: false });
+  document.getElementById('clock-dubai').textContent = fmt(now, 'Asia/Dubai');
+  document.getElementById('clock-ny').textContent = fmt(now, 'America/New_York');
+  document.getElementById('clock-utc').textContent = fmt(now, 'UTC');
+}
+setInterval(updateClocks, 1000);
+updateClocks();
+
+function pctColor(v) { return v >= 0 ? 'var(--green)' : 'var(--red)'; }
+function pctSign(v) { return v >= 0 ? '+' + v.toFixed(2) + '%' : v.toFixed(2) + '%'; }
+
+// Live data
+async function loadLive() {
+  try {
+    const r = await fetch(API + '/api/live');
+    const d = await r.json();
+    document.getElementById('btc-price').textContent = '$' + Number(d.price).toLocaleString();
+    document.getElementById('btc-price').className = 'card-value ' + (d.change_pct >= 0 ? 'green' : 'red');
+    document.getElementById('btc-change').innerHTML = `<span style="color:${pctColor(d.change_pct)}">${pctSign(d.change_pct)}</span> (24h)`;
+
+    document.getElementById('rsi-value').textContent = d.rsi_14;
+    const rsiEl = document.getElementById('rsi-value');
+    const rsiSig = document.getElementById('rsi-signal');
+    if (d.rsi_14 > 70) { rsiEl.className = 'card-value red'; rsiSig.innerHTML = '<span class="signal-badge sell">Overbought</span>'; }
+    else if (d.rsi_14 < 30) { rsiEl.className = 'card-value green'; rsiSig.innerHTML = '<span class="signal-badge buy">Oversold</span>'; }
+    else if (d.rsi_14 < 40) { rsiEl.className = 'card-value'; rsiSig.innerHTML = '<span class="signal-badge wait">Approaching Oversold</span>'; }
+    else if (d.rsi_14 > 60) { rsiEl.className = 'card-value'; rsiSig.innerHTML = '<span class="signal-badge wait">Approaching Overbought</span>'; }
+    else { rsiEl.className = 'card-value'; rsiSig.innerHTML = '<span class="signal-badge neutral">Neutral</span>'; }
+
+    const techHTML = `
+      <div class="metric-row"><span class="metric-label">MACD</span><span class="metric-value" style="color:${d.macd >= 0 ? 'var(--green)' : 'var(--red)'}">${d.macd}</span></div>
+      <div class="metric-row"><span class="metric-label">MACD Signal</span><span class="metric-value">${d.macd_signal}</span></div>
+      <div class="metric-row"><span class="metric-label">MACD Histogram</span><span class="metric-value" style="color:${d.macd_hist >= 0 ? 'var(--green)' : 'var(--red)'}">${d.macd_hist}</span></div>
+      <div class="metric-row"><span class="metric-label">Bollinger Upper</span><span class="metric-value">$${Number(d.bb_upper).toLocaleString()}</span></div>
+      <div class="metric-row"><span class="metric-label">Bollinger Mid (SMA20)</span><span class="metric-value">$${Number(d.bb_mid).toLocaleString()}</span></div>
+      <div class="metric-row"><span class="metric-label">Bollinger Lower</span><span class="metric-value">$${Number(d.bb_lower).toLocaleString()}</span></div>
+      <div class="metric-row"><span class="metric-label">EMA 20</span><span class="metric-value">$${Number(d.ema_20).toLocaleString()}</span></div>
+      <div class="metric-row"><span class="metric-label">EMA 50</span><span class="metric-value">$${Number(d.ema_50).toLocaleString()}</span></div>
+      <div class="metric-row"><span class="metric-label">SMA 200</span><span class="metric-value">${d.sma_200 ? '$' + Number(d.sma_200).toLocaleString() : 'N/A'}</span></div>
+    `;
+    document.getElementById('technicals-list').innerHTML = techHTML;
+
+    generateSignal(d);
+  } catch(e) { console.error('Live:', e); }
+}
+
+function generateSignal(d) {
+  const el = document.getElementById('trade-signal');
+  const reason = document.getElementById('signal-reason');
+  let signals = 0;
+  let reasons = [];
+
+  if (d.rsi_14 < 40) { signals++; reasons.push('RSI < 40 (weakness)'); }
+  if (d.macd_hist < 0) { signals++; reasons.push('MACD bearish'); }
+  if (d.price < d.bb_mid) { signals++; reasons.push('Below BB midline'); }
+  if (d.price < d.ema_20) { signals++; reasons.push('Below EMA20'); }
+
+  const now = new Date();
+  const dubaiHour = parseInt(now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Dubai', hour: 'numeric', hour12: false }));
+  const inWindow = dubaiHour >= 23 || dubaiHour < 1;
+
+  if (signals >= 3 && inWindow) {
+    el.innerHTML = '<span class="signal-badge buy">BUY WINDOW ACTIVE</span>';
+    reason.innerHTML = reasons.join(' + ') + ' | Dubai buy window open';
+  } else if (signals >= 3) {
+    el.innerHTML = '<span class="signal-badge wait">WAIT FOR 12AM DUBAI</span>';
+    reason.innerHTML = reasons.join(' + ') + ' | Conditions met, wait for entry window';
+  } else if (signals >= 2) {
+    el.innerHTML = '<span class="signal-badge neutral">MIXED SIGNALS</span>';
+    reason.innerHTML = reasons.join(' + ');
+  } else {
+    el.innerHTML = '<span class="signal-badge sell">NO TRADE</span>';
+    reason.innerHTML = 'Conditions not favorable';
+  }
+}
+
+// Macro data
+async function loadMacro() {
+  try {
+    const r = await fetch(API + '/api/macro');
+    const d = await r.json();
+    document.getElementById('m2-value').textContent = '$' + (d.m2_latest / 1000).toFixed(1) + 'T';
+    const m2tag = d.m2_yoy_pct > 0 ? 'green' : 'red';
+    document.getElementById('m2-change').innerHTML = `<span style="color:var(--${m2tag})">YoY: ${pctSign(d.m2_yoy_pct)}</span> | MoM: $${d.m2_change_mom}B`;
+    document.getElementById('ffr-value').textContent = d.fed_funds_rate + '%';
+    document.getElementById('fed-bs').textContent = '$' + d.fed_balance_sheet.toFixed(2) + 'T';
+    const ycVal = d.yield_curve_10y2y;
+    document.getElementById('yc-value').textContent = ycVal + '%';
+    document.getElementById('yc-value').style.color = ycVal >= 0 ? 'var(--green)' : 'var(--red)';
+
+    // M2 chart
+    if (d.m2_history) {
+      const labels = d.m2_history.filter((_, i) => i % 6 === 0).map(h => h.date.substring(0, 7));
+      const vals = d.m2_history.filter((_, i) => i % 6 === 0).map(h => h.value);
+      new Chart(document.getElementById('m2Chart'), {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{ label: 'M2 ($B)', data: vals, borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,.1)', fill: true, tension: .3, pointRadius: 0 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: { x: { ticks: { color: '#64748b', maxTicksLimit: 8 }, grid: { color: 'rgba(30,41,59,.5)' } }, y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(30,41,59,.5)' } } },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  } catch(e) { console.error('Macro:', e); }
+}
+
+// DXY
+async function loadDXY() {
+  try {
+    const r = await fetch(API + '/api/dxy');
+    const d = await r.json();
+    document.getElementById('dxy-value').textContent = d.dxy;
+    document.getElementById('dxy-change').innerHTML = `<span style="color:${pctColor(d.change_pct)}">${pctSign(d.change_pct)}</span>`;
+  } catch(e) { console.error('DXY:', e); }
+}
+
+// Strategy backtest
+async function loadStrategy() {
+  try {
+    const r = await fetch(API + '/api/strategy');
+    const d = await r.json();
+    const s = d.summary;
+    document.getElementById('strategy-summary').innerHTML = `
+      <div class="metric-row"><span class="metric-label">Total Trades</span><span class="metric-value">${s.total_trades}</span></div>
+      <div class="metric-row"><span class="metric-label">Win Rate</span><span class="metric-value" style="color:${s.win_rate > 50 ? 'var(--green)' : 'var(--red)'}">${s.win_rate}%</span></div>
+      <div class="metric-row"><span class="metric-label">W / L</span><span class="metric-value"><span style="color:var(--green)">${s.wins}W</span> / <span style="color:var(--red)">${s.losses}L</span></span></div>
+      <div class="metric-row"><span class="metric-label">Avg Return/Trade</span><span class="metric-value" style="color:${pctColor(s.avg_return)}">${pctSign(s.avg_return)}</span></div>
+      <div class="metric-row"><span class="metric-label">Cumulative Return</span><span class="metric-value" style="color:${pctColor(s.cum_return)}">${pctSign(s.cum_return)}</span></div>
+      <div class="metric-row"><span class="metric-label">Best Trade</span><span class="metric-value" style="color:var(--green)">+${s.max_win}%</span></div>
+      <div class="metric-row"><span class="metric-label">Worst Trade</span><span class="metric-value" style="color:var(--red)">${s.max_loss}%</span></div>
+      <div class="metric-row"><span class="metric-label">Annualized Sharpe</span><span class="metric-value">${s.sharpe}</span></div>
+    `;
+
+    // Equity chart
+    const eqLabels = d.equity_curve.filter((_, i) => i % 15 === 0).map(e => e.date);
+    const eqVals = d.equity_curve.filter((_, i) => i % 15 === 0).map(e => e.equity);
+    new Chart(document.getElementById('equityChart'), {
+      type: 'line',
+      data: {
+        labels: eqLabels,
+        datasets: [{ label: 'Equity ($)', data: eqVals, borderColor: '#06b6d4', backgroundColor: 'rgba(6,182,212,.1)', fill: true, tension: .3, pointRadius: 0 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { x: { ticks: { color: '#64748b', maxTicksLimit: 8 }, grid: { color: 'rgba(30,41,59,.5)' } }, y: { ticks: { color: '#64748b', callback: v => '$' + v.toLocaleString() }, grid: { color: 'rgba(30,41,59,.5)' } } },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Day of week table
+    let dowHTML = '<table><tr><th>Day</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr>';
+    d.by_day.forEach(r => {
+      dowHTML += `<tr>
+        <td><strong>${r.day}</strong></td><td>${r.trades}</td>
+        <td style="color:${r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)'}">${r.win_rate}%</td>
+        <td style="color:${pctColor(r.avg_return)}">${pctSign(r.avg_return)}</td>
+        <td><div class="bar-cell"><div class="bar ${r.cum_return >= 0 ? 'green' : 'red'}" style="width:${Math.min(Math.abs(r.cum_return) * 5, 100)}px"></div><span style="color:${pctColor(r.cum_return)}">${pctSign(r.cum_return)}</span></div></td>
+      </tr>`;
+    });
+    dowHTML += '</table>';
+    document.getElementById('dow-table').innerHTML = dowHTML;
+
+    // Month table
+    let monthHTML = '<table><tr><th>Month</th><th>Trades</th><th>Win Rate</th><th>Avg Return</th><th>Cumulative</th></tr>';
+    d.by_month.forEach(r => {
+      monthHTML += `<tr>
+        <td><strong>${r.month}</strong></td><td>${r.trades}</td>
+        <td style="color:${r.win_rate > 52 ? 'var(--green)' : r.win_rate < 48 ? 'var(--red)' : 'var(--text)'}">${r.win_rate}%</td>
+        <td style="color:${pctColor(r.avg_return)}">${pctSign(r.avg_return)}</td>
+        <td><div class="bar-cell"><div class="bar ${r.cum_return >= 0 ? 'green' : 'red'}" style="width:${Math.min(Math.abs(r.cum_return) * 3, 100)}px"></div><span style="color:${pctColor(r.cum_return)}">${pctSign(r.cum_return)}</span></div></td>
+      </tr>`;
+    });
+    monthHTML += '</table>';
+    document.getElementById('month-table').innerHTML = monthHTML;
+
+    // Recent trades
+    let recHTML = '<table><tr><th>Date</th><th>Day</th><th>Buy</th><th>Sell</th><th>Return</th></tr>';
+    d.recent_trades.reverse().forEach(t => {
+      recHTML += `<tr>
+        <td>${t.date}</td><td>${t.dow}</td>
+        <td>$${Number(t.buy).toLocaleString()}</td><td>$${Number(t.sell).toLocaleString()}</td>
+        <td style="color:${pctColor(t.return_pct)};font-weight:600">${pctSign(t.return_pct)}</td>
+      </tr>`;
+    });
+    recHTML += '</table>';
+    document.getElementById('recent-trades').innerHTML = recHTML;
+  } catch(e) { console.error('Strategy:', e); }
+}
+
+// Session heatmap
+async function loadSessions() {
+  try {
+    const r = await fetch(API + '/api/sessions');
+    const d = await r.json();
+    let html = '<div class="heatmap-grid">';
+    d.hourly_stats.forEach(h => {
+      const intensity = Math.min(Math.abs(h.avg_return) * 300, 1);
+      const bg = h.avg_return >= 0
+        ? `rgba(34,197,94,${intensity})`
+        : `rgba(239,68,68,${intensity})`;
+      const dubaiLabel = h.hour_dubai.toString().padStart(2, '0') + ':00';
+      const isBuyWindow = h.hour_utc === 20;
+      const isSellWindow = h.hour_utc === 2;
+      const border = isBuyWindow ? '2px solid var(--green)' : isSellWindow ? '2px solid var(--cyan)' : 'none';
+      html += `<div class="heat-cell" style="background:${bg};border:${border}">
+        <div class="label">${dubaiLabel} GST</div>
+        <div>${h.avg_return >= 0 ? '+' : ''}${h.avg_return.toFixed(3)}%</div>
+        <div class="label">Win ${h.win_rate}%</div>
+      </div>`;
+    });
+    html += '</div>';
+    html += '<div style="margin-top:12px;font-size:11px;color:var(--muted)">Green border = BUY window | Cyan border = SELL window</div>';
+    document.getElementById('session-heatmap').innerHTML = html;
+  } catch(e) { console.error('Sessions:', e); }
+}
+
+// Correlations
+async function loadCorrelations() {
+  try {
+    const r = await fetch(API + '/api/correlations');
+    const d = await r.json();
+    const labels = d.rolling_30d.filter((_, i) => i % 5 === 0).map(c => c.date);
+    const spxData = d.rolling_30d.filter((_, i) => i % 5 === 0).map(c => c.btc_spx);
+    const goldData = d.rolling_30d.filter((_, i) => i % 5 === 0).map(c => c.btc_gold);
+    new Chart(document.getElementById('corrChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'BTC-SPX', data: spxData, borderColor: '#3b82f6', tension: .3, pointRadius: 0 },
+          { label: 'BTC-Gold', data: goldData, borderColor: '#f59e0b', tension: .3, pointRadius: 0 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: '#64748b', maxTicksLimit: 8 }, grid: { color: 'rgba(30,41,59,.5)' } },
+          y: { min: -1, max: 1, ticks: { color: '#64748b' }, grid: { color: 'rgba(30,41,59,.5)' } }
+        },
+        plugins: { legend: { labels: { color: '#94a3b8' } } }
+      }
+    });
+  } catch(e) { console.error('Corr:', e); }
+}
+
+// Load everything
+loadLive();
+loadMacro();
+loadDXY();
+loadStrategy();
+loadSessions();
+loadCorrelations();
+
+// Auto-refresh live data every 60s
+setInterval(loadLive, 60000);
+</script>
+</body>
+</html>

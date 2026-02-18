@@ -19,6 +19,17 @@ interface AlphaCondition {
   value: string;
 }
 
+interface TradeTiming {
+  entry_dubai: string;
+  entry_utc: string;
+  entry_ny: string;
+  exit_dubai: string;
+  exit_utc: string;
+  exit_ny: string;
+  buy_window_active: boolean;
+  window_note: string;
+}
+
 interface AlphaSetup {
   id: string;
   name: string;
@@ -28,6 +39,7 @@ interface AlphaSetup {
   conditions: AlphaCondition[];
   met_count: number;
   total_count: number;
+  timing: TradeTiming;
   backtest: {
     win_rate: number;
     trades: number;
@@ -67,7 +79,16 @@ export async function GET() {
 
     const today = new Date();
     const utcDay = today.getUTCDay();
+    const utcHour = today.getUTCHours();
+    const dubaiHour = (utcHour + 4) % 24;
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Friday scalp buy window: Friday 8PM-11:59PM Dubai (4PM-8PM UTC)
+    const fridayBuyWindowActive = utcDay === 5 && utcHour >= 16 && utcHour <= 23;
+    // Cosmic buy window: any time during the event day close (around 8PM-12AM Dubai)
+    const cosmicBuyWindowActive = utcHour >= 16 || utcHour < 2;
+    // Momentum buy window: end of US session into Dubai morning (8PM-2AM Dubai / 4PM-10PM UTC)
+    const momentumBuyWindowActive = utcHour >= 16 || utcHour < 6;
 
     const eclipseInfo = nearEclipse(today);
     const fullMoonDays = daysToFullMoon(today);
@@ -140,6 +161,16 @@ export async function GET() {
         conditions: s1_conditions,
         met_count: s1_met,
         total_count: 2,
+        timing: {
+          entry_dubai: '12:00 AM (midnight)',
+          entry_utc: '8:00 PM',
+          entry_ny: '4:00 PM ET',
+          exit_dubai: 'Target/Stop or +5 days',
+          exit_utc: 'Target/Stop or +5 days',
+          exit_ny: 'Target/Stop or +5 days',
+          buy_window_active: s1_met === 2 && cosmicBuyWindowActive,
+          window_note: 'Enter during US close / Dubai late evening. Hold for cosmic reversion.',
+        },
         backtest: {
           win_rate: 84.21,
           trades: 19,
@@ -155,12 +186,26 @@ export async function GET() {
       {
         id: 'friday_scalp',
         name: 'Friday Low-Vol Scalp',
-        description: 'Friday + ultra-low volume + no catalysts = quiet weekend setup. BTC drifts up into weekend. Buy at Friday close, take +0.5% profit, -1% stop, exit same day or Monday open.',
+        description: 'Friday + ultra-low volume + no catalysts = quiet weekend drift. BTC drifts up into the weekend as US traders close positions. Enter Friday evening Dubai time, exit Saturday morning or on TP/SL hit.',
         signal: s2_met >= 4 && isFriday && isLowVol ? 'BUY' : 'NO_TRADE',
         confidence: isFriday && isLowVol && noEarnings ? Math.min(95, s2_met * 16) : 0,
         conditions: s2_conditions,
         met_count: s2_met,
         total_count: s2_conditions.length,
+        timing: {
+          entry_dubai: '8:00 PM - 12:00 AM (Fri night)',
+          entry_utc: '4:00 PM - 8:00 PM (Fri)',
+          entry_ny: '12:00 PM - 4:00 PM ET (Fri close)',
+          exit_dubai: '6:00 AM - 8:00 AM Sat (or TP/SL)',
+          exit_utc: '2:00 AM - 4:00 AM Sat (or TP/SL)',
+          exit_ny: '10:00 PM - 12:00 AM Fri (or TP/SL)',
+          buy_window_active: fridayBuyWindowActive && s2_met >= 4,
+          window_note: dubaiHour >= 20 || dubaiHour < 1
+            ? 'BUY WINDOW OPEN NOW - Dubai evening entry zone'
+            : isFriday
+              ? `Buy window opens at 8:00 PM Dubai (in ~${((20 - dubaiHour + 24) % 24)}h)`
+              : `Next window: Friday 8:00 PM Dubai`,
+        },
         backtest: {
           win_rate: 82.61,
           trades: 23,
@@ -176,12 +221,22 @@ export async function GET() {
       {
         id: 'momentum_dollar',
         name: 'Momentum + Weak Dollar',
-        description: 'BTC above Bollinger upper band + DXY falling + low volume = strong trend continuation. Ride the momentum with tight risk. Target +1-2%, stop -1.5 to -3%, hold 2-5 days.',
+        description: 'BTC above Bollinger upper band + DXY falling + low volume = strong trend continuation. Enter during US close / Dubai late evening. Target +1%, stop -1.5%, hold 2 days.',
         signal: s3_met >= 4 && isDxyDown && aboveBBUpper ? 'BUY' : 'NO_TRADE',
         confidence: isDxyDown && aboveBBUpper ? Math.min(95, s3_met * 16) : 0,
         conditions: s3_conditions,
         met_count: s3_met,
         total_count: s3_conditions.length,
+        timing: {
+          entry_dubai: '12:00 AM (midnight)',
+          entry_utc: '8:00 PM',
+          entry_ny: '4:00 PM ET (US close)',
+          exit_dubai: '12:00 AM +2 days (or TP/SL)',
+          exit_utc: '8:00 PM +2 days (or TP/SL)',
+          exit_ny: '4:00 PM ET +2 days (or TP/SL)',
+          buy_window_active: s3_met >= 4 && isDxyDown && aboveBBUpper && momentumBuyWindowActive,
+          window_note: 'Enter at US market close / Dubai midnight. Ride momentum for 2 days.',
+        },
         backtest: {
           win_rate: 81.25,
           trades: 16,
