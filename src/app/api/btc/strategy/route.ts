@@ -51,7 +51,7 @@ function computeStats(trades: Trade[]) {
     };
   }).filter(Boolean);
 
-  const years = [...new Set(trades.map((t) => t.year))].sort();
+  const years = Array.from(new Set(trades.map((t) => t.year))).sort();
   const byYear = years.map((yr) => {
     const dt = trades.filter((t) => t.year === yr);
     const w = dt.filter((t) => t.return_pct > 0).length;
