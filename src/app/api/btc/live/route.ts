@@ -10,9 +10,10 @@ function ns(v: number | null | undefined) {
 
 export async function GET() {
   try {
-    const [btcCandles, spxCandles] = await Promise.all([
+    const [btcCandles, spxCandles, vixCandles] = await Promise.all([
       yfChart('BTC-USD', '2y', '1d'),
       yfChart('^GSPC', '6mo', '1d'),
+      yfChart('^VIX', '6mo', '1d'),
     ]);
 
     // --- BTC ---
@@ -64,6 +65,36 @@ export async function GET() {
       ema_50: ns(ema50[n - 1]),
       sma_200: ns(sma200[n - 1]),
       updated: new Date().toISOString(),
+
+      vix: (() => {
+        const vixCloses = vixCandles.map((c) => c.close);
+        const vn = vixCloses.length;
+        const vixLast = vixCloses[vn - 1];
+        const vixPrev = vixCloses[vn - 2];
+        const vixChange = ((vixLast - vixPrev) / vixPrev) * 100;
+        const vixSma20 = sma(vixCloses, 20);
+        const vix5d = vixCloses.slice(-5);
+        const vix20d = vixCloses.slice(-20);
+        const vixHigh6m = Math.max(...vixCloses);
+        const vixLow6m = Math.min(...vixCloses);
+        let zone: string;
+        if (vixLast < 15) zone = 'Extreme Complacency';
+        else if (vixLast < 20) zone = 'Low Volatility';
+        else if (vixLast < 25) zone = 'Elevated';
+        else if (vixLast < 30) zone = 'High Fear';
+        else zone = 'Extreme Fear / Panic';
+        return {
+          price: ns(vixLast),
+          change_pct: ns(vixChange),
+          sma_20: ns(vixSma20[vn - 1]),
+          above_sma20: vixLast > (vixSma20[vn - 1] ?? 0),
+          high_6m: ns(vixHigh6m),
+          low_6m: ns(vixLow6m),
+          range_5d: { high: ns(Math.max(...vix5d)), low: ns(Math.min(...vix5d)) },
+          range_20d: { high: ns(Math.max(...vix20d)), low: ns(Math.min(...vix20d)) },
+          zone,
+        };
+      })(),
 
       spx: {
         price: ns(spxLast),

@@ -11,12 +11,17 @@ interface SpxData {
   high_52w: number; low_52w: number; from_high_pct: number;
   range_5d: { high: number; low: number }; range_20d: { high: number; low: number };
 }
+interface VixData {
+  price: number; change_pct: number; sma_20: number | null; above_sma20: boolean;
+  high_6m: number; low_6m: number; zone: string;
+  range_5d: { high: number; low: number }; range_20d: { high: number; low: number };
+}
 interface LiveData {
   price: number; change_pct: number; rsi_14: number;
   macd: number; macd_signal: number; macd_hist: number;
   bb_upper: number; bb_mid: number; bb_lower: number;
   ema_20: number; ema_50: number; sma_200: number | null;
-  spx: SpxData;
+  spx: SpxData; vix: VixData;
 }
 interface MacroData {
   m2_latest: number; m2_change_mom: number; m2_yoy_pct: number;
@@ -389,10 +394,26 @@ export default function BTCPage() {
         </div>
 
         {/* Macro row */}
-        <div className="grid-top">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, marginBottom: 24 }}>
           <div className="card"><div className="card-title">Fed Funds Rate</div><div className="card-value" style={{ fontSize: 28 }}>{macro ? macro.fed_funds_rate + '%' : '--'}</div></div>
           <div className="card"><div className="card-title">Fed Balance Sheet</div><div className="card-value" style={{ fontSize: 28 }}>{macro ? '$' + macro.fed_balance_sheet + 'T' : '--'}</div></div>
           <div className="card"><div className="card-title">Yield Curve (10Y-2Y)</div><div className="card-value" style={{ fontSize: 28, color: macro ? (macro.yield_curve_10y2y >= 0 ? 'var(--green)' : 'var(--red)') : undefined }}>{macro ? macro.yield_curve_10y2y + '%' : '--'}</div></div>
+          <div className="card">
+            <div className="card-title">VIX (Fear Index)</div>
+            {live?.vix ? (
+              <>
+                <div className="card-value" style={{ fontSize: 28, color: live.vix.price >= 25 ? 'var(--red)' : live.vix.price >= 20 ? 'var(--amber)' : 'var(--green)' }}>{live.vix.price}</div>
+                <div className="card-sub">
+                  <span style={{ color: pctCol(-live.vix.change_pct) }}>{pctSign(live.vix.change_pct)}</span>
+                  {' '}<span className={`sb ${live.vix.price >= 25 ? 'sb-sell' : live.vix.price >= 20 ? 'sb-wait' : 'sb-buy'}`} style={{ fontSize: 10, padding: '2px 8px' }}>{live.vix.zone}</span>
+                </div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 6 }}>
+                  SMA20: {live.vix.sma_20} {live.vix.above_sma20 ? '(above)' : '(below)'}<br/>
+                  5d: {live.vix.range_5d.low}–{live.vix.range_5d.high} | 6m: {live.vix.low_6m}–{live.vix.high_6m}
+                </div>
+              </>
+            ) : <div className="card-value" style={{ fontSize: 28 }}>--</div>}
+          </div>
           <div className="card">
             <div className="card-title">Trade Signal</div>
             <div style={{ marginTop: 8 }}>{signal ? <span className={`sb sb-${signal.badge}`}>{signal.label}</span> : <span className="sb sb-neutral">LOADING</span>}</div>
