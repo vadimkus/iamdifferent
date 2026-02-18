@@ -12,21 +12,21 @@
 ## Data Flow
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    DASHBOARD (page.tsx)                  │
-│                 Refreshes: 10s / 60s                    │
-└───────┬──────┬──────┬──────┬──────┬──────┬──────┬───────┘
-        │      │      │      │      │      │      │
-        ▼      ▼      ▼      ▼      ▼      ▼      ▼
-   /binance  /live  /alpha  /chart /macro  /dxy  /friday
-   (10s)    (60s)  (60s)   (once) (once)  (once) (once)
-        │      │      │
-        ▼      ▼      ▼
-   ┌────────┐ ┌────────┐ ┌─────────────┐
-   │Binance │ │ Yahoo  │ │ FRED API    │
-   │  API   │ │Finance │ │             │
-   │(public)│ │(yfinance│ │(2a948c....) │
-   └────────┘ └────────┘ └─────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                       DASHBOARD (page.tsx)                       │
+│                    Refreshes: 10s / 60s                         │
+└──┬──────┬──────┬───────┬──────┬──────┬──────┬──────┬──────┬─────┘
+   │      │      │       │      │      │      │      │      │
+   ▼      ▼      ▼       ▼      ▼      ▼      ▼      ▼      ▼
+/binance /live /alpha /weekly /chart /macro  /dxy /friday /corr
+ (10s)  (60s) (60s)  (60s)  (user) (once) (once) (once) (once)
+   │      │      │       │
+   ▼      ▼      ▼       ▼
+┌────────┐ ┌────────┐ ┌─────────────┐ ┌──────────────────┐
+│Binance │ │ Yahoo  │ │ FRED API    │ │ market-events.ts │
+│  API   │ │Finance │ │             │ │ (static calendar)│
+│(public)│ │(yfChart)│ │(2a948c....) │ └──────────────────┘
+└────────┘ └────────┘ └─────────────┘
 ```
 
 ## API Endpoints
@@ -145,7 +145,7 @@ Hardcoded event calendars (2024-2026):
 
 - **Platform:** Vercel (automatic deploy from `main` branch)
 - **Runtime:** Node.js serverless functions for API routes
-- **Static data:** `btc/friday_timing_results.json` read from filesystem at runtime
+- **Static data:** `btc/friday_timing_results.json` read from filesystem at runtime; `weekly_strategy_results.json` is reference only (configs hardcoded in API route)
 - **Environment:** No env vars needed — all APIs are public or key is hardcoded
 
 ## Research Pipeline (Offline)

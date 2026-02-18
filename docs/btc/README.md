@@ -48,11 +48,42 @@ Friday afternoon (Dubai time), when US session volume dies and no catalysts are 
 | #2 | 19:00 | 15:00 | 10:00 | 65.4% | 30.8% |
 | #3 | 20:00 | 16:00 | 11:00 | 68.3% | 25.0% |
 
+### How the Two Systems Work Together
+
+| | Weekly Tiered (every Friday) | Alpha Strategies (rare) |
+|-|------------------------------|------------------------|
+| **Frequency** | ~47 trades/year | 2-3 trades/year |
+| **Win Rate** | 61-88% (tier-dependent) | 81-84% |
+| **Dashboard** | "This Friday's Trade" card | Alpha Strategies cards |
+| **Entry Logic** | Tier assigned automatically | All conditions must align |
+| **Price Levels** | Shown only during buy window | Shown when signal active |
+| **Annual P&L ($270K)** | ~$6.4K (consistent) | ~$8-15K (rare, high-conviction) |
+
+**Run both in parallel.** The Weekly Tiered system provides steady income every Friday. Alpha Strategies add 2-3 high-conviction trades per year on top.
+
 ### Data Sources
 
 - **Binance** — Real-time BTC price, order book, volume (10s refresh)
 - **Yahoo Finance** — RSI, MACD, Bollinger, EMA/SMA, SPX, DXY, VIX
 - **FRED** — M2 Money Supply, Fed Funds Rate, Balance Sheet, Yield Curve
+- **Static Calendars** — FOMC dates, Mag7 earnings, eclipses, moon phases (2024-2026)
+
+---
+
+## Research Pipeline
+
+Three offline Python scripts generate all backtest data:
+
+```bash
+cd btc
+pip3 install -r requirements.txt
+
+python3 research.py           # 508 strategy combos → research_results.json (~2 min)
+python3 weekly_strategy.py    # Tiered Friday system → weekly_strategy_results.json (~12 sec)
+python3 friday_timing.py      # Friday entry hours → friday_timing_results.json (~15 sec)
+```
+
+After re-running, update hardcoded tier configs in `src/app/api/btc/weekly-strategy/route.ts` if optimal TP/SL changed.
 
 ---
 

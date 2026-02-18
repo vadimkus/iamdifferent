@@ -1,6 +1,19 @@
-# Alpha Trading Strategies
+# BTC Trading Strategies
 
 ## Overview
+
+Two complementary strategy systems, designed to run in parallel:
+
+| System | Purpose | Frequency | Win Rate | $270K Annual |
+|--------|---------|-----------|----------|-------------|
+| **Weekly Friday Tiered** | Consistent weekly income | ~47/yr | 64% | +$6,417 |
+| **Alpha Strategies** | High-conviction rare setups | ~2-3/yr | 80-85% | +$8-15K |
+
+The Weekly Tiered system trades every single Friday (see [Strategy 4](#strategy-4-weekly-friday-tiered-system)). Alpha Strategies fire only when rare conditions align (see Strategies 1-3 below).
+
+---
+
+## Alpha Strategies (80%+ Win Rate, Rare)
 
 Three backtested strategies identified through systematic research across 508 condition combinations using 9+ years of BTC, SPX, Gold, DXY, and VIX data. All strategies have **80%+ historical win rate**.
 
