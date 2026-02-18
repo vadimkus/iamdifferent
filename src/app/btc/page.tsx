@@ -676,7 +676,7 @@ export default function BTCPage() {
                   <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
                     <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>POSITION</div>
                     <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--amber)' }}>${(tp.position_size / 1000).toFixed(0)}K</div>
-                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>Friday 8PM Dubai</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>Fri 4PM Dubai</div>
                   </div>
                 </div>
               )}

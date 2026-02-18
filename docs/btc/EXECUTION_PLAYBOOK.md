@@ -177,16 +177,28 @@ Unlike the Alpha Strategies (2-3 trades/year), the Weekly Tiered System trades *
 | 2 (MEDIUM) | Cyan | 4+/5 relaxed | +1.0% | -2.0% | 3d | 67.7% |
 | 3 (BASE) | Amber | Every other Friday | +2.0% | -3.0% | 5d | 61.1% |
 
+## Entry Timing
+
+Two optimal entry times based on 2-year hourly backtest:
+
+| Entry | Dubai | UTC | ET | Strength |
+|-------|-------|-----|----|----------|
+| **Primary** | **16:00** | 12:00 | 07:00 | Best TP hit rate (72.1%) |
+| **Secondary** | **20:00** | 16:00 | 11:00 | Lowest SL risk (25%) |
+
+**Scaling option:** 50% at 16:00, 50% at 20:00 — best of both.
+
 ## Weekly Routine
 
 | Day | Time (Dubai) | Action |
 |-----|-------------|--------|
 | Thursday | Evening | Open dashboard, check "This Friday's Trade" section |
 | Friday | Morning | Note which tier is showing and trade parameters |
-| Friday | **20:00** | **EXECUTE: Buy BTC at market** |
-| Friday | 20:01 | Set TP and SL on exchange immediately |
+| Friday | **16:00** | **PRIMARY ENTRY: Buy BTC at market** |
+| Friday | 16:01 | Set TP and SL on exchange immediately |
+| Friday | 20:00 | **SECONDARY ENTRY** (if scaling, or if you missed 16:00) |
 | Sat-Wed | As needed | Monitor — TP/SL will auto-execute |
-| Hold day | **20:00** | If TP/SL not hit by max hold, exit at market |
+| Hold day | 16:00 | If TP/SL not hit by max hold, exit at market |
 
 ## Position Sizing
 
@@ -202,8 +214,8 @@ All tiers use the full $270K position. The tier system adjusts **TP/SL width**, 
 
 The "This Friday's Trade" card shows:
 - Active tier (color-coded) with all conditions checked/unchecked
-- Exact entry, TP, and SL prices calculated from live BTC price
-- Dollar amounts for TP and SL at $270K position
+- TP/SL percentages and dollar amounts (Mon-Fri before 4PM)
+- Exact entry, TP, and SL prices from live BTC price (Friday 4PM+ when buy window opens)
 - Buy window status (green pulse when active)
 - Annual projection based on backtest results
 

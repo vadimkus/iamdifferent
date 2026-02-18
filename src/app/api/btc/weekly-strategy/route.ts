@@ -226,13 +226,15 @@ export async function GET() {
     const tpDollar = position * activeConfig.tp_pct / 100;
     const slDollar = position * Math.abs(activeConfig.sl_pct) / 100;
 
-    // Buy window: Friday 8PM-midnight Dubai (UTC 16:00-20:00)
-    const buyWindowActive = isFriday && utcHour >= 16 && utcHour <= 23;
+    // Buy window: Friday 4PM-midnight Dubai (UTC 12:00-20:00)
+    // Primary entry: 16:00 Dubai (72.1% TP hit rate from hourly backtest)
+    // Secondary entry: 20:00 Dubai (lowest SL hit rate at 25%)
+    const buyWindowActive = isFriday && utcHour >= 12 && utcHour <= 23;
     const nextFridayNote = isFriday
-      ? (dubaiHour >= 20 || dubaiHour < 1
-          ? 'BUY WINDOW OPEN — Dubai evening entry zone'
-          : `Buy window opens at 8:00 PM Dubai (in ~${(20 - dubaiHour + 24) % 24}h)`)
-      : `Next trade: Friday 8:00 PM Dubai`;
+      ? (dubaiHour >= 16
+          ? 'BUY WINDOW OPEN — Enter at 16:00 Dubai (best) or 20:00 Dubai (safest)'
+          : `Buy window opens at 4:00 PM Dubai (in ~${(16 - dubaiHour + 24) % 24}h)`)
+      : `Next trade: Friday 4:00 PM Dubai`;
 
     const result: TierResult = {
       tier: activeTier,
@@ -253,7 +255,7 @@ export async function GET() {
         position_size: position,
       },
       timing: {
-        entry_dubai: 'Friday 8:00 PM - 12:00 AM',
+        entry_dubai: 'Friday 4:00 PM (best) / 8:00 PM (safest)',
         exit_dubai: `TP/SL hit or +${activeConfig.hold_days} day${activeConfig.hold_days > 1 ? 's' : ''} exit`,
         buy_window_active: buyWindowActive,
         window_note: nextFridayNote,
