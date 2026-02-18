@@ -53,11 +53,29 @@ interface AlphaSetup {
   };
 }
 
+async function fetchBinancePrice(): Promise<{ price: number; volRatio: number; isLowVol: boolean } | null> {
+  try {
+    const [ticker, klines] = await Promise.all([
+      fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', { cache: 'no-store' }).then((r) => r.json()),
+      fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=24', { cache: 'no-store' }).then((r) => r.json()),
+    ]);
+    const price = parseFloat(ticker.lastPrice);
+    const hourlyVols = (klines as unknown[][]).map((k: unknown[]) => parseFloat(k[5] as string));
+    const avg = hourlyVols.reduce((s: number, v: number) => s + v, 0) / hourlyVols.length;
+    const current = hourlyVols[hourlyVols.length - 1] ?? 0;
+    const ratio = avg > 0 ? current / avg : 1;
+    return { price, volRatio: ratio, isLowVol: ratio < 0.7 };
+  } catch {
+    return null;
+  }
+}
+
 export async function GET() {
   try {
-    const [btcDaily, dxyDaily] = await Promise.all([
+    const [btcDaily, dxyDaily, binance] = await Promise.all([
       yfChart('BTC-USD', '6mo', '1d'),
       yfChart('DX-Y.NYB', '1mo', '1d'),
+      fetchBinancePrice(),
     ]);
 
     const closes = btcDaily.map((c) => c.close);
@@ -69,10 +87,11 @@ export async function GET() {
     const ema20 = ema(closes, 20);
     const sma200 = sma(closes, 200);
     const bb = calcBollinger(closes);
-    const currentPrice = closes[n - 1];
+    const currentPrice = binance?.price ?? closes[n - 1];
 
     const vol20Avg = volumes.slice(-20).reduce((a, b) => a + b, 0) / 20;
-    const volRatio = volumes[n - 1] / vol20Avg;
+    const yahoVolRatio = volumes[n - 1] / vol20Avg;
+    const volRatio = binance ? binance.volRatio : yahoVolRatio;
 
     const dxyN = dxyDaily.length;
     const dxyChange = dxyN >= 2 ? ((dxyDaily[dxyN - 1].close - dxyDaily[dxyN - 2].close) / dxyDaily[dxyN - 2].close) * 100 : 0;
@@ -261,9 +280,11 @@ export async function GET() {
       setups,
       context: {
         price: ns(currentPrice),
+        price_source: binance ? 'binance' : 'yahoo',
         rsi: ns(currentRSI),
         day: dayNames[utcDay],
         vol_ratio: ns(volRatio),
+        vol_source: binance ? 'binance_hourly' : 'yahoo_daily',
         dxy_change: ns(dxyChange),
         bb_pct: ns(bbPct ? bbPct * 100 : null),
         above_sma200: aboveSMA200,

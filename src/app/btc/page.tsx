@@ -42,6 +42,21 @@ interface CorrData {
   matrix: { btc_spx: number; btc_gold: number; spx_gold: number };
   rolling_30d: { date: string; btc_spx: number | null; btc_gold: number | null }[];
 }
+interface BinanceSpread { value: number; pct: number; best_bid: number; best_ask: number }
+interface BinanceOrderBook {
+  bids: { price: number; qty: number; total: number; usd: number }[];
+  asks: { price: number; qty: number; total: number; usd: number }[];
+  bid_wall: { price: number; qty: number; usd: number };
+  ask_wall: { price: number; qty: number; usd: number };
+  bid_depth_btc: number; ask_depth_btc: number;
+  bid_ask_ratio: number; pressure: string;
+}
+interface BinanceVolProfile { avg_hourly_btc: number; current_hour_btc: number; vol_ratio: number; is_low_volume: boolean }
+interface BinanceData {
+  price: number; change_pct: number; open_24h: number; high_24h: number; low_24h: number;
+  volume_24h_btc: number; volume_24h_usdt: number; trades_24h: number;
+  spread: BinanceSpread; order_book: BinanceOrderBook; volume_profile: BinanceVolProfile;
+}
 interface AlphaCond { id: string; label: string; met: boolean; value: string }
 interface AlphaBacktest {
   win_rate: number; trades: number; expectancy: number; sharpe: number;
@@ -102,6 +117,7 @@ export default function BTCPage() {
   const [dxy, setDxy] = useState<DxyData | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
   const [alpha, setAlpha] = useState<AlphaData | null>(null);
+  const [binance, setBinance] = useState<BinanceData | null>(null);
   const [fridayTiming, setFridayTiming] = useState<FridayTimingData | null>(null);
   const [btcChart, setBtcChart] = useState<ChartData | null>(null);
   const [btcChartInterval, setBtcChartInterval] = useState('1d');
@@ -143,6 +159,9 @@ export default function BTCPage() {
   const loadAlpha = useCallback(async () => {
     try { const r = await fetch('/api/btc/alpha-strategy'); setAlpha(await r.json()); } catch { /* */ }
   }, []);
+  const loadBinance = useCallback(async () => {
+    try { const r = await fetch('/api/btc/binance'); setBinance(await r.json()); } catch { /* */ }
+  }, []);
   const loadFridayTiming = useCallback(async () => {
     try { const r = await fetch('/api/btc/friday-timing'); setFridayTiming(await r.json()); } catch { /* */ }
   }, []);
@@ -154,10 +173,11 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadCorr(); loadAlpha(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
-    const id = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
-    return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadCorr, loadAlpha, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+    loadLive(); loadMacro(); loadDxy(); loadCorr(); loadAlpha(); loadBinance(); loadFridayTiming(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    const id1 = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
+    const id2 = setInterval(() => { loadBinance(); }, 10_000);
+    return () => { clearInterval(id1); clearInterval(id2); };
+  }, [loadLive, loadMacro, loadDxy, loadCorr, loadAlpha, loadBinance, loadFridayTiming, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -772,15 +792,27 @@ export default function BTCPage() {
 
         {/* Top metrics */}
         <div className="grid-top">
-          <div className="card">
-            <div className="card-title">BTC / USD</div>
-            <div className="card-value" style={{ color: live && live.change_pct >= 0 ? 'var(--green)' : 'var(--red)' }}>{live ? '$' + fmt(live.price) : '--'}</div>
-            <div className="card-sub">{live ? <span style={{ color: pctCol(live.change_pct) }}>{pctSign(live.change_pct)}</span> : '--'} (24h)</div>
+          <div className="card" style={{ border: binance ? '1px solid rgba(245,158,11,.3)' : undefined }}>
+            <div className="card-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>BTC / USDT</span>
+              {binance && <span style={{ fontSize: 9, color: '#f59e0b', fontWeight: 700, background: 'rgba(245,158,11,.12)', padding: '2px 6px', borderRadius: 4 }}>BINANCE LIVE</span>}
+            </div>
+            <div className="card-value" style={{ color: (binance?.change_pct ?? live?.change_pct ?? 0) >= 0 ? 'var(--green)' : 'var(--red)' }}>
+              {binance ? '$' + fmt(binance.price) : live ? '$' + fmt(live.price) : '--'}
+            </div>
+            <div className="card-sub">
+              {binance ? <span style={{ color: pctCol(binance.change_pct) }}>{pctSign(binance.change_pct)}</span> : live ? <span style={{ color: pctCol(live.change_pct) }}>{pctSign(live.change_pct)}</span> : '--'} (24h)
+            </div>
+            {binance && (
+              <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 6 }}>
+                H: ${fmt(binance.high_24h)} L: ${fmt(binance.low_24h)} | Spread: ${binance.spread.value}
+              </div>
+            )}
           </div>
           <div className="card">
             <div className="card-title">RSI (14)</div>
             <div className="card-value" style={{ color: live ? (live.rsi_14 > 70 ? 'var(--red)' : live.rsi_14 < 30 ? 'var(--green)' : 'var(--text)') : undefined }}>{live ? live.rsi_14 : '--'}</div>
-            <div className="card-sub">{live ? (live.rsi_14 > 70 ? <span className="sb sb-sell">Overbought</span> : live.rsi_14 < 30 ? <span className="sb sb-buy">Oversold</span> : live.rsi_14 < 40 ? <span className="sb sb-wait">Approaching Oversold</span> : live.rsi_14 > 60 ? <span className="sb sb-wait">Approaching Overbought</span> : <span className="sb sb-neutral">Neutral</span>) : '--'}</div>
+            <div className="card-sub" style={{ fontSize: 11 }}>{live ? (live.rsi_14 > 70 ? 'Overbought' : live.rsi_14 < 30 ? 'Oversold' : live.rsi_14 < 40 ? 'Approaching Oversold' : live.rsi_14 > 60 ? 'Approaching Overbought' : 'Neutral') : '--'}</div>
           </div>
           <div className="card">
             <div className="card-title">M2 Money Supply</div>
@@ -794,6 +826,68 @@ export default function BTCPage() {
           </div>
         </div>
 
+        {/* Binance Order Book & Volume */}
+        {binance && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginBottom: 24 }}>
+            <div className="card">
+              <div className="card-title">Binance Order Book</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, marginBottom: 8 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)' }}>BIDS (Buy)</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--red)' }}>ASKS (Sell)</span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 11 }}>
+                <div>
+                  {binance.order_book.bids.slice(0, 5).map((b, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '2px 0', borderBottom: '1px solid rgba(30,41,59,.3)' }}>
+                      <span style={{ color: 'var(--green)' }}>${fmt(b.price)}</span>
+                      <span style={{ color: 'var(--muted)' }}>{b.qty.toFixed(4)}</span>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  {binance.order_book.asks.slice(0, 5).map((a, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '2px 0', borderBottom: '1px solid rgba(30,41,59,.3)' }}>
+                      <span style={{ color: 'var(--red)' }}>${fmt(a.price)}</span>
+                      <span style={{ color: 'var(--muted)' }}>{a.qty.toFixed(4)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{ marginTop: 8, fontSize: 11, color: 'var(--muted)' }}>
+                Bid Wall: {binance.order_book.bid_wall.qty.toFixed(3)} BTC @ ${fmt(binance.order_book.bid_wall.price)} (${binance.order_book.bid_wall.usd.toLocaleString()})<br/>
+                Ask Wall: {binance.order_book.ask_wall.qty.toFixed(3)} BTC @ ${fmt(binance.order_book.ask_wall.price)} (${binance.order_book.ask_wall.usd.toLocaleString()})
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-title">Market Pressure</div>
+              <div style={{ marginTop: 8, textAlign: 'center' }}>
+                <div style={{
+                  fontSize: 20, fontWeight: 800, padding: '8px 16px', borderRadius: 8, display: 'inline-block',
+                  background: binance.order_book.pressure === 'BUY_PRESSURE' ? 'rgba(34,197,94,.15)' : binance.order_book.pressure === 'SELL_PRESSURE' ? 'rgba(239,68,68,.15)' : 'rgba(148,163,184,.1)',
+                  color: binance.order_book.pressure === 'BUY_PRESSURE' ? 'var(--green)' : binance.order_book.pressure === 'SELL_PRESSURE' ? 'var(--red)' : 'var(--muted)',
+                }}>{binance.order_book.pressure.replace('_', ' ')}</div>
+              </div>
+              <div style={{ marginTop: 12, fontSize: 12 }}>
+                <div className="mr"><span className="mr-l">Bid/Ask Ratio</span><span className="mr-v" style={{ color: binance.order_book.bid_ask_ratio > 1 ? 'var(--green)' : 'var(--red)' }}>{binance.order_book.bid_ask_ratio}x</span></div>
+                <div className="mr"><span className="mr-l">Bid Depth</span><span className="mr-v">{binance.order_book.bid_depth_btc} BTC</span></div>
+                <div className="mr"><span className="mr-l">Ask Depth</span><span className="mr-v">{binance.order_book.ask_depth_btc} BTC</span></div>
+                <div className="mr"><span className="mr-l">Spread</span><span className="mr-v">${binance.spread.value} ({binance.spread.pct}%)</span></div>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-title">Binance Volume</div>
+              <div style={{ marginTop: 8, fontSize: 12 }}>
+                <div className="mr"><span className="mr-l">24h Volume</span><span className="mr-v">{binance.volume_24h_btc.toLocaleString()} BTC</span></div>
+                <div className="mr"><span className="mr-l">24h Turnover</span><span className="mr-v">${(binance.volume_24h_usdt / 1e9).toFixed(2)}B</span></div>
+                <div className="mr"><span className="mr-l">24h Trades</span><span className="mr-v">{binance.trades_24h.toLocaleString()}</span></div>
+                <div className="mr"><span className="mr-l">Current Hour</span><span className="mr-v">{binance.volume_profile.current_hour_btc} BTC</span></div>
+                <div className="mr"><span className="mr-l">Avg Hour</span><span className="mr-v">{binance.volume_profile.avg_hourly_btc} BTC</span></div>
+                <div className="mr"><span className="mr-l">Vol Ratio</span><span className="mr-v" style={{ color: binance.volume_profile.is_low_volume ? 'var(--green)' : 'var(--text)' }}>{binance.volume_profile.vol_ratio}x {binance.volume_profile.is_low_volume ? '(LOW)' : ''}</span></div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Macro row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, marginBottom: 24 }}>
           <div className="card"><div className="card-title">Fed Funds Rate</div><div className="card-value" style={{ fontSize: 28 }}>{macro ? macro.fed_funds_rate + '%' : '--'}</div></div>
@@ -806,7 +900,11 @@ export default function BTCPage() {
                 <div className="card-value" style={{ fontSize: 28, color: live.vix.price >= 25 ? 'var(--red)' : live.vix.price >= 20 ? 'var(--amber)' : 'var(--green)' }}>{live.vix.price}</div>
                 <div className="card-sub">
                   <span style={{ color: pctCol(-live.vix.change_pct) }}>{pctSign(live.vix.change_pct)}</span>
-                  {' '}<span className={`sb ${live.vix.price >= 25 ? 'sb-sell' : live.vix.price >= 20 ? 'sb-wait' : 'sb-buy'}`} style={{ fontSize: 10, padding: '2px 8px' }}>{live.vix.zone}</span>
+                  {' '}<span style={{
+                    fontSize: 10, padding: '2px 8px', borderRadius: 12, fontWeight: 600,
+                    background: live.vix.price >= 25 ? 'rgba(239,68,68,.15)' : live.vix.price >= 20 ? 'rgba(245,158,11,.15)' : 'rgba(34,197,94,.15)',
+                    color: live.vix.price >= 25 ? 'var(--red)' : live.vix.price >= 20 ? 'var(--amber)' : 'var(--green)',
+                  }}>{live.vix.zone}</span>
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 6 }}>
                   SMA20: {live.vix.sma_20} {live.vix.above_sma20 ? '(above)' : '(below)'}<br/>
