@@ -45,15 +45,6 @@ interface CorrData {
   matrix: { btc_spx: number; btc_gold: number; spx_gold: number };
   rolling_30d: { date: string; btc_spx: number | null; btc_gold: number | null }[];
 }
-interface RecCondition {
-  id: string; name: string; description: string; value: string;
-  met: boolean; edge: string; weight: number;
-}
-interface RecData {
-  score: number; recommendation: string; confidence: string;
-  conditions: RecCondition[]; met_count: number; total_count: number;
-  best_combo_active: boolean; best_combo_note: string | null;
-}
 interface AlphaCond { id: string; label: string; met: boolean; value: string }
 interface AlphaBacktest {
   win_rate: number; trades: number; expectancy: number; sharpe: number;
@@ -92,7 +83,6 @@ export default function BTCPage() {
   const [dxy, setDxy] = useState<DxyData | null>(null);
   const [sessions, setSessions] = useState<HourlyStat[] | null>(null);
   const [corr, setCorr] = useState<CorrData | null>(null);
-  const [rec, setRec] = useState<RecData | null>(null);
   const [alpha, setAlpha] = useState<AlphaData | null>(null);
   const [btcChart, setBtcChart] = useState<ChartData | null>(null);
   const [btcChartInterval, setBtcChartInterval] = useState('1d');
@@ -134,9 +124,6 @@ export default function BTCPage() {
   const loadCorr = useCallback(async () => {
     try { const r = await fetch('/api/btc/correlations'); setCorr(await r.json()); } catch { /* */ }
   }, []);
-  const loadRec = useCallback(async () => {
-    try { const r = await fetch('/api/btc/recommendation'); setRec(await r.json()); } catch { /* */ }
-  }, []);
   const loadAlpha = useCallback(async () => {
     try { const r = await fetch('/api/btc/alpha-strategy'); setAlpha(await r.json()); } catch { /* */ }
   }, []);
@@ -148,10 +135,10 @@ export default function BTCPage() {
   }, []);
 
   useEffect(() => {
-    loadLive(); loadMacro(); loadDxy(); loadSessions(); loadCorr(); loadRec(); loadAlpha(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
-    const id = setInterval(() => { loadLive(); loadRec(); loadAlpha(); }, 60_000);
+    loadLive(); loadMacro(); loadDxy(); loadSessions(); loadCorr(); loadAlpha(); loadBtcChart(btcChartInterval, btcChartRange); loadEvents();
+    const id = setInterval(() => { loadLive(); loadAlpha(); }, 60_000);
     return () => clearInterval(id);
-  }, [loadLive, loadMacro, loadDxy, loadSessions, loadCorr, loadRec, loadAlpha, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
+  }, [loadLive, loadMacro, loadDxy, loadSessions, loadCorr, loadAlpha, loadBtcChart, btcChartInterval, btcChartRange, loadEvents]);
 
   // Charts (after Chart.js loads)
   useEffect(() => {
@@ -414,30 +401,9 @@ export default function BTCPage() {
         .bar-w { display:flex; align-items:center; gap:6px; }
         .bar { height:6px; border-radius:3px; min-width:2px; }
         .loading { color:var(--muted); padding:40px; text-align:center; }
-        .rec-box { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:24px; }
-        .rec-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
-        .rec-score { font-size:48px; font-weight:800; font-variant-numeric:tabular-nums; }
-        .rec-badge { font-size:18px; font-weight:700; padding:8px 20px; border-radius:24px; }
-        .rec-badge-high { background:rgba(34,197,94,.2); color:var(--green); border:2px solid rgba(34,197,94,.4); }
-        .rec-badge-medium { background:rgba(6,182,212,.2); color:var(--cyan); border:2px solid rgba(6,182,212,.4); }
-        .rec-badge-low { background:rgba(245,158,11,.2); color:var(--amber); border:2px solid rgba(245,158,11,.4); }
-        .rec-badge-none { background:rgba(239,68,68,.15); color:var(--red); border:2px solid rgba(239,68,68,.3); }
-        .score-bar { width:100%; height:8px; background:rgba(30,41,59,.8); border-radius:4px; margin:12px 0; overflow:hidden; }
-        .score-fill { height:100%; border-radius:4px; transition:width .5s ease; }
-        .combo-alert { background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(234,179,8,.08)); border:1px solid rgba(245,158,11,.4); border-radius:10px; padding:14px 18px; margin-bottom:16px; font-size:14px; font-weight:600; color:var(--amber); }
-        .cond-row { display:grid; grid-template-columns:36px 1fr 140px 80px 60px; align-items:center; padding:12px 16px; border-bottom:1px solid rgba(30,41,59,.5); gap:12px; }
-        .cond-row:last-child { border-bottom:none; }
-        .cond-header { font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:500; }
-        .cond-icon { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; }
-        .cond-icon-yes { background:rgba(34,197,94,.2); color:var(--green); }
-        .cond-icon-no { background:rgba(239,68,68,.1); color:var(--red); }
-        .cond-name { font-weight:600; font-size:14px; }
-        .cond-desc { font-size:12px; color:var(--muted); margin-top:2px; }
-        .cond-val { font-size:13px; font-variant-numeric:tabular-nums; }
-        .cond-edge { font-size:12px; font-weight:600; }
         @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
         @media(max-width:1100px) { .alpha-grid { grid-template-columns:1fr !important; } }
-        @media(max-width:900px) { .grid-top { grid-template-columns:repeat(2,1fr); } .grid-2,.steps { grid-template-columns:1fr; } .cond-row { grid-template-columns:28px 1fr; } .cond-desc,.cond-header:nth-child(n+3) { display:none; } }
+        @media(max-width:900px) { .grid-top { grid-template-columns:repeat(2,1fr); } .grid-2 { grid-template-columns:1fr; } }
       `}</style>
 
       <div className="btc-header">
@@ -579,63 +545,6 @@ export default function BTCPage() {
               })}
             </div>
           ) : <div className="loading">Loading alpha strategies...</div>}
-        </div>
-
-        {/* Recommendation Table */}
-        <div className="rec-box">
-          <div className="rec-header">
-            <div>
-              <div className="sec-title" style={{ marginBottom: 4 }}><span className="dot" style={{ background: rec && rec.score >= 55 ? 'var(--green)' : 'var(--red)' }} /> Tonight&apos;s Trade Recommendation</div>
-              <div style={{ color: 'var(--muted)', fontSize: 13 }}>Based on 17 conditions: technicals, macro, lunar cycles, FOMC, Mag7 earnings</div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              {rec ? (
-                <>
-                  <div className="rec-score" style={{ color: rec.score >= 75 ? 'var(--green)' : rec.score >= 55 ? 'var(--cyan)' : rec.score >= 40 ? 'var(--amber)' : 'var(--red)' }}>{rec.score}%</div>
-                  <div className={`rec-badge rec-badge-${rec.confidence}`}>{rec.recommendation}</div>
-                </>
-              ) : <div className="loading">Scoring...</div>}
-            </div>
-          </div>
-
-          {rec && (
-            <>
-              <div className="score-bar">
-                <div className="score-fill" style={{ width: `${rec.score}%`, background: rec.score >= 75 ? 'var(--green)' : rec.score >= 55 ? 'var(--cyan)' : rec.score >= 40 ? 'var(--amber)' : 'var(--red)' }} />
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--muted)', marginBottom: 16 }}>
-                <span>0% — NO TRADE</span>
-                <span>{rec.met_count} / {rec.total_count} conditions met</span>
-                <span>100% — STRONG BUY</span>
-              </div>
-
-              {rec.best_combo_active && rec.best_combo_note && (
-                <div className="combo-alert">
-                  {rec.best_combo_note}
-                </div>
-              )}
-
-              <div className="cond-row cond-header">
-                <div></div>
-                <div>Condition</div>
-                <div>Current Value</div>
-                <div>Edge</div>
-                <div>Weight</div>
-              </div>
-              {rec.conditions.map((c: RecCondition) => (
-                <div className="cond-row" key={c.id}>
-                  <div className={`cond-icon ${c.met ? 'cond-icon-yes' : 'cond-icon-no'}`}>{c.met ? '\u2713' : '\u2717'}</div>
-                  <div>
-                    <div className="cond-name" style={{ color: c.met ? 'var(--text)' : 'var(--muted)' }}>{c.name}</div>
-                    <div className="cond-desc">{c.description}</div>
-                  </div>
-                  <div className="cond-val" style={{ color: c.met ? 'var(--green)' : 'var(--text)' }}>{c.value}</div>
-                  <div className="cond-edge" style={{ color: 'var(--cyan)' }}>{c.edge}</div>
-                  <div style={{ color: 'var(--muted)', fontSize: 12 }}>{'★'.repeat(c.weight)}</div>
-                </div>
-              ))}
-            </>
-          )}
         </div>
 
         {/* BTC Chart */}
