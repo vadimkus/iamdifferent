@@ -627,34 +627,59 @@ export default function BTCPage() {
                 </div>
               </div>
 
-              {/* Trade parameters grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 16 }}>
-                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>ENTRY</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text)' }}>${tp.entry_price?.toLocaleString()}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>Friday evening Dubai</div>
+              {/* Trade parameters grid — exact $ only when buy window is open */}
+              {isBuy && f.timing.buy_window_active ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 16 }}>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>ENTRY (LIVE)</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text)' }}>${tp.entry_price?.toLocaleString()}</div>
+                    <div style={{ fontSize: 10, color: 'var(--green)' }}>Buy now</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(34,197,94,.08)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>TAKE PROFIT</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--green)' }}>${tp.tp_price?.toLocaleString()}</div>
+                    <div style={{ fontSize: 10, color: 'var(--green)' }}>+{f.config.tp_pct}% (+${tp.tp_dollar?.toLocaleString()})</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(239,68,68,.08)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>STOP LOSS</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--red)' }}>${tp.sl_price?.toLocaleString()}</div>
+                    <div style={{ fontSize: 10, color: 'var(--red)' }}>{f.config.sl_pct}% (-${tp.sl_dollar?.toLocaleString()})</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>HOLD</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--cyan)' }}>{f.config.hold_days}d</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>max hold time</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>POSITION</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--amber)' }}>${(tp.position_size / 1000).toFixed(0)}K</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>full position</div>
+                  </div>
                 </div>
-                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(34,197,94,.08)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>TAKE PROFIT</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--green)' }}>${tp.tp_price?.toLocaleString()}</div>
-                  <div style={{ fontSize: 10, color: 'var(--green)' }}>+{f.config.tp_pct}% (+${tp.tp_dollar?.toLocaleString()})</div>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(34,197,94,.08)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>TAKE PROFIT</div>
+                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--green)' }}>+{f.config.tp_pct}%</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>+${tp.tp_dollar?.toLocaleString()} on $270K</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(239,68,68,.08)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>STOP LOSS</div>
+                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--red)' }}>{f.config.sl_pct}%</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>-${tp.sl_dollar?.toLocaleString()} on $270K</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>HOLD</div>
+                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--cyan)' }}>{f.config.hold_days}d</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>max hold time</div>
+                  </div>
+                  <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>POSITION</div>
+                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--amber)' }}>${(tp.position_size / 1000).toFixed(0)}K</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>Friday 8PM Dubai</div>
+                  </div>
                 </div>
-                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(239,68,68,.08)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>STOP LOSS</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--red)' }}>${tp.sl_price?.toLocaleString()}</div>
-                  <div style={{ fontSize: 10, color: 'var(--red)' }}>{f.config.sl_pct}% (-${tp.sl_dollar?.toLocaleString()})</div>
-                </div>
-                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>HOLD</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--cyan)' }}>{f.config.hold_days}d</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>max hold time</div>
-                </div>
-                <div style={{ textAlign: 'center', padding: 12, background: 'rgba(0,0,0,.2)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>POSITION</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--amber)' }}>${(tp.position_size / 1000).toFixed(0)}K</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)' }}>full position</div>
-                </div>
-              </div>
+              )}
 
               {/* Buy window status */}
               <div style={{
