@@ -10,8 +10,13 @@ function ns(v: number | null | undefined) {
 
 export async function GET() {
   try {
-    const candles = await yfChart('BTC-USD', '6mo', '1d');
-    const closes = candles.map((c) => c.close);
+    const [btcCandles, spxCandles] = await Promise.all([
+      yfChart('BTC-USD', '2y', '1d'),
+      yfChart('^GSPC', '6mo', '1d'),
+    ]);
+
+    // --- BTC ---
+    const closes = btcCandles.map((c) => c.close);
     const n = closes.length;
 
     const rsi = calcRSI(closes);
@@ -24,6 +29,26 @@ export async function GET() {
     const last = closes[n - 1];
     const prev = closes[n - 2];
     const changePct = ((last - prev) / prev) * 100;
+
+    // --- SPX ---
+    const spxCloses = spxCandles.map((c) => c.close);
+    const sn = spxCloses.length;
+    const spxLast = spxCloses[sn - 1];
+    const spxPrev = spxCloses[sn - 2];
+    const spxChange = ((spxLast - spxPrev) / spxPrev) * 100;
+    const spxRsi = calcRSI(spxCloses);
+    const spxEma20 = ema(spxCloses, 20);
+    const spxEma50 = ema(spxCloses, 50);
+    const spxSma50 = sma(spxCloses, 50);
+    const spxSma200 = sma(spxCloses, 200);
+    const { macdLine: spxMacd, signal: spxSig, histogram: spxHist } = calcMACD(spxCloses);
+
+    // SPX high/low for context
+    const spx5d = spxCloses.slice(-5);
+    const spx20d = spxCloses.slice(-20);
+    const spxHigh52w = Math.max(...spxCloses);
+    const spxLow52w = Math.min(...spxCloses);
+    const spxFromHigh = ((spxLast - spxHigh52w) / spxHigh52w) * 100;
 
     return NextResponse.json({
       price: ns(last),
@@ -39,6 +64,24 @@ export async function GET() {
       ema_50: ns(ema50[n - 1]),
       sma_200: ns(sma200[n - 1]),
       updated: new Date().toISOString(),
+
+      spx: {
+        price: ns(spxLast),
+        change_pct: ns(spxChange),
+        rsi_14: ns(spxRsi[sn - 1]),
+        ema_20: ns(spxEma20[sn - 1]),
+        ema_50: ns(spxEma50[sn - 1]),
+        sma_50: ns(spxSma50[sn - 1]),
+        sma_200: ns(spxSma200[sn - 1]),
+        macd: ns(spxMacd[sn - 1]),
+        macd_signal: ns(spxSig[sn - 1]),
+        macd_hist: ns(spxHist[sn - 1]),
+        high_52w: ns(spxHigh52w),
+        low_52w: ns(spxLow52w),
+        from_high_pct: ns(spxFromHigh),
+        range_5d: { high: ns(Math.max(...spx5d)), low: ns(Math.min(...spx5d)) },
+        range_20d: { high: ns(Math.max(...spx20d)), low: ns(Math.min(...spx20d)) },
+      },
     });
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e);

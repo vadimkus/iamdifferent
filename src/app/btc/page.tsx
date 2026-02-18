@@ -4,11 +4,19 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import Script from 'next/script';
 
 // ---------- types ----------
+interface SpxData {
+  price: number; change_pct: number; rsi_14: number;
+  ema_20: number; ema_50: number; sma_50: number | null; sma_200: number | null;
+  macd: number; macd_signal: number; macd_hist: number;
+  high_52w: number; low_52w: number; from_high_pct: number;
+  range_5d: { high: number; low: number }; range_20d: { high: number; low: number };
+}
 interface LiveData {
   price: number; change_pct: number; rsi_14: number;
   macd: number; macd_signal: number; macd_hist: number;
   bb_upper: number; bb_mid: number; bb_lower: number;
   ema_20: number; ema_50: number; sma_200: number | null;
+  spx: SpxData;
 }
 interface MacroData {
   m2_latest: number; m2_change_mom: number; m2_yoy_pct: number;
@@ -392,10 +400,10 @@ export default function BTCPage() {
           </div>
         </div>
 
-        {/* Technicals + M2 chart */}
-        <div className="grid-2">
+        {/* Technicals + SPX + M2 chart */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginBottom: 24 }}>
           <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--blue)' }} /> Technical Indicators</div>
+            <div className="sec-title"><span className="dot" style={{ background: 'var(--blue)' }} /> BTC Technical Indicators</div>
             {live ? (
               <>
                 {[
@@ -407,7 +415,7 @@ export default function BTCPage() {
                   ['Bollinger Lower', '$' + fmt(live.bb_lower), undefined],
                   ['EMA 20', '$' + fmt(live.ema_20), undefined],
                   ['EMA 50', '$' + fmt(live.ema_50), undefined],
-                  ['SMA 200', live.sma_200 ? '$' + fmt(live.sma_200) : 'N/A', undefined],
+                  ['SMA 200', live.sma_200 ? '$' + fmt(live.sma_200) : 'N/A (building)', undefined],
                 ].map(([label, value, color]) => (
                   <div className="mr" key={label as string}><span className="mr-l">{label as string}</span><span className="mr-v" style={color ? { color: color as string } : undefined}>{String(value)}</span></div>
                 ))}
@@ -415,7 +423,36 @@ export default function BTCPage() {
             ) : <div className="loading">Loading...</div>}
           </div>
           <div className="card">
-            <div className="sec-title"><span className="dot" style={{ background: 'var(--purple)' }} /> M2 vs BTC (10 Years)</div>
+            <div className="sec-title"><span className="dot" style={{ background: 'var(--amber)' }} /> S&P 500 (SPX)</div>
+            {live?.spx ? (() => {
+              const s = live.spx;
+              return (
+                <>
+                  <div style={{ marginBottom: 12 }}>
+                    <div style={{ fontSize: 28, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{fmt(s.price)}</div>
+                    <div style={{ fontSize: 14, color: pctCol(s.change_pct) }}>{pctSign(s.change_pct)} today</div>
+                  </div>
+                  {[
+                    ['RSI (14)', String(s.rsi_14), s.rsi_14 > 70 ? 'var(--red)' : s.rsi_14 < 30 ? 'var(--green)' : undefined],
+                    ['EMA 20', fmt(s.ema_20), s.price > s.ema_20 ? 'var(--green)' : 'var(--red)'],
+                    ['EMA 50', fmt(s.ema_50), s.price > s.ema_50 ? 'var(--green)' : 'var(--red)'],
+                    ['SMA 200', s.sma_200 ? fmt(s.sma_200) : 'N/A', s.sma_200 ? (s.price > s.sma_200 ? 'var(--green)' : 'var(--red)') : undefined],
+                    ['MACD', String(s.macd), pctCol(s.macd)],
+                    ['MACD Histogram', String(s.macd_hist), pctCol(s.macd_hist)],
+                    ['From 52w High', pctSign(s.from_high_pct), pctCol(s.from_high_pct)],
+                    ['52w High', fmt(s.high_52w), undefined],
+                    ['52w Low', fmt(s.low_52w), undefined],
+                    ['5d Range', fmt(s.range_5d.low) + ' – ' + fmt(s.range_5d.high), undefined],
+                    ['20d Range', fmt(s.range_20d.low) + ' – ' + fmt(s.range_20d.high), undefined],
+                  ].map(([label, value, color]) => (
+                    <div className="mr" key={label as string}><span className="mr-l">{label as string}</span><span className="mr-v" style={color ? { color: color as string } : undefined}>{String(value)}</span></div>
+                  ))}
+                </>
+              );
+            })() : <div className="loading">Loading...</div>}
+          </div>
+          <div className="card">
+            <div className="sec-title"><span className="dot" style={{ background: 'var(--purple)' }} /> M2 Money Supply (10 Years)</div>
             <div className="chart-wrap"><canvas ref={m2ChartRef} /></div>
           </div>
         </div>
